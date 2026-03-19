@@ -40,9 +40,25 @@ a {
   font-family: "Public Sans-Regular";
   src: local("Public Sans-Regular");
 }
-/* @FONTWARNING[{"type": "restricted", "family": "Public Sans-Medium", "weight": "500", "style": "normal", "allowsCrossOrigin": false}] */
-
 @font-face {
   font-family: "Public Sans-Medium";
   src: local("Public Sans-Medium");
+}
+
+.editable {
+  outline: none;
+  min-width: 5px;
+  min-height: 1em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.editable:hover {
+  background-color: rgba(240, 110, 0, 0.05);
+}
+
+.editable:focus {
+  background-color: white;
+  border: 1px solid #f06e00 !important;
+  box-shadow: 0 0 0 2px rgba(240, 110, 0, 0.1);
 }
