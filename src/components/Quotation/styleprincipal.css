@@ -264,7 +264,7 @@
   padding: 10px 20px;
   background-color: #fffcf9;
   border-radius: 8px;
-  border: 1px solid;
+
 }
 
 .quotation .container-7 {
@@ -501,7 +501,7 @@
   width: 100%;
   background-color: #fffcf9;
   border-radius: 8px;
-  border: 1px solid;
+
 }
 
 .quotation .container-14 {
@@ -652,7 +652,7 @@
   width: 100%;
   background-color: #fffcf9;
   border-radius: 8px;
-  border: 1px solid;
+
 }
 
 .quotation .container-23 {
@@ -733,7 +733,7 @@
   width: 100%;
   background-color: #fffcf9;
   border-radius: 8px;
-  border: 1px solid;
+
 }
 
 .quotation .new-section {
@@ -783,7 +783,7 @@
   width: 100%;
   background-color: #fffcf9;
   border-radius: 8px;
-  border: 1px solid;
+
 }
 
 .quotation .general-air-cargo-wrapper {
@@ -2060,8 +2060,6 @@
   align-self: stretch;
   width: 100%;
   background-color: #fffcf9;
-  border-top-width: 1px;
-  border-top-style: solid;
   border-right-style: none;
   border-bottom-style: none;
   border-left-style: none;
