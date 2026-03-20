@@ -239,6 +239,9 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
                   <div class="data-3"><div class="text-wrapper-11">VKg</div></div>
                   <div class="data-4"><div class="text-wrapper-12">3.75</div></div>
                   <div class="data-5"><div class="text-wrapper-13">$549.673 CLP</div></div>
+                  <div class="delete-action">
+                    <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                  </div>
                 </div>
                 <div class="row-2">
                   <div class="data-6">
@@ -248,6 +251,9 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
                   <div class="data-8"><div class="text-wrapper-15">VKg</div></div>
                   <div class="data-9"><div class="text-wrapper-16">0.30</div></div>
                   <div class="data-10"><div class="text-wrapper-17">$49.02 USD</div></div>
+                  <div class="delete-action">
+                    <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                  </div>
                 </div>
                 <div class="row-3">
                   <div class="data-11">
@@ -257,6 +263,9 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
                   <div class="data-8"><div class="text-wrapper-19">-</div></div>
                   <div class="data-9"><div class="text-wrapper-16">35.00</div></div>
                   <div class="data-12"><div class="text-wrapper-20">$31.395 CL</div></div>
+                  <div class="delete-action">
+                    <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                  </div>
                 </div>
                 <div class="row-2">
                   <div class="data-13">
@@ -266,6 +275,9 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
                   <div class="data-15"><div class="text-wrapper-22">-</div></div>
                   <div class="data-16"><div class="text-wrapper-23">185.00</div></div>
                   <div class="data-12"><div class="text-wrapper-24">$161.72 EUR</div></div>
+                  <div class="delete-action">
+                    <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                  </div>
                 </div>
                 <div class="row-4">
                   <div class="data-13">
@@ -275,6 +287,14 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
                   <div class="data-15"><div class="text-wrapper-26">VKg</div></div>
                   <div class="data-16"><div class="text-wrapper-27">3.75</div></div>
                   <div class="data-12"><div class="text-wrapper-28">$549.673 CLP</div></div>
+                  <div class="delete-action">
+                    <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                  </div>
+                </div>
+                <div class="add-row-container">
+                  <button class="add-button" type="button">
+                    AGREGAR
+                  </button>
                 </div>
               </div>
             </div>
@@ -334,6 +354,29 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
         </div>
       </footer>
     </div>
+    <script>
+      document.addEventListener('click', function(e) {
+        const deleteBtn = e.target.closest('.delete-action');
+        if (deleteBtn) {
+          const row = deleteBtn.closest('.row, .row-2, .row-3, .row-4');
+          if (row) row.remove();
+          return;
+        }
+        const addBtn = e.target.closest('.add-button');
+        if (addBtn) {
+          const container = addBtn.closest('.add-row-container');
+          const rowContainer = container ? container.previousElementSibling : null;
+          if (rowContainer) {
+            const rows = rowContainer.querySelectorAll('.row, .row-2, .row-3, .row-4');
+            if (rows.length > 0) {
+              const lastRow = rows[rows.length - 1];
+              const newRow = lastRow.cloneNode(true);
+              rowContainer.appendChild(newRow);
+            }
+          }
+        }
+      });
+    </script>
   </body>
 </html>
     `;

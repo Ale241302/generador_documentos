@@ -2169,3 +2169,58 @@
   line-height: 20px;
   white-space: nowrap;
 }
+
+.quotation .delete-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.quotation .delete-action:hover {
+  opacity: 0.7;
+}
+
+.quotation .delete-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.quotation .add-row-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  width: 100%;
+  border-top: 1px solid #eaeaea;
+}
+
+.quotation .add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background-color: #f06e00;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-family: "Public Sans-Bold", Helvetica;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(240, 110, 0, 0.2);
+}
+
+.quotation .add-button:hover {
+  background-color: #d05e00;
+  box-shadow: 0 4px 8px rgba(240, 110, 0, 0.3);
+}
+
+.quotation .add-button:active {
+  transform: translateY(1px);
+}

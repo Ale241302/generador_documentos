@@ -4,8 +4,8 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="globals.css" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="globalprincipal.css" />
+  <link rel="stylesheet" href="styleprincipal.css" />
 </head>
 
 <body>
@@ -318,6 +318,9 @@
                 <div class="data-5">
                   <div class="text-wrapper-13">$549.673 CLP</div>
                 </div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                </div>
               </div>
               <div class="row-2">
                 <div class="data-6">
@@ -336,6 +339,9 @@
                 </div>
                 <div class="data-10">
                   <div class="text-wrapper-17">$49.02 USD</div>
+                </div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
                 </div>
               </div>
               <div class="row-3">
@@ -356,6 +362,9 @@
                 <div class="data-12">
                   <div class="text-wrapper-20">$31.395 CL</div>
                 </div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                </div>
               </div>
               <div class="row-2">
                 <div class="data-13">
@@ -374,6 +383,9 @@
                 </div>
                 <div class="data-12">
                   <div class="text-wrapper-24">$161.72 EUR</div>
+                </div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
                 </div>
               </div>
               <div class="row-4">
@@ -394,6 +406,9 @@
                 <div class="data-12">
                   <div class="text-wrapper-28">$549.673 CLP</div>
                 </div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                </div>
               </div>
               <div class="row-2">
                 <div class="data-13">
@@ -412,6 +427,9 @@
                 </div>
                 <div class="data-12">
                   <div class="text-wrapper-31">$49.02 USD</div>
+                </div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
                 </div>
               </div>
               <div class="row-4">
@@ -432,6 +450,9 @@
                 <div class="data-12">
                   <div class="text-wrapper-35">$31.395 CLP</div>
                 </div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                </div>
               </div>
               <div class="row-2">
                 <div class="data-13">
@@ -450,6 +471,9 @@
                 </div>
                 <div class="data-12">
                   <div class="text-wrapper-36">$161.72 EUR</div>
+                </div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
                 </div>
               </div>
               <div class="row-4">
@@ -470,6 +494,9 @@
                 <div class="data-12">
                   <div class="text-wrapper-38">$549.673 CLP</div>
                 </div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                </div>
               </div>
               <div class="row-2">
                 <div class="data-13">
@@ -489,7 +516,15 @@
                 <div class="data-12">
                   <div class="text-wrapper-35">$49.02 USD</div>
                 </div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                </div>
               </div>
+            </div>
+            <div class="add-row-container">
+              <button class="add-button" type="button">
+                AGREGAR
+              </button>
             </div>
           </div>
         </div>
@@ -583,6 +618,35 @@
       </div>
     </footer>
   </div>
+
+  <script>
+    document.addEventListener('click', function(e) {
+      // Deletion logic
+      const deleteBtn = e.target.closest('.delete-action');
+      if (deleteBtn) {
+        const row = deleteBtn.closest('.row, .row-2, .row-3, .row-4');
+        if (row) {
+          row.remove();
+        }
+        return;
+      }
+      
+      // Addition logic
+      const addBtn = e.target.closest('.add-button');
+      if (addBtn) {
+        const container = addBtn.closest('.add-row-container');
+        const rowContainer = container ? container.previousElementSibling : null;
+        if (rowContainer) {
+          const rows = rowContainer.querySelectorAll('.row, .row-2, .row-3, .row-4');
+          if (rows.length > 0) {
+            const lastRow = rows[rows.length - 1];
+            const newRow = lastRow.cloneNode(true);
+            rowContainer.appendChild(newRow);
+          }
+        }
+      }
+    });
+  </script>
 </body>
 
 </html>
