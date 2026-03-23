@@ -63,6 +63,17 @@ const fixFooterForCanvas = (clonedDoc: Document) => {
   // 3. Limpieza de notas y otros márgenes problemáticos
   const leftSideNotes2 = clonedDoc.querySelectorAll(".left-side-notes-2");
   leftSideNotes2.forEach((ln: any) => ln.style.setProperty("margin-bottom", "0", "important"));
+
+  // 4. Bajar EXCLUSIVAMENTE los iconos de los encabezados (REQUESTED BY, ORIGIN, etc.) 
+  // sin tocar para nada el flexbox de los contenedores para no romper tu diseño.
+  const sectionHeaders = clonedDoc.querySelectorAll(".horizontal-border, .horizontal-border-2, .container-6");
+  sectionHeaders.forEach((header: any) => {
+    if (header.children && header.children.length > 0) {
+      const icon = header.children[0];
+      icon.style.setProperty("position", "relative", "important");
+      icon.style.setProperty("top", "4px", "important"); // << Baja exactamente el icono
+    }
+  });
 };
 
 // Función auxiliar para convertir imágenes antes de html2canvas

@@ -236,8 +236,6 @@
   align-items: flex-start;
   position: relative;
   flex: 0 0 auto;
-  margin-top: -5.00px;
-  margin-bottom: -3.00px;
 }
 
 .quotation .requested-by {
@@ -246,7 +244,6 @@
   align-items: center;
   width: 134.53px;
   height: 28px;
-  margin-top: -1.00px;
   font-family: "Public Sans-Bold", Helvetica;
   font-weight: 700;
   color: #2f2f2f;
@@ -438,7 +435,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin-top: -1.00px;
   font-family: "Public Sans-Bold", Helvetica;
   font-weight: 700;
 }
@@ -616,7 +612,6 @@
   align-items: flex-start;
   position: relative;
   flex: 0 0 auto;
-  margin-top: -1.00px;
 }
 
 .quotation .icon-2 {
@@ -631,7 +626,6 @@
   align-items: center;
   width: 63.55px;
   height: 28px;
-  margin-top: -1.00px;
   font-family: "Public Sans-Bold", Helvetica;
   font-weight: 700;
   color: #2f2f2f;
@@ -722,7 +716,6 @@
   align-items: center;
   width: 120.84px;
   height: 28px;
-  margin-top: -1.00px;
   font-family: "Public Sans-Bold", Helvetica;
   font-weight: 700;
   color: #2f2f2f;
@@ -773,7 +766,6 @@
   align-items: center;
   width: 217.3px;
   height: 28px;
-  margin-top: -1.00px;
   font-family: "Public Sans-Bold", Helvetica;
   font-weight: 700;
   color: #2f2f2f;
