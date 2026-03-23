@@ -40,7 +40,6 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <!-- Use base href so relative images load from the dev server correctly -->
     <base href="${window.location.origin}/src/components/Quotation/" />
     <style>
       ${globalCss}
@@ -54,6 +53,7 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
       .quotation {
         margin: 0 auto;
         box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        margin-bottom: 20px; /* Separación visual entre páginas */
       }
       /* Ensure text wraps correctly in descriptions */
       .general-air-cargo {
@@ -230,105 +230,105 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
                 <div class="price-wrapper"><div class="price">PRICE</div></div>
                 <div class="amount-wrapper"><div class="amount">AMOUNT</div></div>
               </div>
-              <div class="div-2">
-                <div class="row">
-                  <div class="data">
-                    <div class="container-26"><p class="text-wrapper-9">Ocean Freight - CNT:40 Ft. Hight Cube</p></div>
-                  </div>
-                  <div class="data-2"><div class="text-wrapper-10">163.41</div></div>
-                  <div class="data-3"><div class="text-wrapper-11">VKg</div></div>
-                  <div class="data-4"><div class="text-wrapper-12">3.75</div></div>
-                  <div class="data-5"><div class="text-wrapper-13">$549.673 CLP</div></div>
-                  <div class="delete-action">
-                    <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
-                  </div>
+              
+              <div class="row">
+                <div class="data">
+                  <div class="container-26"><p class="text-wrapper-9">Ocean Freight - CNT:40 Ft. Hight Cube</p></div>
                 </div>
-                <div class="row-2">
-                  <div class="data-6">
-                    <div class="container-27"><div class="text-wrapper-9">Fuel Service</div></div>
-                  </div>
-                  <div class="data-7"><div class="text-wrapper-14">163.41</div></div>
-                  <div class="data-8"><div class="text-wrapper-15">VKg</div></div>
-                  <div class="data-9"><div class="text-wrapper-16">0.30</div></div>
-                  <div class="data-10"><div class="text-wrapper-17">$49.02 USD</div></div>
-                  <div class="delete-action">
-                    <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
-                  </div>
+                <div class="data-2"><div class="text-wrapper-10">163.41</div></div>
+                <div class="data-3"><div class="text-wrapper-11">VKg</div></div>
+                <div class="data-4"><div class="text-wrapper-12">3.75</div></div>
+                <div class="data-5"><div class="text-wrapper-13">$549.673 CLP</div></div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
                 </div>
-                <div class="row-3">
-                  <div class="data-11">
-                    <div class="container-28"><div class="text-wrapper-9">Airport Charge</div></div>
-                  </div>
-                  <div class="data-7"><div class="text-wrapper-18">1.00</div></div>
-                  <div class="data-8"><div class="text-wrapper-19">-</div></div>
-                  <div class="data-9"><div class="text-wrapper-16">35.00</div></div>
-                  <div class="data-12"><div class="text-wrapper-20">$31.395 CL</div></div>
-                  <div class="delete-action">
-                    <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
-                  </div>
+              </div>
+              <div class="row-2">
+                <div class="data-6">
+                  <div class="container-27"><div class="text-wrapper-9">Fuel Service</div></div>
                 </div>
-                <div class="row-2">
-                  <div class="data-13">
-                    <div class="container-29"><div class="text-wrapper-9">Documentation</div></div>
-                  </div>
-                  <div class="data-14"><div class="text-wrapper-21">1.00</div></div>
-                  <div class="data-15"><div class="text-wrapper-22">-</div></div>
-                  <div class="data-16"><div class="text-wrapper-23">185.00</div></div>
-                  <div class="data-12"><div class="text-wrapper-24">$161.72 EUR</div></div>
-                  <div class="delete-action">
-                    <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
-                  </div>
+                <div class="data-7"><div class="text-wrapper-14">163.41</div></div>
+                <div class="data-8"><div class="text-wrapper-15">VKg</div></div>
+                <div class="data-9"><div class="text-wrapper-16">0.30</div></div>
+                <div class="data-10"><div class="text-wrapper-17">$49.02 USD</div></div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
                 </div>
-                <div class="row-4">
-                  <div class="data-13">
-                    <div class="container-29"><div class="text-wrapper-9">Air Freight</div></div>
-                  </div>
-                  <div class="data-14"><div class="text-wrapper-25">163.41</div></div>
-                  <div class="data-15"><div class="text-wrapper-26">VKg</div></div>
-                  <div class="data-16"><div class="text-wrapper-27">3.75</div></div>
-                  <div class="data-12"><div class="text-wrapper-28">$549.673 CLP</div></div>
-                  <div class="delete-action">
-                    <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
-                  </div>
+              </div>
+              <div class="row-3">
+                <div class="data-11">
+                  <div class="container-28"><div class="text-wrapper-9">Airport Charge</div></div>
                 </div>
-                <div class="add-row-container">
-                  <button class="add-button" type="button">
-                    AGREGAR
-                  </button>
+                <div class="data-7"><div class="text-wrapper-18">1.00</div></div>
+                <div class="data-8"><div class="text-wrapper-19">-</div></div>
+                <div class="data-9"><div class="text-wrapper-16">35.00</div></div>
+                <div class="data-12"><div class="text-wrapper-20">$31.395 CL</div></div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
                 </div>
+              </div>
+              <div class="row-2">
+                <div class="data-13">
+                  <div class="container-29"><div class="text-wrapper-9">Documentation</div></div>
+                </div>
+                <div class="data-14"><div class="text-wrapper-21">1.00</div></div>
+                <div class="data-15"><div class="text-wrapper-22">-</div></div>
+                <div class="data-16"><div class="text-wrapper-23">185.00</div></div>
+                <div class="data-12"><div class="text-wrapper-24">$161.72 EUR</div></div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                </div>
+              </div>
+              <div class="row-4">
+                <div class="data-13">
+                  <div class="container-29"><div class="text-wrapper-9">Air Freight</div></div>
+                </div>
+                <div class="data-14"><div class="text-wrapper-25">163.41</div></div>
+                <div class="data-15"><div class="text-wrapper-26">VKg</div></div>
+                <div class="data-16"><div class="text-wrapper-27">3.75</div></div>
+                <div class="data-12"><div class="text-wrapper-28">$549.673 CLP</div></div>
+                <div class="delete-action">
+                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+                </div>
+              </div>
+              
+              <div class="add-row-container">
+                <button class="add-button" type="button">
+                  AGREGAR
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <div class="total">
-          <div class="right-side-totals">
-            <div class="container-30">
-              <div class="container-31">
-                <div class="container-32"><div class="text">SUBTOTAL</div></div>
-                <div class="container-32"><div class="text-wrapper-40">$2.175.608 CLP</div></div>
-              </div>
-              <div class="container-31">
-                <div class="container-32"><div class="tax">TAX</div></div>
-                <div class="container-32"><div class="text-2">$0.00</div></div>
-              </div>
-              <div class="background">
-                <div class="margin"><div class="text-wrapper-41">TOTAL (CLP)</div></div>
-                <div class="container-25"><div class="text-wrapper-42">$2.175.608</div></div>
-              </div>
+      </div>
+      <div class="total">
+        <div class="right-side-totals">
+          <div class="container-30">
+            <div class="container-31">
+              <div class="container-32"><div class="text">SUBTOTAL</div></div>
+              <div class="container-32"><div class="text-wrapper-40">$2.175.608 CLP</div></div>
             </div>
-            <div class="container-30">
-              <div class="container-31">
-                <div class="container-32"><div class="text">SUBTOTAL</div></div>
-                <div class="container-32"><div class="text-wrapper-43">$2.425.43 USD</div></div>
-              </div>
-              <div class="container-31">
-                <div class="container-32"><div class="tax">TAX</div></div>
-                <div class="container-32"><div class="text-2">$0.00</div></div>
-              </div>
-              <div class="background">
-                <div class="margin"><div class="text-wrapper-41">TOTAL (USD)</div></div>
-                <div class="container-25"><div class="text-wrapper-44">$2.425.43</div></div>
-              </div>
+            <div class="container-31">
+              <div class="container-32"><div class="tax">TAX</div></div>
+              <div class="container-32"><div class="text-2">$0.00</div></div>
+            </div>
+            <div class="background">
+              <div class="margin"><div class="text-wrapper-41">TOTAL (CLP)</div></div>
+              <div class="container-25"><div class="text-wrapper-42">$2.175.608</div></div>
+            </div>
+          </div>
+          <div class="container-30">
+            <div class="container-31">
+              <div class="container-32"><div class="text">SUBTOTAL</div></div>
+              <div class="container-32"><div class="text-wrapper-43">$2.425.43 USD</div></div>
+            </div>
+            <div class="container-31">
+              <div class="container-32"><div class="tax">TAX</div></div>
+              <div class="container-32"><div class="text-2">$0.00</div></div>
+            </div>
+            <div class="background">
+              <div class="margin"><div class="text-wrapper-41">TOTAL (USD)</div></div>
+              <div class="container-25"><div class="text-wrapper-44">$2.425.43</div></div>
             </div>
           </div>
         </div>
@@ -356,23 +356,127 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
     </div>
     <script>
       document.addEventListener('click', function(e) {
+        
+        // Obtiene el contenedor .div-2 directamente
+        const getRowContainer = (quotationNode) => {
+          return quotationNode.querySelector('.border > .div-2');
+        };
+
         const deleteBtn = e.target.closest('.delete-action');
         if (deleteBtn) {
           const row = deleteBtn.closest('.row, .row-2, .row-3, .row-4');
-          if (row) row.remove();
+          const quotation = deleteBtn.closest('.quotation');
+          
+          if (row && quotation) {
+            row.remove();
+            
+            const rowContainer = getRowContainer(quotation);
+            const remainingRows = rowContainer ? rowContainer.querySelectorAll('.row, .row-2, .row-3, .row-4') : [];
+            
+            if (remainingRows.length === 0) {
+              const allQuotations = Array.from(document.querySelectorAll('.quotation'));
+              const index = allQuotations.indexOf(quotation);
+              
+              if (index > 0) {
+                if (index === allQuotations.length - 1) {
+                  const prevQuotation = allQuotations[index - 1];
+                  
+                  const addBtnContainer = quotation.querySelector('.add-row-container');
+                  const totals = quotation.querySelector('.total');
+                  const signature = quotation.querySelector('.signature-line');
+                  
+                  if (addBtnContainer) {
+                    const prevRowContainer = getRowContainer(prevQuotation);
+                    if (prevRowContainer) prevRowContainer.appendChild(addBtnContainer);
+                  }
+                  
+                  if (totals) {
+                    const prevMain = prevQuotation.querySelector('.main') || prevQuotation.querySelector('.board');
+                    if (prevMain && prevMain.parentNode) {
+                      prevMain.parentNode.insertBefore(totals, prevMain.nextSibling);
+                    }
+                  }
+                  
+                  if (signature) {
+                    const prevFooter = prevQuotation.querySelector('.footer');
+                    if (prevFooter && prevFooter.parentNode) {
+                      prevFooter.parentNode.insertBefore(signature, prevFooter);
+                    }
+                  }
+                }
+                quotation.remove();
+              }
+            }
+          }
           return;
         }
+        
         const addBtn = e.target.closest('.add-button');
         if (addBtn) {
-          const container = addBtn.closest('.add-row-container');
-          const rowContainer = container ? container.previousElementSibling : null;
-          if (rowContainer) {
-            const rows = rowContainer.querySelectorAll('.row, .row-2, .row-3, .row-4');
-            if (rows.length > 0) {
-              const lastRow = rows[rows.length - 1];
-              const newRow = lastRow.cloneNode(true);
+          const allQuotations = Array.from(document.querySelectorAll('.quotation'));
+          // Encontramos el índice de la última página
+          const lastIndex = allQuotations.length - 1;
+          const lastQuotation = allQuotations[lastIndex];
+          
+          const rowContainer = getRowContainer(lastQuotation);
+          if (!rowContainer) return;
+
+          const rows = rowContainer.querySelectorAll('.row, .row-2, .row-3, .row-4');
+          if (rows.length === 0) return;
+          
+          const lastRow = rows[rows.length - 1];
+          const newRow = lastRow.cloneNode(true);
+          
+          const editables = newRow.querySelectorAll('[contenteditable="true"]');
+          editables.forEach(el => {
+            el.innerText = '';
+          });
+
+          const addRowContainer = rowContainer.querySelector('.add-row-container');
+
+          // ======== LÓGICA DE LÍMITE DINÁMICO ========
+          // Si estamos en la página 1 (index 0), el límite es 12. 
+          // Si estamos en la página 2 o superior (index > 0), el límite es 23.
+          const currentLimit = (lastIndex === 0) ? 12 : 23;
+
+          if (rows.length < currentLimit) {
+            // Aún hay espacio en la página actual
+            if (addRowContainer) {
+              rowContainer.insertBefore(newRow, addRowContainer);
+            } else {
               rowContainer.appendChild(newRow);
             }
+          } else {
+            // ===== CREAR NUEVA PÁGINA =====
+            const newQuotation = lastQuotation.cloneNode(true);
+            
+            // Siempre removemos la sección superior en las páginas nuevas
+            const container6 = newQuotation.querySelector('.container-6');
+            if (container6) container6.remove();
+            
+            const newRowContainer = getRowContainer(newQuotation);
+            
+            if (newRowContainer) {
+               const headerRow = newRowContainer.querySelector('.header-row');
+               const clonedAddBtn = newRowContainer.querySelector('.add-row-container');
+               
+               newRowContainer.innerHTML = ''; 
+               
+               if (headerRow) newRowContainer.appendChild(headerRow);
+               newRowContainer.appendChild(newRow);
+               if (clonedAddBtn) newRowContainer.appendChild(clonedAddBtn);
+            }
+            
+            // Limpiamos la página anterior
+            const oldAddBtn = lastQuotation.querySelector('.add-row-container');
+            const oldTotals = lastQuotation.querySelector('.total');
+            const oldSignature = lastQuotation.querySelector('.signature-line');
+            
+            if (oldAddBtn) oldAddBtn.remove();
+            if (oldTotals) oldTotals.remove();
+            if (oldSignature) oldSignature.remove();
+
+            lastQuotation.parentNode.appendChild(newQuotation);
           }
         }
       });
@@ -388,9 +492,9 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
 
   return (
     <div className="w-full h-full flex flex-col pt-8">
-      <iframe 
-        ref={iframeRef} 
-        title="Quotation Preview" 
+      <iframe
+        ref={iframeRef}
+        title="Quotation Preview"
         className="w-full h-[85vh] border-0 drop-shadow-xl bg-transparent rounded-lg"
         sandbox="allow-same-origin allow-scripts"
       />

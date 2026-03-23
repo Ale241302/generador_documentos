@@ -618,41 +618,144 @@
       </div>
     </footer>
   </div>
-
   <script>
-    document.addEventListener('click', function(e) {
-      // Deletion logic
+    document.addEventListener('click', function (e) {
+
+      // Obtiene el contenedor .div-2 directamente para mayor seguridad
+      const getRowContainer = (quotationNode) => {
+        return quotationNode.querySelector('.border > .div-2');
+      };
+
       const deleteBtn = e.target.closest('.delete-action');
       if (deleteBtn) {
         const row = deleteBtn.closest('.row, .row-2, .row-3, .row-4');
-        if (row) {
+        const quotation = deleteBtn.closest('.quotation');
+
+        if (row && quotation) {
           row.remove();
+
+          const rowContainer = getRowContainer(quotation);
+          const remainingRows = rowContainer ? rowContainer.querySelectorAll('.row, .row-2, .row-3, .row-4') : [];
+
+          if (remainingRows.length === 0) {
+            const allQuotations = Array.from(document.querySelectorAll('.quotation'));
+            const index = allQuotations.indexOf(quotation);
+
+            if (index > 0) {
+              if (index === allQuotations.length - 1) {
+                const prevQuotation = allQuotations[index - 1];
+
+                const addBtnContainer = quotation.querySelector('.add-row-container');
+                const totals = quotation.querySelector('.total');
+                const signature = quotation.querySelector('.signature-line');
+
+                if (addBtnContainer) {
+                  const prevRowContainer = getRowContainer(prevQuotation);
+                  if (prevRowContainer) prevRowContainer.appendChild(addBtnContainer);
+                }
+
+                if (totals) {
+                  const prevMain = prevQuotation.querySelector('.main') || prevQuotation.querySelector('.board');
+                  if (prevMain && prevMain.parentNode) {
+                    prevMain.parentNode.insertBefore(totals, prevMain.nextSibling);
+                  }
+                }
+
+                if (signature) {
+                  const prevFooter = prevQuotation.querySelector('.footer');
+                  if (prevFooter && prevFooter.parentNode) {
+                    prevFooter.parentNode.insertBefore(signature, prevFooter);
+                  }
+                }
+              }
+              quotation.remove();
+            }
+          }
         }
         return;
       }
-      
-      // Addition logic
+
       const addBtn = e.target.closest('.add-button');
       if (addBtn) {
-        const container = addBtn.closest('.add-row-container');
-        const rowContainer = container ? container.previousElementSibling : null;
-        if (rowContainer) {
-          const rows = rowContainer.querySelectorAll('.row, .row-2, .row-3, .row-4');
-          if (rows.length > 0) {
-            const lastRow = rows[rows.length - 1];
-            const newRow = lastRow.cloneNode(true);
-            
-            // Clear content of editable elements in the new row
-            const editables = newRow.querySelectorAll('[contenteditable="true"]');
-            editables.forEach(el => {
-              el.innerText = '';
-            });
-            
+        const allQuotations = Array.from(document.querySelectorAll('.quotation'));
+        const lastIndex = allQuotations.length - 1;
+        const lastQuotation = allQuotations[lastIndex];
+
+        const rowContainer = getRowContainer(lastQuotation);
+        if (!rowContainer) return;
+
+        const rows = rowContainer.querySelectorAll('.row, .row-2, .row-3, .row-4');
+        if (rows.length === 0) return;
+
+        const lastRow = rows[rows.length - 1];
+        const newRow = lastRow.cloneNode(true);
+
+        const editables = newRow.querySelectorAll('[contenteditable="true"]');
+        editables.forEach(el => {
+          el.innerText = '';
+        });
+
+        const addRowContainer = rowContainer.querySelector('.add-row-container');
+
+        // ======== LÓGICA DE LÍMITE DINÁMICO ========
+        // Página 1 (index 0) = 12 filas. Página 2+ (index > 0) = 23 filas.
+        const currentLimit = (lastIndex === 0) ? 12 : 23;
+
+        if (rows.length < currentLimit) {
+          if (addRowContainer) {
+            rowContainer.insertBefore(newRow, addRowContainer);
+          } else {
             rowContainer.appendChild(newRow);
           }
+        } else {
+          // ===== CREAR NUEVA PÁGINA =====
+          const newQuotation = lastQuotation.cloneNode(true);
+
+          const container6 = newQuotation.querySelector('.container-6');
+          if (container6) container6.remove();
+
+          const newRowContainer = getRowContainer(newQuotation);
+
+          if (newRowContainer) {
+            const headerRow = newRowContainer.querySelector('.header-row');
+            const clonedAddBtn = newRowContainer.querySelector('.add-row-container');
+
+            newRowContainer.innerHTML = '';
+
+            if (headerRow) newRowContainer.appendChild(headerRow);
+            newRowContainer.appendChild(newRow);
+            if (clonedAddBtn) newRowContainer.appendChild(clonedAddBtn);
+          }
+
+          const oldAddBtn = lastQuotation.querySelector('.add-row-container');
+          const oldTotals = lastQuotation.querySelector('.total');
+          const oldSignature = lastQuotation.querySelector('.signature-line');
+
+          if (oldAddBtn) oldAddBtn.remove();
+          if (oldTotals) oldTotals.remove();
+          if (oldSignature) oldSignature.remove();
+
+          lastQuotation.parentNode.appendChild(newQuotation);
         }
       }
     });
+    // =========================================================
+    // COMUNICACIÓN CON REACT PARA EFECTO MULTI-HOJA
+    // =========================================================
+    function notificarAlturaAReact() {
+      // Calculamos la altura total de todas las hojas + márgenes
+      const totalHeight = document.body.scrollHeight;
+      // Le enviamos la altura al archivo Cotizacion.tsx
+      window.parent.postMessage({ type: 'RESIZE_PRINCIPAL', height: totalHeight }, '*');
+    }
+
+    // Avisar cuando carga la página
+    window.addEventListener('load', notificarAlturaAReact);
+
+    // Un "espía" (Observer) que detecta automáticamente cuando clonas 
+    // una página o eliminas una fila, y actualiza la altura al instante.
+    const observer = new MutationObserver(notificarAlturaAReact);
+    observer.observe(document.body, { childList: true, subtree: true });
   </script>
 </body>
 
