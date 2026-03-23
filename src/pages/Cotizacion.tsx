@@ -50,6 +50,13 @@ const fixFooterForCanvas = (clonedDoc: Document) => {
     c35.style.setProperty("display", "flex", "important");
     c35.style.setProperty("align-items", "center", "important");
     c35.style.setProperty("gap", "8px", "important");
+
+    // Bajar el icono del mundo para que quede en la misma línea
+    const worldIcon = c35.querySelector(".background-2");
+    if (worldIcon) {
+      worldIcon.style.setProperty("position", "relative", "important");
+      worldIcon.style.setProperty("top", "7px", "important");
+    }
   });
 
   // 2. Template Secundario: .container-10
@@ -58,6 +65,13 @@ const fixFooterForCanvas = (clonedDoc: Document) => {
     c10.style.setProperty("display", "flex", "important");
     c10.style.setProperty("align-items", "center", "important");
     c10.style.setProperty("gap", "8px", "important");
+
+    // Bajar el icono del mundo
+    const worldIcon = c10.querySelector(".background");
+    if (worldIcon) {
+      worldIcon.style.setProperty("position", "relative", "important");
+      worldIcon.style.setProperty("top", "7px", "important");
+    }
   });
 
   // 3. Limpieza de notas y otros márgenes problemáticos
@@ -233,7 +247,7 @@ export function Cotizacion() {
       for (let i = 0; i < pagesPrin.length; i++) {
         const page = pagesPrin[i] as HTMLElement;
         const canvas = await html2canvas(page, {
-          scale: 2,
+          scale: 3,
           useCORS: true,
           allowTaint: false,
           onclone: fixFooterForCanvas, // ← aplica todos los fixes del footer
@@ -256,7 +270,7 @@ export function Cotizacion() {
         const pageSec = docSec.querySelector(".quotation") as HTMLElement;
         if (pageSec) {
           const canvas = await html2canvas(pageSec, {
-            scale: 2,
+            scale: 3,
             useCORS: true,
             allowTaint: false,
             onclone: fixFooterForCanvas,
