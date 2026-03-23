@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import globalCss from "./globalprincipal.css?raw";
 import styleCss from "./styleprincipal.css?raw";
+import jsBarcodeScript from "jsbarcode/dist/JsBarcode.all.min.js?raw";
 
 interface QuotationData {
   quotationNo: string;
@@ -29,11 +30,25 @@ interface QuotationData {
   goodsDescription: string;
 }
 
-export function PrincipalPreview({ data }: { data: QuotationData }) {
+interface PrincipalPreviewProps {
+  data: QuotationData;
+  onHeaderChange: (headerHtml: string) => void;
+}
+
+export function PrincipalPreview({ data, onHeaderChange }: PrincipalPreviewProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    // Generate the HTML for the iframe dynamically on every data change
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data && event.data.type === 'HEADER_UPDATED') {
+        onHeaderChange(event.data.headerHtml);
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [onHeaderChange]);
+
+  useEffect(() => {
     const htmlContent = `
 <!DOCTYPE html>
 <html>
@@ -41,10 +56,12 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
     <base href="${window.location.origin}/src/components/Quotation/" />
+    <script>
+      ${jsBarcodeScript}
+    </script>
     <style>
       ${globalCss}
       ${styleCss}
-      /* Scale the content slightly so it fits nicely in the preview pane */
       body {
         transform: scale(0.65);
         transform-origin: top center;
@@ -53,9 +70,8 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
       .quotation {
         margin: 0 auto;
         box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        margin-bottom: 20px; /* Separación visual entre páginas */
+        margin-bottom: 20px;
       }
-      /* Ensure text wraps correctly in descriptions */
       .general-air-cargo {
         white-space: pre-wrap;
       }
@@ -63,20 +79,28 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
   </head>
   <body>
     <div class="quotation">
-      <header class="header">
+      <header class="header" id="main-header">
         <div class="container">
-          <img class="img" src="img/container.svg" onerror="this.style.display='none'" />
+          <img class="img" src="https://storage.googleapis.com/sclcargo/web/Home/logo-largo.png" />
           <div class="div">
-            <img class="container-2" src="img/image.svg" onerror="this.style.display='none'" />
+            <img class="container-2 barcode-container" />
             <div class="vertical-divider"></div>
             <div class="container-3">
               <div class="container-4">
-                <div class="div-wrapper"><div class="text-wrapper">QUOTATION</div></div>
-                <div class="div-wrapper"><div class="text-wrapper-2">${data.quotationNo}</div></div>
+                <div class="div-wrapper">
+                  <div class="text-wrapper editable" contenteditable="true">QUOTATION</div>
+                </div>
+                <div class="div-wrapper">
+                  <div class="text-wrapper-2 editable quotation-number" contenteditable="true">${data.quotationNo}</div>
+                </div>
               </div>
               <div class="container-5">
-                <div class="div-wrapper"><div class="text-wrapper-3">DATE</div></div>
-                <div class="div-wrapper"><div class="text-wrapper-4">${data.date}</div></div>
+                <div class="div-wrapper">
+                  <div class="text-wrapper-3 editable" contenteditable="true">DATE</div>
+                </div>
+                <div class="div-wrapper">
+                  <div class="text-wrapper-4 editable" contenteditable="true">${data.date}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -87,7 +111,7 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
           <div class="top-row-requested-by">
             <div class="requested-by-section">
               <div class="horizontal-border">
-                <img class="img" src="img/container-2.svg" onerror="this.style.display='none'" />
+                <img class="img" src="https://storage.googleapis.com/sclcargo/SCLCargo_gendoc/assets/container.svg" />
                 <div class="heading"><div class="requested-by">REQUESTED BY</div></div>
               </div>
               <div class="background-border">
@@ -233,69 +257,27 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
               
               <div class="row">
                 <div class="data">
-                  <div class="container-26"><p class="text-wrapper-9">Ocean Freight - CNT:40 Ft. Hight Cube</p></div>
+                  <div class="container-26"><p class="text-wrapper-9 editable" contenteditable="true">Ocean Freight - CNT:40 Ft. Hight Cube</p></div>
                 </div>
-                <div class="data-2"><div class="text-wrapper-10">163.41</div></div>
-                <div class="data-3"><div class="text-wrapper-11">VKg</div></div>
-                <div class="data-4"><div class="text-wrapper-12">3.75</div></div>
-                <div class="data-5"><div class="text-wrapper-13">$549.673 CLP</div></div>
-                <div class="delete-action">
-                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
-                </div>
+                <div class="data-2"><div class="text-wrapper-10 editable" contenteditable="true">163.41</div></div>
+                <div class="data-3"><div class="text-wrapper-11 editable" contenteditable="true">VKg</div></div>
+                <div class="data-4"><div class="text-wrapper-12 editable" contenteditable="true">3.75</div></div>
+                <div class="data-5"><div class="text-wrapper-13 editable" contenteditable="true">$549.673 CLP</div></div>
+                <div class="delete-action"><img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" /></div>
               </div>
               <div class="row-2">
                 <div class="data-6">
-                  <div class="container-27"><div class="text-wrapper-9">Fuel Service</div></div>
+                  <div class="container-27"><div class="text-wrapper-9 editable" contenteditable="true">Fuel Service</div></div>
                 </div>
-                <div class="data-7"><div class="text-wrapper-14">163.41</div></div>
-                <div class="data-8"><div class="text-wrapper-15">VKg</div></div>
-                <div class="data-9"><div class="text-wrapper-16">0.30</div></div>
-                <div class="data-10"><div class="text-wrapper-17">$49.02 USD</div></div>
-                <div class="delete-action">
-                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
-                </div>
-              </div>
-              <div class="row-3">
-                <div class="data-11">
-                  <div class="container-28"><div class="text-wrapper-9">Airport Charge</div></div>
-                </div>
-                <div class="data-7"><div class="text-wrapper-18">1.00</div></div>
-                <div class="data-8"><div class="text-wrapper-19">-</div></div>
-                <div class="data-9"><div class="text-wrapper-16">35.00</div></div>
-                <div class="data-12"><div class="text-wrapper-20">$31.395 CL</div></div>
-                <div class="delete-action">
-                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
-                </div>
-              </div>
-              <div class="row-2">
-                <div class="data-13">
-                  <div class="container-29"><div class="text-wrapper-9">Documentation</div></div>
-                </div>
-                <div class="data-14"><div class="text-wrapper-21">1.00</div></div>
-                <div class="data-15"><div class="text-wrapper-22">-</div></div>
-                <div class="data-16"><div class="text-wrapper-23">185.00</div></div>
-                <div class="data-12"><div class="text-wrapper-24">$161.72 EUR</div></div>
-                <div class="delete-action">
-                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
-                </div>
-              </div>
-              <div class="row-4">
-                <div class="data-13">
-                  <div class="container-29"><div class="text-wrapper-9">Air Freight</div></div>
-                </div>
-                <div class="data-14"><div class="text-wrapper-25">163.41</div></div>
-                <div class="data-15"><div class="text-wrapper-26">VKg</div></div>
-                <div class="data-16"><div class="text-wrapper-27">3.75</div></div>
-                <div class="data-12"><div class="text-wrapper-28">$549.673 CLP</div></div>
-                <div class="delete-action">
-                  <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
-                </div>
+                <div class="data-7"><div class="text-wrapper-14 editable" contenteditable="true">163.41</div></div>
+                <div class="data-8"><div class="text-wrapper-15 editable" contenteditable="true">VKg</div></div>
+                <div class="data-9"><div class="text-wrapper-16 editable" contenteditable="true">0.30</div></div>
+                <div class="data-10"><div class="text-wrapper-17 editable" contenteditable="true">$49.02 USD</div></div>
+                <div class="delete-action"><img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" /></div>
               </div>
               
               <div class="add-row-container">
-                <button class="add-button" type="button">
-                  AGREGAR
-                </button>
+                <button class="add-button" type="button">AGREGAR</button>
               </div>
             </div>
           </div>
@@ -306,36 +288,43 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
           <div class="container-30">
             <div class="container-31">
               <div class="container-32"><div class="text">SUBTOTAL</div></div>
-              <div class="container-32"><div class="text-wrapper-40">$2.175.608 CLP</div></div>
+              <div class="container-32"><div class="text-wrapper-40">$0.00 CLP</div></div>
             </div>
             <div class="container-31">
               <div class="container-32"><div class="tax">TAX</div></div>
-              <div class="container-32"><div class="text-2">$0.00</div></div>
+              <div class="container-32"><div class="text-2 editable tax-input" contenteditable="true">$0.00</div></div>
             </div>
             <div class="background">
               <div class="margin"><div class="text-wrapper-41">TOTAL (CLP)</div></div>
-              <div class="container-25"><div class="text-wrapper-42">$2.175.608</div></div>
+              <div class="container-25"><div class="text-wrapper-42">$0.00</div></div>
             </div>
           </div>
           <div class="container-30">
             <div class="container-31">
               <div class="container-32"><div class="text">SUBTOTAL</div></div>
-              <div class="container-32"><div class="text-wrapper-43">$2.425.43 USD</div></div>
+              <div class="container-32"><div class="text-wrapper-43">$0.00 USD</div></div>
             </div>
             <div class="container-31">
               <div class="container-32"><div class="tax">TAX</div></div>
-              <div class="container-32"><div class="text-2">$0.00</div></div>
+              <div class="container-32"><div class="text-2 editable tax-input" contenteditable="true">$0.00</div></div>
             </div>
             <div class="background">
               <div class="margin"><div class="text-wrapper-41">TOTAL (USD)</div></div>
-              <div class="container-25"><div class="text-wrapper-44">$2.425.43</div></div>
+              <div class="container-25"><div class="text-wrapper-44">$0.00</div></div>
             </div>
           </div>
         </div>
       </div>
       <div class="signature-line">
-        <div class="horizontal-divider-wrapper"><div class="horizontal-divider"></div></div>
-        <div class="signature-wrapper"><div class="signature">SIGNATURE</div></div>
+        <div class="signature-name-wrapper">
+          <div class="signature-name editable" contenteditable="true"></div>
+        </div>
+        <div class="horizontal-divider-wrapper">
+          <div class="horizontal-divider"></div>
+        </div>
+        <div class="signature-wrapper">
+          <div class="signature">SIGNATURE</div>
+        </div>
       </div>
       <footer class="footer">
         <div class="container-33">
@@ -354,10 +343,82 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
         </div>
       </footer>
     </div>
+    
     <script>
+      function actualizarCodigoBarras() {
+        if (typeof window.JsBarcode !== 'function') return;
+        const numElement = document.querySelector('.quotation-number');
+        let valor = numElement ? numElement.innerText.trim() : 'QT-0000';
+        if (valor === '') valor = 'QT-0000';
+
+        const barcodes = document.querySelectorAll('.barcode-container');
+        barcodes.forEach(img => {
+          try {
+            window.JsBarcode(img, valor, {
+              format: "CODE128",     
+              displayValue: false,   
+              lineColor: "#2f2f2f",  
+              background: "transparent",
+              width: 2,              
+              height: 48,            
+              margin: 0
+            });
+          } catch (e) {}
+        });
+      }
+
+      function calcularTotales() {
+        let subtotalCLP = 0;
+        let subtotalUSD = 0;
+
+        const todasLasFilas = document.querySelectorAll('.row, .row-2, .row-3, .row-4');
+
+        todasLasFilas.forEach(row => {
+          const amountElement = row.querySelector('.data-5 .text-wrapper-13, .data-10 .text-wrapper-17, .data-12 .text-wrapper-20, .data-12 .text-wrapper-24, .data-12 .text-wrapper-28, .data-12 .text-wrapper-31, .data-12 .text-wrapper-35, .data-12 .text-wrapper-36, .data-12 .text-wrapper-38');
+
+          if (amountElement) {
+            const textoMoneda = amountElement.innerText.trim().toUpperCase();
+            const numeroLimpio = textoMoneda.replace(/[^0-9.,-]/g, '').replace(/\\./g, '');
+            const valor = parseFloat(numeroLimpio.replace(',', '.')) || 0;
+
+            if (textoMoneda.includes('CLP') || textoMoneda.includes('CL')) {
+              subtotalCLP += valor;
+            } else if (textoMoneda.includes('USD')) {
+              subtotalUSD += valor;
+            }
+          }
+        });
+
+        const taxInputs = document.querySelectorAll('.tax-input');
+        let taxCLP = 0;
+        let taxUSD = 0;
+
+        if (taxInputs.length >= 2) {
+          const textoTaxCLP = taxInputs[0].innerText.trim();
+          const textoTaxUSD = taxInputs[1].innerText.trim();
+
+          taxCLP = parseFloat(textoTaxCLP.replace(/[^0-9.,-]/g, '').replace(/\\./g, '').replace(',', '.')) || 0;
+          taxUSD = parseFloat(textoTaxUSD.replace(/[^0-9.,-]/g, '').replace(/\\./g, '').replace(',', '.')) || 0;
+        }
+
+        const totalFinalCLP = subtotalCLP + taxCLP;
+        const totalFinalUSD = subtotalUSD + taxUSD;
+
+        const formatterCLP = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', minimumFractionDigits: 0 });
+        const formatterUSD = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+        const subtotalDOM_CLP = document.querySelector('.text-wrapper-40');
+        const subtotalDOM_USD = document.querySelector('.text-wrapper-43');
+        if (subtotalDOM_CLP) subtotalDOM_CLP.innerText = formatterCLP.format(subtotalCLP) + ' CLP';
+        if (subtotalDOM_USD) subtotalDOM_USD.innerText = formatterUSD.format(subtotalUSD) + ' USD';
+
+        const totalDOM_CLP = document.querySelector('.text-wrapper-42');
+        const totalDOM_USD = document.querySelector('.text-wrapper-44');
+        if (totalDOM_CLP) totalDOM_CLP.innerText = formatterCLP.format(totalFinalCLP);
+        if (totalDOM_USD) totalDOM_USD.innerText = formatterUSD.format(totalFinalUSD);
+      }
+
       document.addEventListener('click', function(e) {
-        
-        // Obtiene el contenedor .div-2 directamente
         const getRowContainer = (quotationNode) => {
           return quotationNode.querySelector('.border > .div-2');
         };
@@ -369,6 +430,7 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
           
           if (row && quotation) {
             row.remove();
+            calcularTotales(); 
             
             const rowContainer = getRowContainer(quotation);
             const remainingRows = rowContainer ? rowContainer.querySelectorAll('.row, .row-2, .row-3, .row-4') : [];
@@ -414,7 +476,6 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
         const addBtn = e.target.closest('.add-button');
         if (addBtn) {
           const allQuotations = Array.from(document.querySelectorAll('.quotation'));
-          // Encontramos el índice de la última página
           const lastIndex = allQuotations.length - 1;
           const lastQuotation = allQuotations[lastIndex];
           
@@ -428,29 +489,23 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
           const newRow = lastRow.cloneNode(true);
           
           const editables = newRow.querySelectorAll('[contenteditable="true"]');
-          editables.forEach(el => {
-            el.innerText = '';
-          });
+          editables.forEach(el => { el.innerText = ''; });
+
+          const priceCell = newRow.querySelector('.data-5 .text-wrapper-13, .data-10 .text-wrapper-17, .data-12 .text-wrapper-20, .data-12 .text-wrapper-24, .data-12 .text-wrapper-28, .data-12 .text-wrapper-31, .data-12 .text-wrapper-35, .data-12 .text-wrapper-36, .data-12 .text-wrapper-38');
+          if (priceCell) priceCell.innerText = '$0 CLP';
 
           const addRowContainer = rowContainer.querySelector('.add-row-container');
-
-          // ======== LÓGICA DE LÍMITE DINÁMICO ========
-          // Si estamos en la página 1 (index 0), el límite es 10. 
-          // Si estamos en la página 2 o superior (index > 0), el límite es 23.
           const currentLimit = (lastIndex === 0) ? 10 : 23;
 
           if (rows.length < currentLimit) {
-            // Aún hay espacio en la página actual
             if (addRowContainer) {
               rowContainer.insertBefore(newRow, addRowContainer);
             } else {
               rowContainer.appendChild(newRow);
             }
           } else {
-            // ===== CREAR NUEVA PÁGINA =====
             const newQuotation = lastQuotation.cloneNode(true);
             
-            // Siempre removemos la sección superior en las páginas nuevas
             const container6 = newQuotation.querySelector('.container-6');
             if (container6) container6.remove();
             
@@ -459,15 +514,12 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
             if (newRowContainer) {
                const headerRow = newRowContainer.querySelector('.header-row');
                const clonedAddBtn = newRowContainer.querySelector('.add-row-container');
-               
                newRowContainer.innerHTML = ''; 
-               
                if (headerRow) newRowContainer.appendChild(headerRow);
                newRowContainer.appendChild(newRow);
                if (clonedAddBtn) newRowContainer.appendChild(clonedAddBtn);
             }
             
-            // Limpiamos la página anterior
             const oldAddBtn = lastQuotation.querySelector('.add-row-container');
             const oldTotals = lastQuotation.querySelector('.total');
             const oldSignature = lastQuotation.querySelector('.signature-line');
@@ -478,8 +530,68 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
 
             lastQuotation.parentNode.appendChild(newQuotation);
           }
+          calcularTotales(); 
+          actualizarCodigoBarras();
         }
       });
+
+      // =========================================================
+      // DETECTAR CAMBIOS EN EL HEADER Y AVISAR A REACT
+      // =========================================================
+      function notificarCambioHeader() {
+        const header = document.getElementById('main-header');
+        if (header) {
+          window.parent.postMessage({ 
+            type: 'HEADER_UPDATED', 
+            headerHtml: header.innerHTML 
+          }, '*');
+        }
+      }
+
+      document.addEventListener('input', function (e) {
+        if (e.target.closest('[contenteditable="true"]')) {
+          calcularTotales();
+          
+          // Si el elemento editado está dentro del header, notificamos a React
+          if (e.target.closest('#main-header')) {
+            notificarCambioHeader();
+          }
+        }
+        
+        if (e.target.classList.contains('quotation-number')) {
+          actualizarCodigoBarras();
+        }
+      });
+
+      // =========================================================
+    // COMUNICACIÓN CON REACT PARA EFECTO MULTI-HOJA
+    // =========================================================
+    function notificarAlturaAReact() {
+      // 1. Buscamos cuántas hojas existen actualmente
+      const hojas = document.querySelectorAll('.quotation');
+      let alturaRealExacta = 0;
+
+      // 2. Sumamos la altura de cada hoja + sus márgenes
+      hojas.forEach(hoja => {
+        const estilos = window.getComputedStyle(hoja);
+        const margenSuperior = parseFloat(estilos.marginTop) || 0;
+        const margenInferior = parseFloat(estilos.marginBottom) || 0;
+        
+        alturaRealExacta += hoja.offsetHeight + margenSuperior + margenInferior;
+      });
+
+      // 3. Enviamos la altura exacta a React (forzando a que se encoja si borraste hojas)
+      window.parent.postMessage({ type: 'RESIZE_PRINCIPAL', height: alturaRealExacta }, '*');
+    }
+
+      window.addEventListener('load', () => {
+        notificarAlturaAReact();
+        calcularTotales();
+        actualizarCodigoBarras();
+      });
+
+      const observer = new MutationObserver(notificarAlturaAReact);
+      observer.observe(document.body, { childList: true, subtree: true });
     </script>
   </body>
 </html>

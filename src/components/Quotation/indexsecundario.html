@@ -6,6 +6,7 @@
   <meta charset="utf-8" />
   <link rel="stylesheet" href="globals.css" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
 
 <body>
@@ -14,7 +15,7 @@
       <div class="container">
         <img class="img" src="https://storage.googleapis.com/sclcargo/web/Home/logo-largo.png" />
         <div class="div">
-          <img class="container-2" src="img/container.svg" />
+          <img class="container-2 barcode-container" />
           <div class="vertical-divider"></div>
           <div class="container-3">
             <div class="container-4">
@@ -22,7 +23,7 @@
                 <div class="text-wrapper editable" contenteditable="true">QUOTATION</div>
               </div>
               <div class="div-wrapper">
-                <div class="text-wrapper-2 editable" contenteditable="true">QT-9141</div>
+                <div class="text-wrapper-2 editable quotation-number" contenteditable="true">QT-9241</div>
               </div>
             </div>
             <div class="container-5">
@@ -65,7 +66,7 @@
           <div class="container-7">
             <p class="element-sujeta-a-piezas editable" contenteditable="true">
               1) Sujeta a piezas finales, con respecto a su peso, dimensiones, tipo de carga, embalaje y
-              &#34;loadability&#34;. (Nota para máximo estándar 300cm de largo, 200cm de ancho, 160cm de alto)<br />2)
+              "loadability". (Nota para máximo estándar 300cm de largo, 200cm de ancho, 160cm de alto)<br />2)
               Válida por 30 días.<br />3) Sujeta a disponibilidad de espacio al momento de la reserva.<br />4) Todas
               las tarifas son entregadas bajo la condición que están sujetas a cambio en cualquier minuto con aviso
               previo.<br />5) Carga que es de origen o para uso militar, dual o donde el exportador/consignatario es
@@ -98,6 +99,38 @@
       </div>
     </footer>
   </div>
+
+  <script>
+    function actualizarCodigoBarras() {
+      if (typeof window.JsBarcode !== 'function') {
+        setTimeout(actualizarCodigoBarras, 100); // Si no ha cargado, reintenta en 100ms
+        return;
+      }
+
+      const numElement = document.querySelector('.quotation-number');
+      let valor = numElement ? numElement.innerText.trim() : 'QT-0000';
+      if (valor === '') valor = 'QT-0000';
+
+      const barcodes = document.querySelectorAll('.barcode-container');
+      barcodes.forEach(img => {
+        try {
+          window.JsBarcode(img, valor, {
+            format: "CODE128",
+            displayValue: false,
+            lineColor: "#2f2f2f",
+            background: "transparent",
+            width: 2,
+            height: 48,
+            margin: 0
+          });
+        } catch (e) {
+          console.error(e);
+        }
+      });
+    }
+
+    window.addEventListener('load', actualizarCodigoBarras);
+  </script>
 </body>
 
 </html>

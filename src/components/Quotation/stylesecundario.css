@@ -406,41 +406,54 @@
 }
 
 .quotation .container-10 {
+  display: flex;
+  /* Cambiado de position: relative */
+  align-items: center;
+  /* Centra verticalmente el icono con el texto */
+  gap: 8px;
+  /* Espacio entre el icono y el texto */
   position: relative;
-  width: 148px;
-  height: 40px;
-  margin-top: -27.00px;
-  margin-bottom: -28.00px;
+  width: auto;
+  /* Deja que el ancho sea automático */
+  height: auto;
+  /* Elimina el alto fijo de 40px */
+  margin-top: 0;
+  /* Elimina el margen negativo */
+  margin-bottom: 0;
+  /* Elimina el margen negativo */
 }
 
+/* Busca .quotation .background y reemplázalo por esto */
 .quotation .background {
   display: flex;
   width: 28px;
-  height: 40px;
+  height: 28px;
+  /* Ajustado para ser un círculo pequeño */
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: calc(50.00% - 20px);
-  left: 0;
   background-color: #fffcf9;
   border-radius: 9999px;
+  flex-shrink: 0;
+  /* Evita que el círculo se aplaste */
 }
 
+/* Busca .quotation .icon-2 y reemplázalo por esto */
 .quotation .icon-2 {
   position: relative;
   width: 16.67px;
   height: 16.67px;
-  background-image: url(./img/vector.svg);
-  background-size: 100% 100%;
+  display: block;
+  object-fit: contain;
+  /* Asegura que la imagen no se deforme */
+  /* Elimina background-image si vas a usar el tag <img> */
 }
 
+/* Busca .quotation .container-11 y reemplázalo por esto */
 .quotation .container-11 {
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
-  position: absolute;
-  top: calc(50.00% - 10px);
-  left: 33px;
+  /* Eliminado position: absolute, top y left */
 }
 
 .quotation .text-wrapper-6 {

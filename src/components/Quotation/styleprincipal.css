@@ -691,11 +691,21 @@
 }
 
 .quotation .container-25 {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: flex;
+  /* Cambiado de position: relative */
+  align-items: center;
+  /* Centra verticalmente el icono con el texto */
+  gap: 8px;
+  /* Espacio entre el icono y el texto */
   position: relative;
-  flex: 0 0 auto;
+  width: auto;
+  /* Deja que el ancho sea automático */
+  height: auto;
+  /* Elimina el alto fijo de 40px */
+  margin-top: 0;
+  /* Elimina el margen negativo */
+  margin-bottom: 0;
+  /* Elimina el margen negativo */
 }
 
 .quotation .icon-3 {
