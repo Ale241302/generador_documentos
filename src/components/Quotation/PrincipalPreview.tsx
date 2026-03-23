@@ -435,9 +435,9 @@ export function PrincipalPreview({ data }: { data: QuotationData }) {
           const addRowContainer = rowContainer.querySelector('.add-row-container');
 
           // ======== LÓGICA DE LÍMITE DINÁMICO ========
-          // Si estamos en la página 1 (index 0), el límite es 12. 
+          // Si estamos en la página 1 (index 0), el límite es 10. 
           // Si estamos en la página 2 o superior (index > 0), el límite es 23.
-          const currentLimit = (lastIndex === 0) ? 12 : 23;
+          const currentLimit = (lastIndex === 0) ? 10 : 23;
 
           if (rows.length < currentLimit) {
             // Aún hay espacio en la página actual

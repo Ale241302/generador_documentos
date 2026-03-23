@@ -175,7 +175,8 @@
 .quotation .main {
   display: flex;
   flex-direction: column;
-  height: 1338px;
+  flex-grow: 1;
+  /* <--- AÑADIDO: Expande el main automáticamente */
   align-items: flex-start;
   gap: 10px;
   padding: 15px 32px 20px;
@@ -1804,6 +1805,11 @@
   border-top-width: 1px;
   border-top-style: solid;
   border-color: #f1f5f9;
+  flex-shrink: 0;
+  /* <--- AÑADIDO: Prohíbe que flexbox lo aplaste */
+  margin-top: auto;
+  margin-bottom: 50px;
+  /* <--- AÑADIDO: Lo empuja siempre hacia abajo */
 }
 
 .quotation .right-side-totals {
@@ -2003,10 +2009,42 @@
   white-space: nowrap;
 }
 
+/* ===============================
+   ESTILOS PARA EL NOMBRE DE FIRMA
+   =============================== */
+.quotation .signature-name-wrapper {
+  position: absolute;
+  top: -18px;
+  /* Ajusta la altura para separarlo de la línea */
+  left: 710px;
+  /* Misma posición 'left' que la línea de firma */
+  width: 255px;
+  /* Mismo ancho que la línea de firma */
+  display: flex;
+  justify-content: flex-end;
+  /* Alinea el texto a la derecha */
+}
+
+.quotation .signature-name {
+  font-family: "Public Sans-SemiBold", Helvetica, sans-serif;
+  font-weight: 600;
+  color: #2f2f2f;
+  font-size: 14px;
+  line-height: normal;
+  text-align: left;
+  white-space: nowrap;
+  outline: none;
+  /* Quita el borde feo cuando haces clic */
+  min-width: 255px;
+  /* Para que sea fácil hacer clic si lo dejas vacío */
+}
+
 .quotation .signature-line {
   position: relative;
   width: 968px;
   height: 25px;
+  flex-shrink: 0;
+  /* <--- AÑADIDO: Prohíbe que flexbox lo aplaste */
 }
 
 .quotation .horizontal-divider-wrapper {
@@ -2063,6 +2101,8 @@
   border-right-style: none;
   border-bottom-style: none;
   border-left-style: none;
+  flex-shrink: 0;
+  /* <--- AÑADIDO: Prohíbe que flexbox lo aplaste */
 }
 
 .quotation .container-33 {
@@ -2223,4 +2263,4 @@
 
 .quotation .add-button:active {
   transform: translateY(1px);
-}
+}

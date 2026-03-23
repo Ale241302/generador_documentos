@@ -545,7 +545,7 @@
                 <div class="tax">TAX</div>
               </div>
               <div class="container-32">
-                <div class="text-2">$0.00</div>
+                <div class="text-2 editable tax-input" contenteditable="true">$0.00</div>
               </div>
             </div>
             <div class="background">
@@ -571,7 +571,7 @@
                 <div class="tax">TAX</div>
               </div>
               <div class="container-32">
-                <div class="text-2">$0.00</div>
+                <div class="text-2 editable tax-input" contenteditable="true">$0.00</div>
               </div>
             </div>
             <div class="background">
@@ -587,6 +587,10 @@
       </div>
     </div>
     <div class="signature-line">
+      <div class="signature-name-wrapper">
+        <div class="signature-name editable" contenteditable="true"></div>
+      </div>
+
       <div class="horizontal-divider-wrapper">
         <div class="horizontal-divider"></div>
       </div>
@@ -619,6 +623,77 @@
     </footer>
   </div>
   <script>
+    // =========================================================
+    // LÓGICA DE CÁLCULO DE TOTALES
+    // =========================================================
+    function calcularTotales() {
+      let subtotalCLP = 0;
+      let subtotalUSD = 0;
+
+      // Buscar todas las filas de datos en todas las páginas (.row, .row-2, .row-3, .row-4)
+      const todasLasFilas = document.querySelectorAll('.row, .row-2, .row-3, .row-4');
+
+      todasLasFilas.forEach(row => {
+        // Buscamos el elemento editable que contiene el AMOUNT. 
+        // Basado en tu HTML, es el penúltimo elemento editable (nth-last-child(2))
+        // dentro de la fila, o podrías buscar específicamente las clases de las celdas de monto.
+        const amountElement = row.querySelector('.data-5 .text-wrapper-13, .data-10 .text-wrapper-17, .data-12 .text-wrapper-20, .data-12 .text-wrapper-24, .data-12 .text-wrapper-28, .data-12 .text-wrapper-31, .data-12 .text-wrapper-35, .data-12 .text-wrapper-36, .data-12 .text-wrapper-38');
+
+        if (amountElement) {
+          const textoMoneda = amountElement.innerText.trim().toUpperCase();
+
+          // Extraer solo el número (quitar símbolo $, letras, espacios y puntos de miles)
+          // Soporta decimales con coma o punto
+          const numeroLimpio = textoMoneda.replace(/[^0-9.,-]/g, '').replace(/\./g, '');
+          const valor = parseFloat(numeroLimpio.replace(',', '.')) || 0;
+
+          // Determinar si es CLP o USD basado en el texto
+          if (textoMoneda.includes('CLP') || textoMoneda.includes('CL')) {
+            subtotalCLP += valor;
+          } else if (textoMoneda.includes('USD')) {
+            subtotalUSD += valor;
+          }
+        }
+      });
+
+      // Extraer el valor escrito manualmente en los campos TAX
+      const taxInputs = document.querySelectorAll('.tax-input');
+      let taxCLP = 0;
+      let taxUSD = 0;
+
+      if (taxInputs.length >= 2) {
+        // Asumimos que el primer input es CLP y el segundo es USD basado en tu HTML
+        const textoTaxCLP = taxInputs[0].innerText.trim();
+        const textoTaxUSD = taxInputs[1].innerText.trim();
+
+        taxCLP = parseFloat(textoTaxCLP.replace(/[^0-9.,-]/g, '').replace(/\./g, '').replace(',', '.')) || 0;
+        taxUSD = parseFloat(textoTaxUSD.replace(/[^0-9.,-]/g, '').replace(/\./g, '').replace(',', '.')) || 0;
+      }
+
+      // Calcular Totales Finales
+      const totalFinalCLP = subtotalCLP + taxCLP;
+      const totalFinalUSD = subtotalUSD + taxUSD;
+
+      // Formateadores
+      const formatterCLP = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', minimumFractionDigits: 0 });
+      const formatterUSD = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+
+      // Actualizar Subtotales en el DOM
+      const subtotalDOM_CLP = document.querySelector('.text-wrapper-40');
+      const subtotalDOM_USD = document.querySelector('.text-wrapper-43');
+      if (subtotalDOM_CLP) subtotalDOM_CLP.innerText = formatterCLP.format(subtotalCLP) + ' CLP';
+      if (subtotalDOM_USD) subtotalDOM_USD.innerText = formatterUSD.format(subtotalUSD) + ' USD';
+
+      // Actualizar Totales Finales (Cajas Naranjas) en el DOM
+      const totalDOM_CLP = document.querySelector('.text-wrapper-42');
+      const totalDOM_USD = document.querySelector('.text-wrapper-44');
+      if (totalDOM_CLP) totalDOM_CLP.innerText = formatterCLP.format(totalFinalCLP);
+      if (totalDOM_USD) totalDOM_USD.innerText = formatterUSD.format(totalFinalUSD);
+    }
+
+    // =========================================================
+    // LÓGICA DE CLICK: AGREGAR Y ELIMINAR
+    // =========================================================
     document.addEventListener('click', function (e) {
 
       // Obtiene el contenedor .div-2 directamente para mayor seguridad
@@ -633,6 +708,7 @@
 
         if (row && quotation) {
           row.remove();
+          calcularTotales(); // <--- Recalcular tras eliminar fila
 
           const rowContainer = getRowContainer(quotation);
           const remainingRows = rowContainer ? rowContainer.querySelectorAll('.row, .row-2, .row-3, .row-4') : [];
@@ -692,14 +768,19 @@
 
         const editables = newRow.querySelectorAll('[contenteditable="true"]');
         editables.forEach(el => {
-          el.innerText = '';
+          el.innerText = ''; // Limpiar campos al clonar
         });
+
+        // Poner valor por defecto de moneda para que sume 0 y no rompa el formateo visual de inmediato
+        const priceCell = newRow.querySelector('.data-5 .text-wrapper-13, .data-10 .text-wrapper-17, .data-12 .text-wrapper-20, .data-12 .text-wrapper-24, .data-12 .text-wrapper-28, .data-12 .text-wrapper-31, .data-12 .text-wrapper-35, .data-12 .text-wrapper-36, .data-12 .text-wrapper-38');
+        if (priceCell) {
+          priceCell.innerText = '$0 CLP';
+        }
 
         const addRowContainer = rowContainer.querySelector('.add-row-container');
 
         // ======== LÓGICA DE LÍMITE DINÁMICO ========
-        // Página 1 (index 0) = 12 filas. Página 2+ (index > 0) = 23 filas.
-        const currentLimit = (lastIndex === 0) ? 12 : 23;
+        const currentLimit = (lastIndex === 0) ? 10 : 23;
 
         if (rows.length < currentLimit) {
           if (addRowContainer) {
@@ -737,8 +818,20 @@
 
           lastQuotation.parentNode.appendChild(newQuotation);
         }
+        calcularTotales(); // <--- Recalcular tras agregar fila
       }
     });
+
+    // =========================================================
+    // LÓGICA DE TECLADO: RECALCULAR AL ESCRIBIR
+    // =========================================================
+    document.addEventListener('input', function (e) {
+      // Si el usuario modifica cualquier elemento contenteditable (filas o tax)
+      if (e.target.closest('[contenteditable="true"]')) {
+        calcularTotales();
+      }
+    });
+
     // =========================================================
     // COMUNICACIÓN CON REACT PARA EFECTO MULTI-HOJA
     // =========================================================
@@ -749,8 +842,11 @@
       window.parent.postMessage({ type: 'RESIZE_PRINCIPAL', height: totalHeight }, '*');
     }
 
-    // Avisar cuando carga la página
-    window.addEventListener('load', notificarAlturaAReact);
+    // Avisar cuando carga la página y forzar cálculo inicial
+    window.addEventListener('load', () => {
+      notificarAlturaAReact();
+      calcularTotales();
+    });
 
     // Un "espía" (Observer) que detecta automáticamente cuando clonas 
     // una página o eliminas una fila, y actualiza la altura al instante.
