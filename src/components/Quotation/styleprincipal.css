@@ -2167,24 +2167,26 @@
 }
 
 .quotation .container-35 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   position: relative;
-  width: 148px;
-  height: 40px;
-  margin-top: -27.00px;
-  margin-bottom: -28.00px;
+  width: auto;
+  height: auto;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .quotation .background-2 {
   display: flex;
   width: 28px;
-  height: 40px;
+  height: 28px;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: calc(50.00% - 20px);
-  left: 0;
+  position: relative;
   background-color: #fffcf9;
   border-radius: 9999px;
+  flex-shrink: 0;
 }
 
 .quotation .icon-5 {
@@ -2199,9 +2201,7 @@
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
-  position: absolute;
-  top: calc(50.00% - 10px);
-  left: 33px;
+  position: relative;
 }
 
 .quotation .text-wrapper-45 {

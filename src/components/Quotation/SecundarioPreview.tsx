@@ -35,7 +35,7 @@ interface PrincipalPreviewProps {
   onHeaderChange: (headerHtml: string) => void;
 }
 
-export function PrincipalPreview({ data, onHeaderChange }: PrincipalPreviewProps) {
+export function SecundarioPreview({ data, onHeaderChange }: PrincipalPreviewProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {

@@ -40,92 +40,40 @@ const toBase64 = (url: string): Promise<string> => {
 // Corrige márgenes negativos y position:absolute
 // del footer que html2canvas no interpreta bien
 // ─────────────────────────────────────────────
-const fixFooterForCanvas = async (clonedDoc: Document) => {
-  // Ajustes para asegurar que el footer se renderice bien con html2canvas
-  // (márgenes, iconos y alineación flexbox)
+const fixFooterForCanvas = (clonedDoc: Document) => {
+  // Ajustes SÍNCRONOS para html2canvas: usamos flexbox explícito 
+  // para mantener la alineación vertical perfecta del icono y el texto.
 
-  // 1. Imágenes base64 (crítico para GCP)
-  const allImgs = clonedDoc.querySelectorAll("img");
+  // 1. Template Principal: .container-35
+  const containers35 = clonedDoc.querySelectorAll(".container-35");
+  containers35.forEach((c35: any) => {
+    c35.style.setProperty("display", "flex", "important");
+    c35.style.setProperty("align-items", "center", "important");
+    c35.style.setProperty("gap", "8px", "important");
+  });
+
+  // 2. Template Secundario: .container-10
+  const containers10 = clonedDoc.querySelectorAll(".container-10");
+  containers10.forEach((c10: any) => {
+    c10.style.setProperty("display", "flex", "important");
+    c10.style.setProperty("align-items", "center", "important");
+    c10.style.setProperty("gap", "8px", "important");
+  });
+
+  // 3. Limpieza de notas y otros márgenes problemáticos
+  const leftSideNotes2 = clonedDoc.querySelectorAll(".left-side-notes-2");
+  leftSideNotes2.forEach((ln: any) => ln.style.setProperty("margin-bottom", "0", "important"));
+};
+
+// Función auxiliar para convertir imágenes antes de html2canvas
+const prepareImagesForCanvas = async (doc: Document) => {
+  const allImgs = doc.querySelectorAll("img");
   for (const imgEl of Array.from(allImgs)) {
     const src = (imgEl as HTMLImageElement).src;
     if (src && src.startsWith("http")) {
       const base64 = await toBase64(src);
       if (base64) (imgEl as HTMLImageElement).src = base64;
     }
-  }
-
-  // 2. Template Principal: .container-35, .background-2, .container-36
-  const container35 = clonedDoc.querySelector(".container-35") as HTMLElement;
-  if (container35) {
-    container35.style.marginTop = "0";
-    container35.style.marginBottom = "0";
-    container35.style.position = "relative";
-    container35.style.display = "flex";
-    container35.style.flexDirection = "row";
-    container35.style.alignItems = "center";
-    container35.style.gap = "8px";
-    container35.style.width = "auto";
-  }
-
-  const background2 = clonedDoc.querySelector(".background-2") as HTMLElement;
-  if (background2) {
-    background2.style.position = "relative";
-    background2.style.top = "auto";
-    background2.style.left = "auto";
-    background2.style.display = "flex";
-    background2.style.alignItems = "center";
-    background2.style.justifyContent = "center";
-    background2.style.width = "28px";
-    background2.style.height = "28px";
-  }
-
-  const container36 = clonedDoc.querySelector(".container-36") as HTMLElement;
-  if (container36) {
-    container36.style.position = "relative";
-    container36.style.top = "auto";
-    container36.style.left = "auto";
-    container36.style.display = "inline-flex";
-    container36.style.flexDirection = "column";
-  }
-
-  // 3. Template Secundario: .container-10, .background, .container-11
-  const container10 = clonedDoc.querySelector(".container-10") as HTMLElement;
-  if (container10) {
-    container10.style.marginTop = "0";
-    container10.style.marginBottom = "0";
-    container10.style.position = "relative";
-    container10.style.display = "flex";
-    container10.style.flexDirection = "row";
-    container10.style.alignItems = "center";
-    container10.style.gap = "8px";
-    container10.style.width = "auto";
-  }
-
-  const backgroundOld = clonedDoc.querySelector(".container-10 .background") as HTMLElement;
-  if (backgroundOld) {
-    backgroundOld.style.position = "relative";
-    backgroundOld.style.top = "auto";
-    backgroundOld.style.left = "auto";
-    backgroundOld.style.display = "flex";
-    backgroundOld.style.alignItems = "center";
-    backgroundOld.style.justifyContent = "center";
-    backgroundOld.style.width = "28px";
-    backgroundOld.style.height = "28px";
-  }
-
-  const container11 = clonedDoc.querySelector(".container-11") as HTMLElement;
-  if (container11) {
-    container11.style.position = "relative";
-    container11.style.top = "auto";
-    container11.style.left = "auto";
-    container11.style.display = "inline-flex";
-    container11.style.flexDirection = "column";
-  }
-
-  // 4. Limpieza de notas y otros márgenes problemáticos
-  const leftSideNotes2 = clonedDoc.querySelector(".left-side-notes-2") as HTMLElement;
-  if (leftSideNotes2) {
-    leftSideNotes2.style.marginBottom = "0";
   }
 };
 
@@ -256,16 +204,8 @@ export function Cotizacion() {
         cliente: (docPrin.querySelector(".HANKA-OPERADOR") as HTMLElement)?.innerText.trim(),
       };
 
-      // ── 2. ESPERAR QUE TODAS LAS IMÁGENES CARGUEN ─────────
-      await Promise.all(
-        Array.from(docPrin.querySelectorAll("img")).map(img => {
-          if (img.complete) return Promise.resolve();
-          return new Promise(resolve => {
-            img.onload = resolve;
-            img.onerror = resolve;
-          });
-        })
-      );
+      // ── 2. PREPARAR DOCUMENTO (Imágenes a Base64) ──────
+      await prepareImagesForCanvas(docPrin);
 
       // ── 3. GENERAR PDF ─────────────────────────────────────
       const pdf = new jsPDF("p", "mm", "a4");
@@ -299,16 +239,8 @@ export function Cotizacion() {
       // Capturar iframe secundario
       const docSec = iframeSecundarioRef.current?.contentDocument;
       if (docSec) {
-        // Esperar imágenes del secundario
-        await Promise.all(
-          Array.from(docSec.querySelectorAll("img")).map(img => {
-            if (img.complete) return Promise.resolve();
-            return new Promise(resolve => {
-              img.onload = resolve;
-              img.onerror = resolve;
-            });
-          })
-        );
+        // Preparar imágenes del secundario
+        await prepareImagesForCanvas(docSec);
 
         const pageSec = docSec.querySelector(".quotation") as HTMLElement;
         if (pageSec) {
