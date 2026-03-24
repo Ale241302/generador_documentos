@@ -1802,27 +1802,36 @@
 
 .quotation .total {
   position: relative;
-  width: 620px;
-  height: 202px;
+  display: flex;
+  /* Añadido para controlar la alineación de sus hijos */
+  width: 100%;
+  /* Cambiado: De 620px a 100% para que use toda la hoja */
+  justify-content: flex-end;
+  /* Añadido: Empuja TODO su contenido hacia la derecha */
+  height: auto;
+  /* Cambiado a auto para que crezca si hay 3 monedas */
+  min-height: 202px;
   border-top-width: 1px;
   border-top-style: solid;
   border-color: #f1f5f9;
   flex-shrink: 0;
-  /* <--- AÑADIDO: Prohíbe que flexbox lo aplaste */
   margin-top: auto;
   margin-bottom: 50px;
-  /* <--- AÑADIDO: Lo empuja siempre hacia abajo */
+  padding-right: 0px;
+  /* Añadido: Para que el margen derecho coincida exactamente con tu tabla */
 }
 
 .quotation .right-side-totals {
   display: flex;
   width: calc(100% - 27px);
   height: 181px;
-  align-items: flex-start;
+  align-items: flex-end;
+  justify-content: flex-end;
+  /* ← AGREGAR ESTO */
   gap: 40px;
   position: relative;
   top: 21px;
-  left: 349px;
+  left: auto;
 }
 
 .quotation .container-30 {
@@ -1925,7 +1934,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding: 10px 24px;
+  padding: 10px 32px;
   position: relative;
   align-self: stretch;
   width: 100%;
@@ -1955,7 +1964,7 @@
   font-family: "Public Sans-Black", Helvetica;
   font-weight: 900;
   color: #ffffff;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 2.00px;
   line-height: 15px;
   white-space: nowrap;
