@@ -34,7 +34,36 @@ function generateIframeContent(html: string, globalCss: string, styleCss: string
 
     return html.replace("</head>", `${baseTag}\n${styleTag}\n${visualFixes}\n</head>`);
 }
+// ─────────────────────────────────────────────
+// HELPER: onclone para html2canvas
+// Corrige posición absoluta del icono del mundo 
+// en el footer del Bill of Lading
+// ─────────────────────────────────────────────
+const fixFooterForCanvas = (clonedDoc: Document) => {
+    const containers6 = clonedDoc.querySelectorAll(".container-6");
 
+    containers6.forEach((c6: any) => {
+        // 1. Convertimos el contenedor principal en Flexbox
+        c6.style.setProperty("display", "flex", "important");
+        c6.style.setProperty("align-items", "center", "important");
+
+        // 2. Bajamos el icono del mundo y le quitamos lo absoluto
+        const worldIcon = c6.querySelector(".background");
+        if (worldIcon) {
+            worldIcon.style.setProperty("position", "relative", "important");
+            worldIcon.style.setProperty("top", "13px", "important"); // La misma medida que funcionó en la Cotización
+            worldIcon.style.setProperty("left", "0", "important");
+        }
+
+        // 3. Acomodamos el texto ("www.sclcargo.cl") al lado del icono
+        const textContainer = c6.querySelector(".container-7");
+        if (textContainer) {
+            textContainer.style.setProperty("position", "relative", "important");
+            textContainer.style.setProperty("top", "7px", "important");
+            textContainer.style.setProperty("left", "10px", "important"); // Le da un poco de espacio
+        }
+    });
+};
 export function BlExport() {
     const navigate = useNavigate();
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -77,7 +106,6 @@ export function BlExport() {
         setSelectedFolderId(folder.id);
         setShowSuggestions(false);
     };
-
     const handleSave = async () => {
         if (!folderName.trim()) {
             toast.warning("El nombre de la carpeta es obligatorio");
@@ -91,14 +119,13 @@ export function BlExport() {
             const docPrin = iframeRef.current?.contentDocument;
             if (!docPrin) throw new Error("No se pudo acceder al iframe del BL");
 
-            // 1. EXTRAER DATOS (Ajusta los querySelectors según las clases de tu index.html de BL)
-            // 1. EXTRAER DATOS (Scraping del iframe)
+            // =========================================================
+            // 1. EXTRAER DATOS FIJOS (Scraping del iframe)
+            // =========================================================
             const extractedData: any = {
-                // Lado Izquierdo - Arriba
                 exporter: (docPrin.querySelector('.input-exporter') as HTMLElement)?.innerText.trim() || "",
                 consignee: (docPrin.querySelector('.input-consignee') as HTMLElement)?.innerText.trim() || "",
                 notify: (docPrin.querySelector('.input-notify') as HTMLElement)?.innerText.trim() || "",
-
                 preCarriage: (docPrin.querySelector('.input-precarriage') as HTMLElement)?.innerText.trim() || "",
                 placeOfReceipt: (docPrin.querySelector('.input-placeofreceipt') as HTMLElement)?.innerText.trim() || "",
                 exportCarrier: (docPrin.querySelector('.input-exportcarrier') as HTMLElement)?.innerText.trim() || "",
@@ -106,7 +133,6 @@ export function BlExport() {
                 foreignPort: (docPrin.querySelector('.input-foreigin') as HTMLElement)?.innerText.trim() || "",
                 placeOfDelivery: (docPrin.querySelector('.input-placeofdeli') as HTMLElement)?.innerText.trim() || "",
 
-                // Lado Derecho - Arriba
                 documentNumber: (docPrin.querySelector('.input-documentnumb') as HTMLElement)?.innerText.trim() || "",
                 blNumber: (docPrin.querySelector('.input-blnumb') as HTMLElement)?.innerText.trim() || "",
                 exportReferences: (docPrin.querySelector('.input-exportref') as HTMLElement)?.innerText.trim() || "",
@@ -118,7 +144,6 @@ export function BlExport() {
                 containerizedYes: (docPrin.querySelector('.input-containerizedyes') as HTMLElement)?.innerText.trim() || "",
                 containerizedNo: (docPrin.querySelector('.input-containerizedno') as HTMLElement)?.innerText.trim() || "",
 
-                // Inferior - Lado Izquierdo (Totales y Tasas)
                 subjectToCorrection: (docPrin.querySelector('.input-subjectco') as HTMLElement)?.innerText.trim() || "",
                 prepaid: (docPrin.querySelector('.input-prepaid') as HTMLElement)?.innerText.trim() || "",
                 collect: (docPrin.querySelector('.input-collect') as HTMLElement)?.innerText.trim() || "",
@@ -126,45 +151,167 @@ export function BlExport() {
                 prepaidBottom: (docPrin.querySelector('.input-prepaid_infe') as HTMLElement)?.innerText.trim() || "",
                 collectBottom: (docPrin.querySelector('.input-collect_infe') as HTMLElement)?.innerText.trim() || "",
 
-                // Inferior - Lado Derecho (Firmas y Fechas)
                 datedAt: (docPrin.querySelector('.input-datedat') as HTMLElement)?.innerText.trim() || "",
                 byAgent: (docPrin.querySelector('.input-by') as HTMLElement)?.innerText.trim() || "",
                 month: (docPrin.querySelector('.input-mo') as HTMLElement)?.innerText.trim() || "",
                 day: (docPrin.querySelector('.input-day') as HTMLElement)?.innerText.trim() || "",
                 year: (docPrin.querySelector('.input-age') as HTMLElement)?.innerText.trim() || "",
-                blNoBottom: (docPrin.querySelector('.input-blno') as HTMLElement)?.innerText.trim() || ""
+                blNoBottom: (docPrin.querySelector('.input-blno') as HTMLElement)?.innerText.trim() || "",
+
+                items: [] // <--- AQUÍ GUARDAREMOS LAS FILAS DE LA TABLA
             };
 
-            // 2. GENERAR EL PDF
+            // =========================================================
+            // 2. EXTRAER FILAS DINÁMICAS DE LA TABLA
+            // =========================================================
+            const rows = docPrin.querySelectorAll('.bl-row');
+            rows.forEach(row => {
+                const marks = (row.querySelector('.col-marks') as HTMLElement)?.innerText.trim() || "";
+                const packages = (row.querySelector('.col-packages') as HTMLElement)?.innerText.trim() || "";
+                const description = (row.querySelector('.col-description') as HTMLElement)?.innerText.trim() || "";
+                const weight = (row.querySelector('.col-weight') as HTMLElement)?.innerText.trim() || "";
+                const measurement = (row.querySelector('.col-measurement') as HTMLElement)?.innerText.trim() || "";
+
+                // Si la fila tiene al menos un dato escrito, la guardamos
+                if (marks || packages || description || weight || measurement) {
+                    extractedData.items.push({ marks, packages, description, weight, measurement });
+                }
+            });
+            // =========================================================
+            // 3. PREPARAR EL PDF Y ARREGLAR ESTILOS TEMPORALMENTE
+            // =========================================================
             const pdf = new jsPDF('p', 'mm', 'a4');
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
 
-            // Ajusta la clase .box al nombre del contenedor principal de tu BL
-            const pagePrin = docPrin.querySelector('.box') as HTMLElement; // Reemplaza .box por la clase de tu HTML
+            // 3.1. Ocultar botones de "Agregar" y "Basurero"
+            const actionButtons = docPrin.querySelectorAll('.delete-bl-row, .add-bl-btn-container');
+            actionButtons.forEach(btn => ((btn as HTMLElement).style.display = 'none'));
+
+            // 3.2. INYECTAR CSS TEMPORAL (Solo para el PDF)
+            // Esto soluciona el footer cortado, los placeholders visibles y los tamaños sin tocar el style.css real
+            const tempStyle = docPrin.createElement('style');
+            tempStyle.id = 'pdf-export-styles';
+            tempStyle.innerHTML = `
+        /* 1. Forzamos el tamaño del contenedor para que quepa el footer */
+        .bill-of-lading-vacio {
+          width: 1000px !important;
+          height: 1420px !important;
+          min-height: 1420px !important;
+          margin: 0 !important;
+        }
+        /* 2. Anclamos el footer estrictamente al fondo */
+        .bill-of-lading-vacio .footer {
+          top: auto !important;
+          bottom: 0 !important;
+        }
+        /* 3. Ocultamos los placeholders vacíos ("Escribe aquí...") */
+        .pdf-textarea:empty::before,
+        .pdf-textarea:empty {
+          color: transparent !important;
+          content: "" !important;
+          display: none !important;
+        }
+        /* 4. Evitamos que el SVG se deforme */
+        .bill-lading {
+          object-fit: fill !important;
+        }
+        
+        /* =========================================================
+           CORRECCIÓN DE POSICIÓN TOP (-2%) EXCLUSIVA PARA EL PDF
+           ========================================================= */
+        .input-exporter { top: 0.5% !important; }
+        .input-consignee { top: 9.5% !important; }
+        .input-notify { top: 18% !important; }
+        
+        .input-documentnumb { top: 0% !important; }
+        .input-blnumb { top: 0% !important; }
+        .input-exportref { top: 3.5% !important; }
+        .input-forwardingagent { top: 9.5% !important; }
+        .input-pointorigin { top: 15.5% !important; height: 2% !important; }
+        .input-domesticrouting { top: 18% !important; }
+        .input-loadingpier { top: 31.2% !important; }
+        .input-typeofmove { top: 34.5% !important; }
+        .input-containerizedyes { top: 34.7% !important; }
+        .input-containerizedno { top: 34.7% !important; }
+        
+        .input-precarriage { top: 27.5% !important; }
+        .input-placeofreceipt { top: 27.5% !important; }
+        .input-exportcarrier { top: 31% !important; }
+        .input-portofloading { top: 31% !important; }
+        .input-foreigin { top: 34.5% !important; }
+        .input-placeofdeli { top: 34.5% !important; }
+        
+        .input-subjectco { top: 79% !important; }
+        .input-prepaid { top: 79% !important; }
+        .input-collect { top: 79% !important; }
+        
+        .input-datedat { top: 85.5% !important; }
+        .input-by { top: 88% !important; }
+        .input-mo { top: 91.7% !important; }
+        .input-day { top: 91.7% !important; }
+        .input-age { top: 91.7% !important; }
+        
+        .input-blno { top: 96.5% !important; }
+        .input-prepaid_infe { top: 96.7% !important; }
+        .input-collect_infe { top: 96.7% !important; }
+        .input-grandtotal { top: 97.3% !important; }
+      `;
+            docPrin.head.appendChild(tempStyle);
+
+            // 3.3. Forzar el scroll del iframe hacia arriba para evitar que los inputs se desplacen hacia abajo
+            docPrin.defaultView?.scrollTo(0, 0);
+
+            // PAUSA CORTA: Le damos 150ms al navegador para aplicar los estilos inyectados antes del flash
+            await new Promise(resolve => setTimeout(resolve, 150));
+
+            const pagePrin = docPrin.querySelector('.bill-of-lading-vacio') as HTMLElement;
 
             if (pagePrin) {
-                const canvas = await html2canvas(pagePrin, { scale: 2, useCORS: true });
+                // Tomamos la captura asegurando coordenadas 0,0 y aplicando onclone
+                const canvas = await html2canvas(pagePrin, {
+                    scale: 3,
+                    useCORS: true,
+                    scrollY: 0,
+                    windowY: 0,
+                    backgroundColor: '#ffffff',
+                    onclone: fixFooterForCanvas // <--- ¡AQUÍ ESTÁ LA MAGIA!
+                });
+
                 const imgData = canvas.toDataURL('image/jpeg', 1.0);
+
+                // Calculamos la altura proporcional para jsPDF para que no se estire ni se aplaste
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
                 pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+
             } else {
                 throw new Error("No se encontró el contenedor principal del documento en el iframe.");
             }
 
-            // 3. NOMBRE DEL ARCHIVO
+            // =========================================================
+            // LIMPIEZA: Dejamos todo como estaba
+            // =========================================================
+
+            // Borramos el CSS temporal que inyectamos
+            const injectedStyle = docPrin.getElementById('pdf-export-styles');
+            if (injectedStyle) injectedStyle.remove();
+
+            // Volvemos a mostrar los botones
+            actionButtons.forEach(btn => ((btn as HTMLElement).style.display = ''));
+            // =========================================================
+            // 4. ENVIAR A PHALCON
+            // =========================================================
             const fileName = `BL_Export_${folderName.replace(/\s+/g, '_')}.pdf`;
             const pdfBlob = pdf.output('blob');
             const formData = new FormData();
 
-            // 4. PREPARAR DATOS PARA PHALCON
             const API_URL = import.meta.env.VITE_API_URL || "http://localhost/scl-cargo-back/gendoc";
             const API_KEY = (import.meta.env.VITE_API_KEY || "").trim();
 
             formData.append('key', API_KEY);
             formData.append('nombre_carpeta', folderName);
             formData.append('id_usuario', '1');
-
-            // MUY IMPORTANTE: Usamos los nombres de campo exactos de tu Backend
             formData.append('datos_bl_export', JSON.stringify(extractedData));
             formData.append('url_documento_bl_export', pdfBlob, fileName);
 
@@ -172,7 +319,6 @@ export function BlExport() {
                 formData.append('id', selectedFolderId);
             }
 
-            // 5. ENVIAR A PHALCON
             const res = await axios.post(`${API_URL}/guardardoc`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
@@ -194,7 +340,6 @@ export function BlExport() {
             setIsGeneratingPdf(false);
         }
     };
-
     const filteredFolders = existingFolders.filter(f =>
         f.nombre_carpeta?.toLowerCase().includes(folderName.toLowerCase())
     );

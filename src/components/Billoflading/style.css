@@ -5,10 +5,13 @@
   background-color: #ffffff;
   border: 1px solid;
   border-color: #fffcf9;
-  width: 100%;
-  min-width: 1000px;
-  min-height: 1310px;
+  width: 1000px;
+  /* CAMBIO: De 100% a tamaño fijo */
+  height: 1310px;
+  /* CAMBIO: De min-height a height fijo */
   position: relative;
+  margin: 0 auto;
+  /* Centra el documento en la pantalla */
 }
 
 .bill-of-lading-vacio .header {
@@ -127,7 +130,7 @@
   justify-content: space-between;
   padding: 30px 32px 32px;
   position: absolute;
-  top: 1273px;
+  top: 1263px;
   left: 1px;
   background-color: #fffcf9;
   border-top-width: 0px;
@@ -666,4 +669,13 @@
 .add-bl-btn-container .add-button:hover {
   background-color: #d15f00;
   transform: scale(1.05);
+}
+
+/* =========================================================
+   ESTILOS PARA EXPORTACIÓN A PDF
+   ========================================================= */
+/* Cuando agregamos esta clase desde React, oculta temporalmente los placeholders vacíos */
+.exporting-pdf .pdf-textarea:empty:before {
+  content: none !important;
+  display: none !important;
 }
