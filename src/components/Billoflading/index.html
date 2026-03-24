@@ -100,52 +100,167 @@
             <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
           </div>
         </div>
-      </div>
 
-      <div class="add-bl-btn-container">
-        <button class="add-button" type="button" id="add-bl-row-btn">AGREGAR FILA</button>
+        <div class="add-bl-btn-container">
+          <button class="add-button" type="button" id="add-bl-row-btn">AGREGAR FILA</button>
+        </div>
       </div>
     </div>
   </div>
   <script>
-    // LÓGICA DE AGREGAR Y ELIMINAR FILAS DEL BL
+    // =========================================================
+    // 1. SINCRONIZAR CAMPOS ENTRE HOJAS EN TIEMPO REAL
+    // =========================================================
+    document.addEventListener('input', function (e) {
+      if (e.target.hasAttribute('contenteditable')) {
+        // Si estamos editando una fila de la tabla, NO sincronizamos
+        if (e.target.closest('.bl-row')) return;
+
+        // Buscamos la clase única del campo (ej: 'input-exporter')
+        const classList = Array.from(e.target.classList);
+        const targetClass = classList.find(c => c.startsWith('input-'));
+
+        if (targetClass) {
+          const value = e.target.innerHTML;
+          // Buscamos el mismo campo en TODAS las hojas y lo actualizamos
+          document.querySelectorAll('.' + targetClass).forEach(el => {
+            if (el !== e.target) {
+              el.innerHTML = value;
+            }
+          });
+        }
+      }
+    });
+
+    // =========================================================
+    // 2. LÓGICA DE AGREGAR Y ELIMINAR FILAS MULTI-HOJA
+    // =========================================================
     document.addEventListener('click', function (e) {
 
-      // 1. ELIMINAR FILA
+      // --- ELIMINAR FILA ---
       const deleteBtn = e.target.closest('.delete-bl-row');
       if (deleteBtn) {
         const row = deleteBtn.closest('.bl-row');
         const container = row.parentElement;
+        const page = container.closest('.bill-of-lading-vacio');
+        const allPages = Array.from(document.querySelectorAll('.bill-of-lading-vacio'));
+        const pageIndex = allPages.indexOf(page);
 
-        // Evitamos borrar si es la única fila que queda
+        // Si la hoja tiene más de una fila, simplemente se borra
         if (container.querySelectorAll('.bl-row').length > 1) {
           row.remove();
         } else {
-          // Si es la última, solo limpiamos su contenido
-          row.querySelectorAll('[contenteditable="true"]').forEach(el => el.innerText = '');
+          // Si es la última fila y NO es la primera hoja, eliminamos la hoja completa
+          if (pageIndex > 0) {
+            // Pasamos el botón a la hoja anterior antes de matar esta
+            const addBtnContainer = page.querySelector('.add-bl-btn-container');
+            const prevPage = allPages[pageIndex - 1];
+            const prevContainer = prevPage.querySelector('.bl-table-container');
+
+            if (addBtnContainer) {
+              prevContainer.appendChild(addBtnContainer);
+            }
+            page.remove();
+          } else {
+            // Es la primera hoja, solo limpiamos el contenido para no quedarnos sin filas
+            row.querySelectorAll('[contenteditable="true"]').forEach(el => el.innerText = '');
+          }
         }
+        notificarAlturaAReact();
       }
 
-      // 2. AGREGAR FILA
+      // --- AGREGAR FILA ---
       const addBtn = e.target.closest('#add-bl-row-btn');
       if (addBtn) {
-        const container = document.querySelector('.bl-table-container');
+        const allPages = Array.from(document.querySelectorAll('.bill-of-lading-vacio'));
+        const lastPage = allPages[allPages.length - 1];
+        const pageIndex = allPages.length - 1;
+        const container = lastPage.querySelector('.bl-table-container');
         const rows = container.querySelectorAll('.bl-row');
 
-        if (rows.length > 0) {
+        // LÍMITES: 9 filas en Hoja 1, 22 filas en Hojas 2, 3, 4...
+        const limit = (pageIndex === 0) ? 9 : 17;
+
+        if (rows.length < limit) {
+          // AÚN HAY ESPACIO EN LA HOJA ACTUAL
           const lastRow = rows[rows.length - 1];
           const newRow = lastRow.cloneNode(true);
+          // Limpiamos los textos clonados
+          newRow.querySelectorAll('[contenteditable="true"]').forEach(el => el.innerText = '');
+          // Insertamos la nueva fila justo ANTES del botón agregar
+          container.insertBefore(newRow, addBtn.closest('.add-bl-btn-container'));
+        } else {
+          // LÍMITE ALCANZADO -> CREAR NUEVA HOJA
+          const newPage = lastPage.cloneNode(true);
 
-          // Limpiar el texto clonado de la nueva fila
-          newRow.querySelectorAll('[contenteditable="true"]').forEach(el => {
-            el.innerText = '';
+          // Cambiar imagen de fondo a versión 2
+          const img = newPage.querySelector('.bill-lading');
+          if (img) {
+            img.src = "https://storage.googleapis.com/sclcargo/SCLCargo_gendoc/assets/billoflading_2.svg";
+          }
+
+          // =========================================================
+          // NUEVO: BORRAR LOS INPUTS INFERIORES EN LA HOJA 2 EN ADELANTE
+          // =========================================================
+          const inputsToRemove = [
+            '.input-subjectco', '.input-prepaid', '.input-collect',
+            '.input-grandtotal', '.input-prepaid_infe', '.input-collect_infe',
+            '.input-datedat', '.input-by', '.input-mo', '.input-day',
+            '.input-age', '.input-blno'
+          ];
+
+          inputsToRemove.forEach(selector => {
+            const el = newPage.querySelector(selector);
+            if (el) {
+              el.remove(); // Lo eliminamos del DOM en esta nueva hoja
+            }
           });
+          // =========================================================
 
-          container.appendChild(newRow);
+          const newContainer = newPage.querySelector('.bl-table-container');
+          const oldRows = newContainer.querySelectorAll('.bl-row');
+
+          // Clonamos una fila para dejarla limpia
+          const rowTemplate = oldRows[0].cloneNode(true);
+          rowTemplate.querySelectorAll('[contenteditable="true"]').forEach(el => el.innerText = '');
+
+          // Destruimos todas las filas viejas copiadas en la nueva hoja
+          oldRows.forEach(r => r.remove());
+
+          // Metemos la fila limpia justo antes del botón
+          const clonedBtnContainer = newContainer.querySelector('.add-bl-btn-container');
+          newContainer.insertBefore(rowTemplate, clonedBtnContainer);
+
+          // Le robamos el botón a la hoja anterior (ya no se puede agregar ahí)
+          addBtn.closest('.add-bl-btn-container').remove();
+
+          // Agregamos la nueva hoja final al documento
+          document.body.appendChild(newPage);
         }
+        notificarAlturaAReact();
       }
-
     });
+
+    // =========================================================
+    // 3. COMUNICACIÓN DE ALTURA PARA QUE REACT EXPANDA EL IFRAME
+    // =========================================================
+    function notificarAlturaAReact() {
+      const hojas = document.querySelectorAll('.bill-of-lading-vacio');
+      let alturaRealExacta = 0;
+
+      hojas.forEach(hoja => {
+        const estilos = window.getComputedStyle(hoja);
+        const margenSuperior = parseFloat(estilos.marginTop) || 0;
+        const margenInferior = parseFloat(estilos.marginBottom) || 0;
+        alturaRealExacta += hoja.offsetHeight + margenSuperior + margenInferior;
+      });
+
+      // Enviamos mensaje a React (Cotizacion/BlExport.tsx)
+      window.parent.postMessage({ type: 'RESIZE_PRINCIPAL', height: alturaRealExacta }, '*');
+    }
+
+    // Avisar apenas carga la página
+    window.addEventListener('load', notificarAlturaAReact);
   </script>
 </body>
 

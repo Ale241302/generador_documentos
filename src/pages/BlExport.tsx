@@ -18,13 +18,13 @@ function generateIframeContent(html: string, globalCss: string, styleCss: string
         background: transparent !important; 
         margin: 0; 
         padding: 0; 
-        /* overflow: hidden; Opcional según tu diseño */
+        overflow: hidden !important; /* ELIMINA EL SCROLL DEL IFRAME */
       }
-      /* Aquí puedes poner la clase contenedora principal de tu index.html del BL */
-      .box {
+      /* Estilo para dar efecto de "Hoja de papel física" */
+      .bill-of-lading-vacio {
         background-color: white;
         box-shadow: 0 0 40px rgba(0,0,0,0.1);
-        margin: 0 auto 48px auto;
+        margin: 0 auto 48px auto !important; /* Espacio entre hojas */
       }
     </style>
   `;
@@ -34,6 +34,7 @@ function generateIframeContent(html: string, globalCss: string, styleCss: string
 
     return html.replace("</head>", `${baseTag}\n${styleTag}\n${visualFixes}\n</head>`);
 }
+
 // ─────────────────────────────────────────────
 // HELPER: onclone para html2canvas
 // Corrige posición absoluta del icono del mundo 
@@ -51,7 +52,7 @@ const fixFooterForCanvas = (clonedDoc: Document) => {
         const worldIcon = c6.querySelector(".background");
         if (worldIcon) {
             worldIcon.style.setProperty("position", "relative", "important");
-            worldIcon.style.setProperty("top", "13px", "important"); // La misma medida que funcionó en la Cotización
+            worldIcon.style.setProperty("top", "13px", "important");
             worldIcon.style.setProperty("left", "0", "important");
         }
 
@@ -60,10 +61,11 @@ const fixFooterForCanvas = (clonedDoc: Document) => {
         if (textContainer) {
             textContainer.style.setProperty("position", "relative", "important");
             textContainer.style.setProperty("top", "7px", "important");
-            textContainer.style.setProperty("left", "10px", "important"); // Le da un poco de espacio
+            textContainer.style.setProperty("left", "10px", "important");
         }
     });
 };
+
 export function BlExport() {
     const navigate = useNavigate();
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -72,12 +74,26 @@ export function BlExport() {
     const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
     const [folderName, setFolderName] = useState("");
     const [selectedFolderId, setSelectedFolderId] = useState<string | null>(null);
-
     const [existingFolders, setExistingFolders] = useState<any[]>([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
 
+    // NUEVO: Estado para controlar la altura dinámica del Iframe
+    const [principalHeight, setPrincipalHeight] = useState(1360);
+
     useEffect(() => {
         fetchFolders();
+    }, []);
+
+    // NUEVO: Escuchar los cambios de altura que envía index.html
+    useEffect(() => {
+        const handleMessage = (event: MessageEvent) => {
+            if (event.data?.type === "RESIZE_PRINCIPAL") {
+                // Sumamos un extra para asegurar que se vea la sombra de la última hoja
+                setPrincipalHeight(event.data.height + 100);
+            }
+        };
+        window.addEventListener("message", handleMessage);
+        return () => window.removeEventListener("message", handleMessage);
     }, []);
 
     const fetchFolders = async () => {
@@ -106,6 +122,7 @@ export function BlExport() {
         setSelectedFolderId(folder.id);
         setShowSuggestions(false);
     };
+
     const handleSave = async () => {
         if (!folderName.trim()) {
             toast.warning("El nombre de la carpeta es obligatorio");
@@ -172,53 +189,28 @@ export function BlExport() {
                 const weight = (row.querySelector('.col-weight') as HTMLElement)?.innerText.trim() || "";
                 const measurement = (row.querySelector('.col-measurement') as HTMLElement)?.innerText.trim() || "";
 
-                // Si la fila tiene al menos un dato escrito, la guardamos
                 if (marks || packages || description || weight || measurement) {
                     extractedData.items.push({ marks, packages, description, weight, measurement });
                 }
             });
+
             // =========================================================
-            // 3. PREPARAR EL PDF Y ARREGLAR ESTILOS TEMPORALMENTE
+            // 3. PREPARAR EL PDF MULTI-HOJA Y ARREGLAR ESTILOS TEMPORALMENTE
             // =========================================================
             const pdf = new jsPDF('p', 'mm', 'a4');
             const pdfWidth = pdf.internal.pageSize.getWidth();
 
-            // 3.1. Ocultar botones de "Agregar" y "Basurero"
             const actionButtons = docPrin.querySelectorAll('.delete-bl-row, .add-bl-btn-container');
             actionButtons.forEach(btn => ((btn as HTMLElement).style.display = 'none'));
 
-            // 3.2. INYECTAR CSS TEMPORAL (Solo para el PDF)
-            // Esto soluciona el footer cortado, los placeholders visibles y los tamaños sin tocar el style.css real
             const tempStyle = docPrin.createElement('style');
             tempStyle.id = 'pdf-export-styles';
             tempStyle.innerHTML = `
-        /* 1. Forzamos el tamaño del contenedor para que quepa el footer */
-        .bill-of-lading-vacio {
-          width: 1000px !important;
-          height: 1420px !important;
-          min-height: 1420px !important;
-          margin: 0 !important;
-        }
-        /* 2. Anclamos el footer estrictamente al fondo */
-        .bill-of-lading-vacio .footer {
-          top: auto !important;
-          bottom: 0 !important;
-        }
-        /* 3. Ocultamos los placeholders vacíos ("Escribe aquí...") */
-        .pdf-textarea:empty::before,
-        .pdf-textarea:empty {
-          color: transparent !important;
-          content: "" !important;
-          display: none !important;
-        }
-        /* 4. Evitamos que el SVG se deforme */
-        .bill-lading {
-          object-fit: fill !important;
-        }
+        .bill-of-lading-vacio { width: 1000px !important; height: 1420px !important; min-height: 1420px !important; margin: 0 !important; }
+        .bill-of-lading-vacio .footer { top: auto !important; bottom: 0 !important; }
+        .pdf-textarea:empty::before, .pdf-textarea:empty { color: transparent !important; content: "" !important; display: none !important; }
+        .bill-lading { object-fit: fill !important; }
         
-        /* =========================================================
-           CORRECCIÓN DE POSICIÓN TOP (-2%) EXCLUSIVA PARA EL PDF
-           ========================================================= */
         .input-exporter { top: 0.5% !important; }
         .input-consignee { top: 9.5% !important; }
         .input-notify { top: 18% !important; }
@@ -231,8 +223,8 @@ export function BlExport() {
         .input-domesticrouting { top: 18% !important; }
         .input-loadingpier { top: 31.2% !important; }
         .input-typeofmove { top: 34.5% !important; }
-        .input-containerizedyes { top: 34.7% !important; }
-        .input-containerizedno { top: 34.7% !important; }
+        .input-containerizedyes { top: 34.8% !important; }
+        .input-containerizedno { top: 34.8% !important; }
         
         .input-precarriage { top: 27.5% !important; }
         .input-placeofreceipt { top: 27.5% !important; }
@@ -257,48 +249,40 @@ export function BlExport() {
         .input-grandtotal { top: 97.3% !important; }
       `;
             docPrin.head.appendChild(tempStyle);
-
-            // 3.3. Forzar el scroll del iframe hacia arriba para evitar que los inputs se desplacen hacia abajo
             docPrin.defaultView?.scrollTo(0, 0);
 
-            // PAUSA CORTA: Le damos 150ms al navegador para aplicar los estilos inyectados antes del flash
             await new Promise(resolve => setTimeout(resolve, 150));
 
-            const pagePrin = docPrin.querySelector('.bill-of-lading-vacio') as HTMLElement;
+            // MODIFICACIÓN MULTI-HOJA: Tomamos foto a TODAS las hojas .bill-of-lading-vacio
+            const pagesPrin = docPrin.querySelectorAll('.bill-of-lading-vacio');
+            let isFirstPage = true;
 
-            if (pagePrin) {
-                // Tomamos la captura asegurando coordenadas 0,0 y aplicando onclone
-                const canvas = await html2canvas(pagePrin, {
+            for (let i = 0; i < pagesPrin.length; i++) {
+                const page = pagesPrin[i] as HTMLElement;
+
+                const canvas = await html2canvas(page, {
                     scale: 3,
                     useCORS: true,
                     scrollY: 0,
                     windowY: 0,
                     backgroundColor: '#ffffff',
-                    onclone: fixFooterForCanvas // <--- ¡AQUÍ ESTÁ LA MAGIA!
+                    onclone: fixFooterForCanvas
                 });
 
                 const imgData = canvas.toDataURL('image/jpeg', 1.0);
-
-                // Calculamos la altura proporcional para jsPDF para que no se estire ni se aplaste
                 const imgProps = pdf.getImageProperties(imgData);
                 const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
+                if (!isFirstPage) pdf.addPage();
                 pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-
-            } else {
-                throw new Error("No se encontró el contenedor principal del documento en el iframe.");
+                isFirstPage = false;
             }
 
-            // =========================================================
-            // LIMPIEZA: Dejamos todo como estaba
-            // =========================================================
-
-            // Borramos el CSS temporal que inyectamos
+            // LIMPIEZA
             const injectedStyle = docPrin.getElementById('pdf-export-styles');
             if (injectedStyle) injectedStyle.remove();
-
-            // Volvemos a mostrar los botones
             actionButtons.forEach(btn => ((btn as HTMLElement).style.display = ''));
+
             // =========================================================
             // 4. ENVIAR A PHALCON
             // =========================================================
@@ -340,6 +324,7 @@ export function BlExport() {
             setIsGeneratingPdf(false);
         }
     };
+
     const filteredFolders = existingFolders.filter(f =>
         f.nombre_carpeta?.toLowerCase().includes(folderName.toLowerCase())
     );
@@ -351,7 +336,11 @@ export function BlExport() {
             <AppHeader />
 
             <main className="flex-1 overflow-y-auto bg-slate-100/50 dark:bg-neutral-900 py-12 flex flex-col items-center gap-12 relative z-0">
-                <div className="w-full max-w-[1000px] shrink-0 transition-all duration-300 h-[1500px]">
+                {/* APLICAMOS LA ALTURA DINÁMICA AL CONTENEDOR DEL IFRAME */}
+                <div
+                    className="w-full max-w-[1000px] shrink-0 transition-all duration-300"
+                    style={{ height: `${principalHeight}px` }}
+                >
                     <iframe
                         ref={iframeRef}
                         srcDoc={iframeSrc}
@@ -377,7 +366,7 @@ export function BlExport() {
                 </button>
             </div>
 
-            {/* MODAL DE GUARDAR (Idéntico al de Cotización) */}
+            {/* MODAL DE GUARDAR */}
             {isSaveModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
                     <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md relative animate-in fade-in zoom-in duration-200">

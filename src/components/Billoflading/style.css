@@ -644,12 +644,15 @@
 }
 
 /* 6. Botón AGREGAR FILA */
+/* 6. Botón AGREGAR FILA (Ahora empujado por las filas) */
 .add-bl-btn-container {
-  position: absolute;
-  top: 69%;
-  /* Se ubica justo al borde inferior de la zona de la tabla */
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  /* ¡Cambio clave! */
+  align-self: center;
+  /* Lo centra horizontalmente */
+  margin-top: 15px;
+  /* Da un respiro entre la última fila y el botón */
+  margin-bottom: 25px;
   z-index: 20;
 }
 
