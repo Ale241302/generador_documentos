@@ -5,7 +5,7 @@ import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { Cotizacion } from "./pages/Cotizacion";
 import { Editor } from "./pages/Editor";
-
+import { BlExport } from '@/pages/BlExport';
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="sclcargo-theme">
@@ -14,9 +14,10 @@ function App() {
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/cotizacion" element={<Cotizacion />} />
-        <Route path="/editor" element={<Editor />} />
+          <Route path="/cotizacion" element={<Cotizacion />} />
+          <Route path="/editor" element={<Editor />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route path="/bl-export" element={<BlExport />} />
         </Routes>
       </BrowserRouter>
       <Toaster />

@@ -149,7 +149,12 @@ export function Dashboard() {
             <button className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors font-medium border-b border-border/50" onClick={() => navigate('/cotizacion')}>Cotización</button>
             <button className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors border-b border-border/50" onClick={() => { }}>Manifiesto de Carga</button>
             <button className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors border-b border-border/50" onClick={() => { }}>BL Importación</button>
-            <button className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors border-b border-border/50" onClick={() => { }}>BL Exportación</button>
+            <button
+              className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors border-b border-border/50"
+              onClick={() => navigate('/bl-export')} /* <--- CAMBIO AQUÍ */
+            >
+              BL Exportación
+            </button>
             <button className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors border-b border-border/50" onClick={() => { }}>AWB</button>
             <button className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors" onClick={() => { }}>Factura Cliente</button>
           </div>
