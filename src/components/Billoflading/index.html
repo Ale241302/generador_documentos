@@ -88,8 +88,65 @@
       <div class="pdf-textarea input-day" contenteditable="true" placeholder="Escribe aqui..."></div>
       <div class="pdf-textarea input-age" contenteditable="true" placeholder="Escribe aqui..."></div>
       <div class="pdf-textarea input-blno" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="bl-table-container">
+        <div class="bl-row">
+          <div class="pdf-textarea col-marks" contenteditable="true" placeholder="Marks..."></div>
+          <div class="pdf-textarea col-packages" contenteditable="true" placeholder="Pkgs..."></div>
+          <div class="pdf-textarea col-description" contenteditable="true" placeholder="Description..."></div>
+          <div class="pdf-textarea col-weight" contenteditable="true" placeholder="Weight..."></div>
+          <div class="pdf-textarea col-measurement" contenteditable="true" placeholder="Meas..."></div>
+
+          <div class="delete-bl-row">
+            <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+          </div>
+        </div>
+      </div>
+
+      <div class="add-bl-btn-container">
+        <button class="add-button" type="button" id="add-bl-row-btn">AGREGAR FILA</button>
+      </div>
     </div>
   </div>
+  <script>
+    // LÓGICA DE AGREGAR Y ELIMINAR FILAS DEL BL
+    document.addEventListener('click', function (e) {
+
+      // 1. ELIMINAR FILA
+      const deleteBtn = e.target.closest('.delete-bl-row');
+      if (deleteBtn) {
+        const row = deleteBtn.closest('.bl-row');
+        const container = row.parentElement;
+
+        // Evitamos borrar si es la única fila que queda
+        if (container.querySelectorAll('.bl-row').length > 1) {
+          row.remove();
+        } else {
+          // Si es la última, solo limpiamos su contenido
+          row.querySelectorAll('[contenteditable="true"]').forEach(el => el.innerText = '');
+        }
+      }
+
+      // 2. AGREGAR FILA
+      const addBtn = e.target.closest('#add-bl-row-btn');
+      if (addBtn) {
+        const container = document.querySelector('.bl-table-container');
+        const rows = container.querySelectorAll('.bl-row');
+
+        if (rows.length > 0) {
+          const lastRow = rows[rows.length - 1];
+          const newRow = lastRow.cloneNode(true);
+
+          // Limpiar el texto clonado de la nueva fila
+          newRow.querySelectorAll('[contenteditable="true"]').forEach(el => {
+            el.innerText = '';
+          });
+
+          container.appendChild(newRow);
+        }
+      }
+
+    });
+  </script>
 </body>
 
 </html>

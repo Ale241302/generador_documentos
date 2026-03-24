@@ -556,3 +556,114 @@
   height: 3%;
   text-align: right;
 }
+
+/* =========================================================
+   TABLA DINÁMICA DEL BILL OF LADING
+   ========================================================= */
+
+/* 1. Contenedor general que se posiciona sobre la cuadrícula vacía del SVG */
+.bl-table-container {
+  position: absolute;
+  top: 40.5%;
+  /* Posición justo debajo de los encabezados de la tabla */
+  left: 0%;
+  width: 97%;
+  height: 35%;
+  /* Espacio libre hasta el texto inferior */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+  overflow: visible;
+  /* Permite que el botón de borrar se salga del borde derecho */
+}
+
+/* 2. Fila Flexible (Permite crecimiento vertical automático) */
+.bl-row {
+  display: flex;
+  width: 100%;
+  position: relative;
+  align-items: flex-start;
+  /* Hace que cada celda crezca hacia abajo a su ritmo */
+}
+
+/* 3. Comportamiento especial de las celdas dentro de la tabla */
+.bl-row .pdf-textarea {
+  position: relative !important;
+  /* EL TRUCO: Quitamos el absolute para que fluyan */
+  min-height: 24px;
+  /* Altura inicial */
+  word-wrap: break-word;
+  /* Rompe textos largos hacia abajo */
+}
+
+/* 4. Porcentajes exactos de las columnas copiando las rayas del SVG */
+.col-marks {
+  width: 21%;
+}
+
+.col-packages {
+  width: 11.4%;
+}
+
+.col-description {
+  width: 46%;
+}
+
+.col-weight {
+  width: 15%;
+}
+
+.col-measurement {
+  width: 11%;
+}
+
+/* 5. Ícono de Borrar */
+.delete-bl-row {
+  position: absolute;
+  right: -25px;
+  /* Flota fuera de la tabla para no mover las columnas */
+  top: 5px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  z-index: 20;
+}
+
+.delete-bl-row:hover {
+  opacity: 1;
+}
+
+.delete-bl-row .delete-icon {
+  width: 25px;
+  height: 25px;
+  margin-top: -5px;
+}
+
+/* 6. Botón AGREGAR FILA */
+.add-bl-btn-container {
+  position: absolute;
+  top: 69%;
+  /* Se ubica justo al borde inferior de la zona de la tabla */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+}
+
+.add-bl-btn-container .add-button {
+  background-color: #f06e00;
+  color: #fff;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 8px;
+  font-family: "Public Sans-Bold", Helvetica, sans-serif;
+  cursor: pointer;
+  font-size: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.add-bl-btn-container .add-button:hover {
+  background-color: #d15f00;
+  transform: scale(1.05);
+}

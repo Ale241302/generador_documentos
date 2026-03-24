@@ -92,10 +92,47 @@ export function BlExport() {
             if (!docPrin) throw new Error("No se pudo acceder al iframe del BL");
 
             // 1. EXTRAER DATOS (Ajusta los querySelectors según las clases de tu index.html de BL)
+            // 1. EXTRAER DATOS (Scraping del iframe)
             const extractedData: any = {
-                // Ejemplo de extracción:
-                // shipper: (docPrin.querySelector('.shipper-class') as HTMLElement)?.innerText.trim(),
-                // consignee: (docPrin.querySelector('.consignee-class') as HTMLElement)?.innerText.trim(),
+                // Lado Izquierdo - Arriba
+                exporter: (docPrin.querySelector('.input-exporter') as HTMLElement)?.innerText.trim() || "",
+                consignee: (docPrin.querySelector('.input-consignee') as HTMLElement)?.innerText.trim() || "",
+                notify: (docPrin.querySelector('.input-notify') as HTMLElement)?.innerText.trim() || "",
+
+                preCarriage: (docPrin.querySelector('.input-precarriage') as HTMLElement)?.innerText.trim() || "",
+                placeOfReceipt: (docPrin.querySelector('.input-placeofreceipt') as HTMLElement)?.innerText.trim() || "",
+                exportCarrier: (docPrin.querySelector('.input-exportcarrier') as HTMLElement)?.innerText.trim() || "",
+                portOfLoading: (docPrin.querySelector('.input-portofloading') as HTMLElement)?.innerText.trim() || "",
+                foreignPort: (docPrin.querySelector('.input-foreigin') as HTMLElement)?.innerText.trim() || "",
+                placeOfDelivery: (docPrin.querySelector('.input-placeofdeli') as HTMLElement)?.innerText.trim() || "",
+
+                // Lado Derecho - Arriba
+                documentNumber: (docPrin.querySelector('.input-documentnumb') as HTMLElement)?.innerText.trim() || "",
+                blNumber: (docPrin.querySelector('.input-blnumb') as HTMLElement)?.innerText.trim() || "",
+                exportReferences: (docPrin.querySelector('.input-exportref') as HTMLElement)?.innerText.trim() || "",
+                forwardingAgent: (docPrin.querySelector('.input-forwardingagent') as HTMLElement)?.innerText.trim() || "",
+                pointOfOrigin: (docPrin.querySelector('.input-pointorigin') as HTMLElement)?.innerText.trim() || "",
+                domesticRouting: (docPrin.querySelector('.input-domesticrouting') as HTMLElement)?.innerText.trim() || "",
+                loadingPier: (docPrin.querySelector('.input-loadingpier') as HTMLElement)?.innerText.trim() || "",
+                typeOfMove: (docPrin.querySelector('.input-typeofmove') as HTMLElement)?.innerText.trim() || "",
+                containerizedYes: (docPrin.querySelector('.input-containerizedyes') as HTMLElement)?.innerText.trim() || "",
+                containerizedNo: (docPrin.querySelector('.input-containerizedno') as HTMLElement)?.innerText.trim() || "",
+
+                // Inferior - Lado Izquierdo (Totales y Tasas)
+                subjectToCorrection: (docPrin.querySelector('.input-subjectco') as HTMLElement)?.innerText.trim() || "",
+                prepaid: (docPrin.querySelector('.input-prepaid') as HTMLElement)?.innerText.trim() || "",
+                collect: (docPrin.querySelector('.input-collect') as HTMLElement)?.innerText.trim() || "",
+                grandTotal: (docPrin.querySelector('.input-grandtotal') as HTMLElement)?.innerText.trim() || "",
+                prepaidBottom: (docPrin.querySelector('.input-prepaid_infe') as HTMLElement)?.innerText.trim() || "",
+                collectBottom: (docPrin.querySelector('.input-collect_infe') as HTMLElement)?.innerText.trim() || "",
+
+                // Inferior - Lado Derecho (Firmas y Fechas)
+                datedAt: (docPrin.querySelector('.input-datedat') as HTMLElement)?.innerText.trim() || "",
+                byAgent: (docPrin.querySelector('.input-by') as HTMLElement)?.innerText.trim() || "",
+                month: (docPrin.querySelector('.input-mo') as HTMLElement)?.innerText.trim() || "",
+                day: (docPrin.querySelector('.input-day') as HTMLElement)?.innerText.trim() || "",
+                year: (docPrin.querySelector('.input-age') as HTMLElement)?.innerText.trim() || "",
+                blNoBottom: (docPrin.querySelector('.input-blno') as HTMLElement)?.innerText.trim() || ""
             };
 
             // 2. GENERAR EL PDF
