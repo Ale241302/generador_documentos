@@ -6,6 +6,8 @@ import { Dashboard } from "./pages/Dashboard";
 import { Cotizacion } from "./pages/Cotizacion";
 import { Editor } from "./pages/Editor";
 import { BlExport } from '@/pages/BlExport';
+import { Bitacora } from "@/pages/Bitacora";
+import { Airwilbil } from "@/pages/Airwilbil";
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="sclcargo-theme">
@@ -18,6 +20,8 @@ function App() {
           <Route path="/editor" element={<Editor />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
           <Route path="/bl-export" element={<BlExport />} />
+          <Route path="/bitacora/:id" element={<Bitacora />} />
+          <Route path="/awb" element={<Airwilbil />} />
         </Routes>
       </BrowserRouter>
       <Toaster />

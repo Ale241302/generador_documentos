@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="globals.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="watermark-controls" data-html2canvas-ignore="true">
+    <span class="watermark-tag" data-text="DRAFT">DRAFT</span>
+    <span class="watermark-tag" data-text="CONFIDENCIAL">CONFIDENCIAL</span>
+    <span class="watermark-tag" data-text="COPY">COPY</span>
+    <span class="watermark-tag" data-text="ORIGINAL">ORIGINAL</span>
+  </div>
+  <div class="air-wil-bil-vacio">
+    <div class="watermark-display"></div>
+    <div class="form-overlay-container">
+
+      <img class="air-wil-bil" src="https://storage.googleapis.com/sclcargo/SCLCargo_gendoc/assets/airwaybill-1.svg" />
+      <div class="pdf-textarea input-1" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-2" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-3" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-4" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-5" contenteditable="true" placeholder=""></div>
+
+      <div class="pdf-textarea input-shiperadd" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-shiperacnum" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-consignee" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-consigneeacnum" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-issuing" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-agents" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-acountno" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-airpotdep" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-to" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-bycarrier" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-to2" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-to3" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-by2" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-by3" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-airpotdes" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-flightdate" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-flightdate2" contenteditable="true" placeholder=""></div>
+
+      <div class="pdf-textarea input-issueby" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-acountinginfo" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-refnumber" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-refnumber2" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-refnumber3" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-currency" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-chgs" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-ppdwt" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-collwt" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-ppdot" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-collot" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-declaredcarriege" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-declaredcustoms" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-amountinsurance" contenteditable="true" placeholder="Escribe aqui..."></div>
+
+      <div class="pdf-textarea input-pais" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-sci" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="awb-table-container">
+
+        <div class="awb-row">
+          <div class="pdf-textarea col-pieces" contenteditable="true" placeholder=""></div>
+          <div class="pdf-textarea col-grossweight" contenteditable="true" placeholder=""></div>
+          <div class="pdf-textarea col-kglb" contenteditable="true" placeholder=""></div>
+          <div class="pdf-textarea col-commodity" contenteditable="true" placeholder=""></div>
+          <div class="pdf-textarea col-chargeable" contenteditable="true" placeholder=""></div>
+          <div class="pdf-textarea col-rate" contenteditable="true" placeholder=""></div>
+          <div class="pdf-textarea col-total" contenteditable="true" placeholder=""></div>
+          <div class="pdf-textarea col-nature" contenteditable="true" placeholder=""></div>
+
+          <div class="delete-awb-row">
+            <img src="https://storage.googleapis.com/sclcargo/web/Home/grupo-49257.png" class="delete-icon" />
+          </div>
+        </div>
+        <div class="awb-totals-row">
+          <div class="pdf-textarea col-pieces val-total-pieces" contenteditable="false"></div>
+          <div class="pdf-textarea col-grossweight val-total-grossweight" contenteditable="false"></div>
+          <div class="pdf-textarea col-kglb val-total-kglb" contenteditable="false"></div>
+          <div class="pdf-textarea col-rateclass" contenteditable="false"></div>
+          <div class="pdf-textarea col-commodity" contenteditable="false"></div>
+          <div class="pdf-textarea col-chargeable" contenteditable="false"></div>
+          <div class="pdf-textarea col-rate" contenteditable="false"></div>
+          <div class="pdf-textarea col-total val-total-amount" contenteditable="false"></div>
+          <div class="pdf-textarea col-nature" contenteditable="false"></div>
+        </div>
+        <div class="add-awb-btn-container">
+          <button class="add-button" type="button" id="add-awb-row-btn">AGREGAR FILA</button>
+        </div>
+
+      </div>
+      <div class="pdf-textarea input-prepaid" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-valuetion" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-tax" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-totalohter" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-totalohtercarrier" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-totalohtercarrier2" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-totalprepaid" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-totalcollect" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-currencyrate" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-cccharges" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-chargesat" contenteditable="true" placeholder="Escribe aqui..."></div>
+
+      <div class="pdf-textarea input-othercarges" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-signature" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-executed" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-atplace" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-signature2" contenteditable="true" placeholder="Escribe aqui..."></div>
+      <div class="pdf-textarea input-totalcollectcharge" contenteditable="true" placeholder="Escribe aqui..."></div>
+
+      <div class="pdf-textarea input-6" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-7" contenteditable="true" placeholder=""></div>
+      <div class="pdf-textarea input-8" contenteditable="true" placeholder="Escribe aqui..."></div>
+
+    </div>
+  </div>
+  <script>
+    // =========================================================
+    // 1. LÓGICA DE CÁLCULO DE TOTALES AUTOMÁTICOS
+    // =========================================================
+    function calcularTotalesAWB() {
+      let sumPieces = 0;
+      let sumGrossWeight = 0;
+      let sumTotalAmount = 0;
+      let sharedUnit = ''; // kg o lb
+
+      // Recorremos solo las filas de datos, ignorando la de totales
+      const rows = document.querySelectorAll('.awb-row');
+
+      rows.forEach(row => {
+        // 1. Sumar Pieces
+        const pieces = parseFloat(row.querySelector('.col-pieces').innerText) || 0;
+        sumPieces += pieces;
+
+        // 2. Sumar Gross Weight
+        const weight = parseFloat(row.querySelector('.col-grossweight').innerText) || 0;
+        sumGrossWeight += weight;
+
+        // 3. Replicar kg/lb (toma el valor de la primera celda que no esté vacía)
+        const unit = row.querySelector('.col-kglb').innerText.trim();
+        if (unit !== '' && sharedUnit === '') {
+          sharedUnit = unit;
+        }
+
+        // 4. Sumar Total
+        const total = parseFloat(row.querySelector('.col-total').innerText) || 0;
+        sumTotalAmount += total;
+      });
+
+      // Escribir los resultados en la fila de totales (solo si hay valor mayor a 0)
+      document.querySelector('.val-total-pieces').innerText = sumPieces > 0 ? sumPieces : '';
+      document.querySelector('.val-total-grossweight').innerText = sumGrossWeight > 0 ? sumGrossWeight : '';
+      document.querySelector('.val-total-kglb').innerText = sharedUnit;
+      document.querySelector('.val-total-amount').innerText = sumTotalAmount > 0 ? sumTotalAmount.toFixed(2) : '';
+      // Nota: .toFixed(2) asegura que el total monetario tenga 2 decimales (ej. 150.50). 
+    }
+
+    // Escuchar cuando el usuario escribe en cualquier parte de la tabla
+    document.querySelector('.awb-table-container').addEventListener('input', function (e) {
+      // Solo recalcular si se escribió en una de las columnas relevantes
+      if (e.target.classList.contains('col-pieces') ||
+        e.target.classList.contains('col-grossweight') ||
+        e.target.classList.contains('col-kglb') ||
+        e.target.classList.contains('col-total')) {
+        calcularTotalesAWB();
+      }
+    });
+
+    // =========================================================
+    // 2. LÓGICA DE AGREGAR Y ELIMINAR FILAS AWB (MAX 10, UNA HOJA)
+    // =========================================================
+    document.addEventListener('click', function (e) {
+
+      // --- ELIMINAR FILA ---
+      const deleteBtn = e.target.closest('.delete-awb-row');
+      if (deleteBtn) {
+        const row = deleteBtn.closest('.awb-row');
+        const container = row.parentElement;
+
+        // Si hay más de una fila, la borramos
+        if (container.querySelectorAll('.awb-row').length > 1) {
+          row.remove();
+        } else {
+          // Si es la última que queda, solo limpiamos los textos
+          row.querySelectorAll('[contenteditable="true"]').forEach(el => el.innerText = '');
+        }
+
+        // ¡NUEVO!: Forzamos el recálculo para que el total baje si se eliminó un valor
+        setTimeout(calcularTotalesAWB, 50);
+      }
+
+      // --- AGREGAR FILA ---
+      const addBtn = e.target.closest('#add-awb-row-btn');
+      if (addBtn) {
+        const container = addBtn.closest('.awb-table-container');
+        const rows = container.querySelectorAll('.awb-row');
+
+        // LÍMITE: 10 FILAS MÁXIMO
+        if (rows.length < 10) {
+          const lastRow = rows[rows.length - 1];
+          const newRow = lastRow.cloneNode(true);
+
+          // Limpiamos los textos clonados
+          newRow.querySelectorAll('[contenteditable="true"]').forEach(el => el.innerText = '');
+
+          // Insertamos la nueva fila justo ANTES de la fila de totales o el botón
+          // (Se inserta antes del elemento que contiene el botón de agregar)
+          container.insertBefore(newRow, addBtn.closest('.add-awb-btn-container').previousElementSibling || addBtn.closest('.add-awb-btn-container'));
+
+          // Recalculamos por seguridad
+          setTimeout(calcularTotalesAWB, 50);
+        } else {
+          // Mostrar alerta si intentan agregar más de 10
+          alert("Has alcanzado el límite máximo de 10 registros para este documento.");
+        }
+      }
+    });
+
+    // =========================================================
+    // 3. LÓGICA DE MARCAS DE AGUA GIGANTE
+    // =========================================================
+    let activeWatermark = null;
+
+    document.querySelector('.watermark-controls').addEventListener('click', function (e) {
+      if (e.target.classList.contains('watermark-tag')) {
+        const clickedText = e.target.getAttribute('data-text');
+        const allTags = document.querySelectorAll('.watermark-tag');
+
+        if (activeWatermark === clickedText) {
+          // Apagar si ya estaba activa
+          activeWatermark = null;
+          allTags.forEach(tag => tag.classList.remove('active'));
+          aplicarMarcaDeAguaATodas('');
+        } else {
+          // Encender nueva
+          activeWatermark = clickedText;
+          allTags.forEach(tag => tag.classList.remove('active'));
+          e.target.classList.add('active');
+          aplicarMarcaDeAguaATodas(clickedText);
+        }
+      }
+    });
+
+    function aplicarMarcaDeAguaATodas(texto) {
+      const displays = document.querySelectorAll('.watermark-display');
+      displays.forEach(display => {
+        if (texto === '') {
+          display.textContent = '';
+          display.classList.remove('active');
+        } else {
+          display.textContent = texto;
+          display.classList.add('active');
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

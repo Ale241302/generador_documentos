@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import SHA256 from "crypto-js/sha256";
+
 export function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [correo, setCorreo] = useState("");
@@ -16,6 +17,7 @@ export function Login() {
       const API_URL = import.meta.env.VITE_API_URL || "http://localhost/scl-cargo-back/gendoc";
       const API_KEY = import.meta.env.VITE_API_KEY || "";
       const claveHash = SHA256(clave).toString();
+
       const res = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -25,6 +27,20 @@ export function Login() {
       const data = await res.json();
 
       if (data.status === 'SUCCESS' || data.return === true) {
+
+        // =========================================================
+        // 🔥 FIX: GUARDAR EL ID DEL USUARIO EN LOCALSTORAGE
+        // =========================================================
+        if (data.data && data.data.id) {
+          localStorage.setItem("usuario_id", data.data.id.toString());
+
+          // Opcional: También puedes guardar el nombre por si lo necesitas luego
+          if (data.data.nombre_usuario) {
+            localStorage.setItem("nombre_usuario", data.data.nombre_usuario);
+          }
+        }
+        // =========================================================
+
         toast.success(data.message || data.mensaje || "Login exitoso");
         navigate("/dashboard");
       } else {

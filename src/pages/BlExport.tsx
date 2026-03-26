@@ -292,10 +292,10 @@ export function BlExport() {
 
             const API_URL = import.meta.env.VITE_API_URL || "http://localhost/scl-cargo-back/gendoc";
             const API_KEY = (import.meta.env.VITE_API_KEY || "").trim();
-
+            const ID_USUARIO = localStorage.getItem("usuario_id") || "1";
             formData.append('key', API_KEY);
             formData.append('nombre_carpeta', folderName);
-            formData.append('id_usuario', '1');
+            formData.append('id_usuario', ID_USUARIO);
             formData.append('datos_bl_export', JSON.stringify(extractedData));
             formData.append('url_documento_bl_export', pdfBlob, fileName);
 

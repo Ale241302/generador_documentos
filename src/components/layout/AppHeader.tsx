@@ -12,11 +12,11 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
             <div className="container flex h-14 items-center pl-4 pr-4 max-w-full">
                 {children}
                 <div className="mr-4 hidden md:flex">
-                    <a className="mr-6 flex items-center space-x-2" href="/">
+                    <a className="mr-6 flex items-center space-x-2" href="/dashboard">
                         <img
                             src="https://storage.googleapis.com/sclcargo/web/Home/logo-largo.png"
                             alt="SCLCargo"
-                            className="h-8 w-auto"
+                            className="h-10 w-auto"
                         />
                     </a>
                 </div>
@@ -49,7 +49,7 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
                             </Button>
                         )}
 
-                        <ThemeToggle />
+
 
                     </nav>
                 </div>

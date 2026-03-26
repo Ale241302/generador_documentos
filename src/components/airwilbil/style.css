@@ -1,0 +1,1278 @@
+/* =========================================================
+   ESTRUCTURA PRINCIPAL (HEADER, FOOTER, CONTENEDORES)
+   ========================================================= */
+.air-wil-bil-vacio {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #fffcf9;
+  width: 1000px;
+  height: 1310px;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  /* NUEVO: Corta cualquier pixel extra que intente salirse */
+}
+
+.air-wil-bil-vacio .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  flex: 1;
+  flex-grow: 1;
+}
+
+.air-wil-bil-vacio .img {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.air-wil-bil-vacio .container-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.air-wil-bil-vacio .div {
+  display: flex;
+  flex-direction: column;
+  width: 141px;
+  align-items: flex-start;
+  gap: 4px;
+  position: relative;
+}
+
+.air-wil-bil-vacio .container-2 {
+  display: flex;
+  flex-direction: column;
+  width: 135px;
+  align-items: flex-start;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.air-wil-bil-vacio .SHIPPING-CARGO-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 135px;
+  align-items: flex-end;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.air-wil-bil-vacio .SHIPPING-CARGO {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 302px;
+  height: 15px;
+  margin-top: -1.00px;
+  margin-left: -167.00px;
+  font-family: "Public Sans-Bold", Helvetica;
+  font-weight: 700;
+  color: #f06e00;
+  font-size: 10px;
+  text-align: right;
+  letter-spacing: -0.50px;
+  line-height: 15px;
+  white-space: nowrap;
+}
+
+.air-wil-bil-vacio .div-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.air-wil-bil-vacio .text-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 218px;
+  height: 32px;
+  margin-top: -1.00px;
+  margin-left: -83.00px;
+  font-family: "Public Sans-Bold", Helvetica;
+  font-weight: 700;
+  color: #2f2f2f;
+  font-size: 24px;
+  text-align: right;
+  letter-spacing: 0;
+  line-height: 32px;
+  white-space: nowrap;
+}
+
+.air-wil-bil-vacio .container-3 {
+  display: flex;
+  width: 409px;
+  align-items: flex-start;
+  gap: 32px;
+  position: relative;
+  margin-top: -22.50px;
+  margin-bottom: -23.50px;
+}
+
+.air-wil-bil-vacio .container-4 {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  align-self: stretch;
+  flex: 0 0 auto;
+}
+
+.air-wil-bil-vacio .ocean-operations-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.air-wil-bil-vacio .ocean-operations {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 167px;
+  height: 15px;
+  margin-top: -1.00px;
+  font-family: "Public Sans-Bold", Helvetica;
+  font-weight: 700;
+  color: #707070;
+  font-size: 10px;
+  letter-spacing: 0;
+  line-height: 15px;
+  white-space: nowrap;
+}
+
+.air-wil-bil-vacio .container-5 {
+  display: flex;
+  flex-direction: column;
+  width: 409px;
+  align-items: flex-start;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.air-wil-bil-vacio .p {
+  position: relative;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  height: 16px;
+  margin-top: -1.00px;
+  font-family: "Public Sans-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #2f2f2f;
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.air-wil-bil-vacio .container-6 {
+  position: relative;
+  width: 148px;
+  height: 40px;
+  margin-top: -27.00px;
+  margin-bottom: -28.00px;
+}
+
+.air-wil-bil-vacio .background {
+  display: flex;
+  width: 28px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: calc(50.00% - 20px);
+  left: 0;
+  background-color: #fffcf9;
+  border-radius: 9999px;
+}
+
+.air-wil-bil-vacio .icon-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.air-wil-bil-vacio .icon {
+  position: relative;
+  width: 16.67px;
+  height: 16.67px;
+}
+
+.air-wil-bil-vacio .container-7 {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  top: calc(50.00% - 10px);
+  left: 33px;
+}
+
+.air-wil-bil-vacio .text-wrapper-2 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 115px;
+  height: 20px;
+  margin-top: -1.00px;
+  font-family: "Public Sans-Bold", Helvetica;
+  font-weight: 700;
+  color: #2f2f2f;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   NUEVO: CAPA DE FORMULARIO (OVERLAY Y TEXTAREAS)
+   ========================================================= */
+
+/* Este contenedor hereda la posición absoluta que antes tenía la etiqueta <img> */
+.form-overlay-container {
+  position: absolute;
+  width: 98.10%;
+  /* CAMBIO CLAVE: Igual que el BL para no desbordar */
+  height: 92.14%;
+  top: 37px;
+  left: 1%;
+}
+
+/* La imagen ahora se ajusta al 100% de su nuevo contenedor */
+.air-wil-bil {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Estilos base para todas las áreas editables que crearás en el BL */
+.pdf-textarea {
+  position: absolute;
+  background-color: transparent;
+  border: 1px solid transparent;
+  font-family: "Public Sans-Regular", Helvetica, sans-serif;
+  font-size: 12px;
+  color: #2f2f2f;
+  padding: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  overflow-y: hidden;
+  z-index: 10;
+  /* Nos aseguramos de que esté por encima de la imagen SVG */
+}
+
+/* Simulación de Placeholder */
+.pdf-textarea:empty:before {
+  content: attr(placeholder);
+  color: #a0a0a0;
+  pointer-events: none;
+  display: block;
+}
+
+/* Efecto Hover */
+.pdf-textarea:hover {
+  border: 1px dashed #cccccc;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Efecto Focus (Borde naranja y fondo blanco) */
+.pdf-textarea:focus {
+  outline: none;
+  border: 1px solid #f06e00;
+  background-color: #ffffff;
+  cursor: text;
+}
+
+/* =========================================================
+   POSICIONES DE LOS CAMPOS (AJÚSTALAS SEGÚN TU NECESIDAD)
+   ========================================================= */
+
+.input-1 {
+  top: 0.3%;
+  /* Mueve arriba/abajo */
+  left: 7%;
+  /* Mueve izq/der */
+  width: 4.5%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-2 {
+  top: 0.3%;
+  /* Mueve arriba/abajo */
+  left: 12%;
+  /* Mueve izq/der */
+  width: 4.2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-3 {
+  top: 0.3%;
+  /* Mueve arriba/abajo */
+  left: 16.5%;
+  /* Mueve izq/der */
+  width: 20%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-4 {
+
+  top: 0.3%;
+  /* Mueve arriba/abajo */
+  left: 65%;
+  /* Mueve izq/der */
+  width: 5%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-5 {
+  top: 0.3%;
+  /* Mueve arriba/abajo */
+  left: 72%;
+  /* Mueve izq/der */
+  width: 19%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+/* Caja para 2. EXPORTER */
+.input-shiperadd {
+
+  top: 5.6%;
+  /* Mueve arriba/abajo */
+  left: 7.5%;
+  /* Mueve izq/der */
+  width: 40.5%;
+  /* Ancho de la caja */
+  height: 6%;
+  /* Alto de la caja */
+}
+
+.input-shiperacnum {
+  top: 3.5%;
+  /* Mueve arriba/abajo */
+  left: 28.5%;
+  /* Mueve izq/der */
+  width: 20%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-consignee {
+  top: 15.2%;
+  /* Mueve arriba/abajo */
+  left: 7.5%;
+  /* Mueve izq/der */
+  width: 40.5%;
+  /* Ancho de la caja */
+  height: 6%;
+  /* Alto de la caja */
+}
+
+.input-consigneeacnum {
+  top: 13%;
+  /* Mueve arriba/abajo */
+  left: 28.5%;
+  /* Mueve izq/der */
+  width: 20%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-issuing {
+  top: 22.5%;
+  /* Mueve arriba/abajo */
+  left: 7.5%;
+  /* Mueve izq/der */
+  width: 40.5%;
+  /* Ancho de la caja */
+  height: 5%;
+  /* Alto de la caja */
+}
+
+.input-agents {
+  top: 28.5%;
+  /* Mueve arriba/abajo */
+  left: 7.5%;
+  /* Mueve izq/der */
+  width: 20%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-acountno {
+  top: 28.5%;
+  /* Mueve arriba/abajo */
+  left: 28.5%;
+  /* Mueve izq/der */
+  width: 20%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-airpotdep {
+  top: 31.7%;
+  /* Mueve arriba/abajo */
+  left: 7.5%;
+  /* Mueve izq/der */
+  width: 40.5%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-to {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 7.2%;
+  /* Mueve izq/der */
+  width: 4.2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-bycarrier {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 12%;
+  /* Mueve izq/der */
+  width: 20%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-to2 {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 32.7%;
+  /* Mueve izq/der */
+  width: 4.2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-to3 {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 40.9%;
+  /* Mueve izq/der */
+  width: 4.2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-by2 {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 37.3%;
+  /* Mueve izq/der */
+  width: 3.2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-by3 {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 45.4%;
+  /* Mueve izq/der */
+  width: 3.2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-airpotdes {
+  top: 38%;
+  /* Mueve arriba/abajo */
+  left: 7.5%;
+  /* Mueve izq/der */
+  width: 20%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-flightdate {
+  top: 38.2%;
+  /* Mueve arriba/abajo */
+  left: 28.5%;
+  /* Mueve izq/der */
+  width: 10%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-flightdate2 {
+  top: 38.2%;
+  /* Mueve arriba/abajo */
+  left: 38.6%;
+  /* Mueve izq/der */
+  width: 10%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-issueby {
+  top: 3%;
+  /* Mueve arriba/abajo */
+  left: 63%;
+  /* Mueve izq/der */
+  width: 25%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-acountinginfo {
+  top: 22.5%;
+  /* Mueve arriba/abajo */
+  left: 49%;
+  /* Mueve izq/der */
+  width: 42.5%;
+  /* Ancho de la caja */
+  height: 8%;
+  /* Alto de la caja */
+}
+
+.input-refnumber {
+  top: 31.8%;
+  /* Mueve arriba/abajo */
+  left: 49%;
+  /* Mueve izq/der */
+  width: 13%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-refnumber2 {
+  top: 31.8%;
+  /* Mueve arriba/abajo */
+  left: 65%;
+  /* Mueve izq/der */
+  width: 13%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-refnumber3 {
+  top: 31.8%;
+  /* Mueve arriba/abajo */
+  left: 79%;
+  /* Mueve izq/der */
+  width: 12.5%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-currency {
+  top: 34.9%;
+  /* Mueve arriba/abajo */
+  left: 49%;
+  /* Mueve izq/der */
+  width: 4%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-chgs {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 53.6%;
+  /* Mueve izq/der */
+  width: 2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-ppdwt {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 55.9%;
+  /* Mueve izq/der */
+  width: 2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-collwt {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 58.3%;
+  /* Mueve izq/der */
+  width: 2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-ppdot {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 60.6%;
+  /* Mueve izq/der */
+  width: 2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-collot {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 62.9%;
+  /* Mueve izq/der */
+  width: 2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-declaredcarriege {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 65.4%;
+  /* Mueve izq/der */
+  width: 13.3%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-declaredcustoms {
+  top: 35%;
+  /* Mueve arriba/abajo */
+  left: 79%;
+  /* Mueve izq/der */
+  width: 13.5%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-amountinsurance {
+  top: 38%;
+  /* Mueve arriba/abajo */
+  left: 49%;
+  /* Mueve izq/der */
+  width: 10%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-pais {
+  top: 44.5%;
+  /* Mueve arriba/abajo */
+  left: 49%;
+  /* Mueve izq/der */
+  width: 15%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-sci {
+  top: 44.3%;
+  /* Mueve arriba/abajo */
+  left: 79%;
+  /* Mueve izq/der */
+  width: 13.2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-prepaid {
+  top: 72.7%;
+  /* Mueve arriba/abajo */
+  left: 10%;
+  /* Mueve izq/der */
+  width: 13.2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-valuetion {
+  top: 75.8%;
+  /* Mueve arriba/abajo */
+  left: 10%;
+  /* Mueve izq/der */
+  width: 13.2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-tax {
+  top: 79%;
+  /* Mueve arriba/abajo */
+  left: 10%;
+  /* Mueve izq/der */
+  width: 13.2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-totalohter {
+  top: 82.2%;
+  /* Mueve arriba/abajo */
+  left: 10%;
+  /* Mueve izq/der */
+  width: 13.2%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-totalohtercarrier {
+  top: 85.4%;
+  /* Mueve arriba/abajo */
+  left: 10%;
+  /* Mueve izq/der */
+  width: 11.8%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-totalohtercarrier2 {
+  top: 85.4%;
+  /* Mueve arriba/abajo */
+  left: 24%;
+  /* Mueve izq/der */
+  width: 11.8%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-totalprepaid {
+  top: 91.6%;
+  /* Mueve arriba/abajo */
+  left: 10%;
+  /* Mueve izq/der */
+  width: 11.8%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-totalcollect {
+  top: 91.6%;
+  /* Mueve arriba/abajo */
+  left: 24%;
+  /* Mueve izq/der */
+  width: 11.8%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-currencyrate {
+  top: 94.7%;
+  /* Mueve arriba/abajo */
+  left: 10%;
+  /* Mueve izq/der */
+  width: 11.8%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-cccharges {
+  top: 94.7%;
+  /* Mueve arriba/abajo */
+  left: 24%;
+  /* Mueve izq/der */
+  width: 11.8%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-chargesat {
+  top: 97.9%;
+  /* Mueve arriba/abajo */
+  left: 24%;
+  /* Mueve izq/der */
+  width: 11.8%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-othercarges {
+  top: 72.7%;
+  /* Mueve arriba/abajo */
+  left: 40%;
+  /* Mueve izq/der */
+  width: 51%;
+  /* Ancho de la caja */
+  height: 8%;
+  /* Alto de la caja */
+}
+
+.input-signature {
+  top: 85.7%;
+  /* Mueve arriba/abajo */
+  left: 40%;
+  /* Mueve izq/der */
+  width: 51%;
+  /* Ancho de la caja */
+  height: 3%;
+  /* Alto de la caja */
+}
+
+.input-executed {
+  top: 93%;
+  /* Mueve arriba/abajo */
+  left: 40%;
+  /* Mueve izq/der */
+  width: 10%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-atplace {
+  top: 93%;
+  /* Mueve arriba/abajo */
+  left: 60%;
+  /* Mueve izq/der */
+  width: 10%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-signature2 {
+  top: 93%;
+  /* Mueve arriba/abajo */
+  left: 75%;
+  /* Mueve izq/der */
+  width: 17%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-totalcollectcharge {
+  top: 97.9%;
+  /* Mueve arriba/abajo */
+  left: 40%;
+  /* Mueve izq/der */
+  width: 10%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-6 {
+  top: 97.2%;
+  /* Mueve arriba/abajo */
+  left: 65%;
+  /* Mueve izq/der */
+  width: 5%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-7 {
+  top: 97.2%;
+  /* Mueve arriba/abajo */
+  left: 72%;
+  /* Mueve izq/der */
+  width: 19%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+.input-8 {
+  top: 99.5%;
+  /* Mueve arriba/abajo */
+  left: 60%;
+  /* Mueve izq/der */
+  width: 19%;
+  /* Ancho de la caja */
+  height: 2%;
+  /* Alto de la caja */
+}
+
+/* 5. Ícono de Borrar */
+.delete-bl-row {
+  position: absolute;
+  right: -25px;
+  /* Flota fuera de la tabla para no mover las columnas */
+  top: 5px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  z-index: 20;
+}
+
+.delete-bl-row:hover {
+  opacity: 1;
+}
+
+.delete-bl-row .delete-icon {
+  width: 25px;
+  height: 25px;
+  margin-top: -5px;
+}
+
+/* 6. Botón AGREGAR FILA */
+/* 6. Botón AGREGAR FILA (Ahora empujado por las filas) */
+.add-bl-btn-container {
+  position: relative;
+  /* ¡Cambio clave! */
+  align-self: center;
+  /* Lo centra horizontalmente */
+  margin-top: 15px;
+  /* Da un respiro entre la última fila y el botón */
+  margin-bottom: 25px;
+  z-index: 20;
+}
+
+.add-bl-btn-container .add-button {
+  background-color: #f06e00;
+  color: #fff;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 8px;
+  font-family: "Public Sans-Bold", Helvetica, sans-serif;
+  cursor: pointer;
+  font-size: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.add-bl-btn-container .add-button:hover {
+  background-color: #d15f00;
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   ESTILOS PARA EXPORTACIÓN A PDF
+   ========================================================= */
+/* Cuando agregamos esta clase desde React, oculta temporalmente los placeholders vacíos */
+.exporting-pdf .pdf-textarea:empty:before {
+  content: none !important;
+  display: none !important;
+}
+
+/* =========================================================
+   MARCAS DE AGUA (CONTROLES Y VISUALIZACIÓN)
+   ========================================================= */
+
+/* Barra superior de botones */
+.watermark-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Diseño de cada tag/botón */
+.watermark-tag {
+  padding: 8px 16px;
+  background-color: #ffffff;
+  border: 2px solid #ced4da;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: "Public Sans-Bold", Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #495057;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.watermark-tag:hover {
+  background-color: #e9ecef;
+}
+
+/* Estado activo del tag */
+.watermark-tag.active {
+  background-color: #f06e00;
+  /* Naranja corporativo */
+  color: white;
+  border-color: #f06e00;
+}
+
+/* =========================================================
+   MARCAS DE AGUA (VISUALIZACIÓN GIGANTE)
+   ========================================================= */
+
+.watermark-display {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+  /* Capa 5: Por encima del SVG (fondo) pero debajo de botones(20) y textos(10) */
+  z-index: 5;
+
+  display: none;
+
+  /* Centramos el texto gigante perfectamente en medio de la hoja */
+  justify-content: center;
+  align-items: center;
+
+  /* LETRA GIGANTE Y ESTILOS */
+  font-size: 175px;
+  /* Tamaño masivo */
+  font-family: "Public Sans-Bold", Helvetica, sans-serif;
+  font-weight: 700;
+
+  /* Color Naranja corporativo (#f06e00) pero con 25% de opacidad para que no tape nada */
+  color: rgba(240, 110, 0, 0.25);
+
+  /* Rotación diagonal */
+  transform: rotate(-45deg);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.watermark-display.active {
+  display: flex;
+  /* Usamos flex para que actúe el centrado */
+}
+
+/* Diseño de cada palabra repetida */
+.watermark-display span {
+  /* CAMBIO: Aumenté el tamaño de la fuente al doble (100px) */
+  font-size: 1080px !important;
+  font-family: "Public Sans-Bold", Helvetica, sans-serif;
+  font-weight: 700;
+
+  /* CAMBIO: Aseguré el color naranja #f06e00. 
+     El '0.15' al final es la opacidad (15%). Súbela a 0.2 o 0.3 si la quieres más fuerte. */
+  color: #f06e00 !important;
+
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* =========================================================
+   TABLA DINÁMICA DEL AIR WAYBILL (AWB)
+   ========================================================= */
+
+/* 1. Contenedor general que se posiciona sobre la cuadrícula vacía del SVG */
+.awb-table-container {
+  position: absolute;
+  top: 50%;
+  /* AJUSTA ESTO: Baja o sube para que cuadre bajo los títulos de la tabla */
+  left: 7.2%;
+  /* AJUSTA ESTO: Mueve a la izquierda o derecha para alinear con el borde */
+  width: 80%;
+  /* AJUSTA ESTO: Ancho total de la tabla */
+  height: 23%;
+  /* Espacio libre hasta el texto inferior */
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  /* Espacio entre filas */
+  z-index: 10;
+  overflow: visible;
+}
+
+/* 2. Fila Flexible (Permite crecimiento vertical) */
+.awb-row {
+  display: flex;
+  width: 100%;
+  position: relative;
+  align-items: flex-start;
+}
+
+/* 3. Comportamiento de las celdas */
+.awb-row .pdf-textarea {
+  position: relative !important;
+  min-height: 20px;
+  word-wrap: break-word;
+  padding: 2px 4px;
+  /* Un poco menos de padding para que quepa más texto */
+}
+
+/* 4. Porcentajes de las columnas (Basados visualmente en la imagen) */
+.col-pieces {
+  width: 5.5%;
+}
+
+.col-grossweight {
+  width: 9.7%;
+  left: 0.4%;
+}
+
+.col-kglb {
+  width: 1%;
+  left: 0.6%;
+}
+
+/* Columna muy delgadita */
+.col-rateclass {
+  width: 3.5%;
+}
+
+.col-commodity {
+  width: 9.5%;
+  left: 3.8%;
+}
+
+.col-chargeable {
+  width: 10%;
+  left: 5.8%;
+}
+
+.col-rate {
+  width: 11%;
+  left: 7.5%;
+}
+
+.col-total {
+  width: 17%;
+  left: 9.5%;
+}
+
+.col-nature {
+  width: 26%;
+  left: 11.5%;
+}
+
+/* =========================================================
+   FILA DE TOTALES AUTOMÁTICOS AWB
+   ========================================================= */
+.awb-totals-row {
+  display: flex;
+  width: 100%;
+
+  /* CAMBIO: Lo forzamos a quedar pegado abajo */
+  position: absolute;
+  bottom: 6%;
+  left: 0;
+
+  align-items: flex-start;
+  border-top: 1px solid transparent;
+  z-index: 10;
+}
+
+/* Evitamos que parezca editable y forzamos el position relative para que se expandan */
+.awb-totals-row .pdf-textarea {
+  position: relative !important;
+
+  min-height: 20px;
+  padding: 2px 0px;
+  cursor: default;
+  font-family: "Public Sans-Bold", Helvetica, sans-serif;
+  color: #000;
+  font-size: 12px !important;
+}
+
+.awb-totals-row .pdf-textarea:hover {
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+
+/* La más ancha */
+
+/* 5. Ícono de Borrar */
+.delete-awb-row {
+  position: absolute;
+  right: -25px;
+  /* Queda por fuera a la derecha */
+  top: 0px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  z-index: 20;
+}
+
+.delete-awb-row:hover {
+  opacity: 1;
+}
+
+.delete-awb-row .delete-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* 6. Botón AGREGAR FILA */
+.add-awb-btn-container {
+  position: relative;
+  align-self: center;
+  margin-top: 10px;
+  z-index: 20;
+}
+
+.add-awb-btn-container .add-button {
+  background-color: #f06e00;
+  color: #fff;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-family: "Public Sans-Bold", Helvetica, sans-serif;
+  cursor: pointer;
+  font-size: 11px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.add-awb-btn-container .add-button:hover {
+  background-color: #d15f00;
+  transform: scale(1.05);
+}

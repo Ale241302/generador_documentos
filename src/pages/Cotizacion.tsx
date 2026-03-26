@@ -289,13 +289,13 @@ export function Cotizacion() {
       // ── 5. PREPARAR FORMDATA Y ENVIAR AL BACKEND ───────────
       const API_URL = import.meta.env.VITE_API_URL || "http://localhost/scl-cargo-back/gendoc";
       const API_KEY = (import.meta.env.VITE_API_KEY || "").trim();
-
+      const ID_USUARIO = localStorage.getItem("usuario_id") || "1";
       const pdfBlob = pdf.output("blob");
       const formData = new FormData();
 
       formData.append("key", API_KEY);
       formData.append("nombre_carpeta", folderName);
-      formData.append("id_usuario", "1");
+      formData.append("id_usuario", ID_USUARIO);
       formData.append("datos_cotizacion", JSON.stringify(extractedData));
 
       if (selectedFolderId) {
