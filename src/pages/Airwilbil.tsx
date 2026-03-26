@@ -158,7 +158,7 @@ export function Airwilbil() {
             const tempStyle = docPrin.createElement('style');
             tempStyle.id = 'pdf-export-styles';
 
-            // ESTILOS ESTRICTOS: Conservamos el 1000x1310 sin mover posiciones
+            // ESTILOS ESTRICTOS: Conservamos el 1000x1310 e inyectamos la corrección de -3% en el left
             tempStyle.innerHTML = `
                 .air-wil-bil-vacio { 
                     width: 1000px !important; 
@@ -173,10 +173,114 @@ export function Airwilbil() {
                     content: "" !important; 
                     display: none !important; 
                 }
+
+                /* --- NUEVO: CORRECCIÓN DE ALTURA Y DESBORDE --- */
                 .pdf-textarea {
                     border: none !important;
                     background: transparent !important;
+                    overflow: visible !important; /* <- EVITA QUE SE CORTE LA "g" */
+                    line-height: 1.2 !important;  /* <- Da un poco de respiro al texto */
                 }
+
+                .awb-row .pdf-textarea, .awb-totals-row .pdf-textarea {
+                    min-height: 25px !important; /* <- Subimos de 20px a 25px */
+                    padding-bottom: 4px !important; /* <- Empuja el borde inferior un poco más abajo */
+                }
+                /* CORRECCIÓN: -3% A TODOS LOS LEFT PARA CENTRAR EL PDF */
+                .input-1 { left: 0.5% !important; }
+                .input-2 { left: 5.5% !important; }
+                .input-3 { left: 11% !important; }
+                .input-4 { left: 65% !important; }
+                .input-5 { left:69% !important; }
+                
+                .input-shiperadd { left: 0.5% !important; }
+                .input-shiperacnum { left: 25.5% !important; }
+                .input-consignee { left: 0.5% !important; }
+                .input-consigneeacnum { left: 25.5% !important; }
+                .input-issuing { left: 0.5% !important; }
+                .input-agents { left: 0.5% !important; }
+                .input-acountno { left: 25.5% !important; }
+                .input-airpotdep { left: 0.5% !important; }
+                
+                .input-to { left: 0.5% !important; }
+                .input-bycarrier { left: 5.5% !important; }
+                .input-to2 { left: 29.7% !important; }
+                .input-to3 { left: 39% !important; }
+                .input-by2 { left: 35% !important; }
+                .input-by3 { left: 44.7% !important; }
+                .input-airpotdes { left: 0.5% !important; }
+                .input-flightdate { left: 24% !important; }
+                .input-flightdate2 { left: 36.5% !important; }
+                
+                .input-issueby { left: 64% !important; }
+                .input-acountinginfo { left: 48.5% !important; }
+                .input-refnumber { left: 48.5% !important; }
+                .input-refnumber2 { left: 62% !important; }
+                .input-refnumber3 { left: 76% !important; }
+                .input-currency { left: 48.5% !important; }
+                .input-chgs { left: 54% !important; }
+                .input-ppdwt { left: 57% !important; }
+                .input-collwt { left: 60% !important; }
+                .input-ppdot { left:62.5% !important; }
+                .input-collot { left:65% !important; }
+                .input-declaredcarriege { left: 67.5% !important; }
+                .input-declaredcustoms { left:84% !important; }
+                .input-amountinsurance { left: 48.5% !important; }
+                
+                .input-pais { left: 50% !important; }
+                .input-sci { left: 84% !important; }
+                
+                .input-prepaid { left: 5% !important; }
+                .input-valuetion { left: 5% !important; }
+                .input-tax { left: 5% !important; }
+                .input-totalohter { left:5% !important; }
+                .input-totalohtercarrier { left: 5% !important; }
+                .input-totalohtercarrier2 { left: 21% !important; }
+                .input-totalprepaid { left: 5% !important; }
+                .input-totalcollect { left: 21% !important; }
+                .input-currencyrate { left: 5% !important; }
+                .input-cccharges { left: 21% !important; }
+                .input-chargesat { left: 21% !important; }
+                
+                .input-othercarges { left: 38.5% !important; }
+                .input-signature { left: 38.5% !important; }
+                .input-executed { left: 38.5% !important; }
+                .input-atplace { left: 60% !important; }
+                .input-signature2 { left: 75% !important; }
+                .input-totalcollectcharge { left: 38.5% !important; }
+                
+                .input-6 { left: 69% !important; }
+                .input-7 { left: 77% !important; }
+                .input-8 { 
+                    left: 65% !important;  /* <- Lo movemos un poco a la izquierda para hacerle espacio */
+                    width: 38% !important; /* <- Aumentamos el ancho al doble para evitar saltos de línea */
+                    text-align: center !important; /* <- Lo centramos en ese nuevo espacio ancho */
+                    white-space: nowrap !important; /* <- FUERZA a que el texto NO haga salto de línea bajo ninguna circunstancia */
+                }
+                
+                /* El contenedor de la tabla también se desplazó, le quitamos 3% (7.2 - 3 = 4.2) */
+                .awb-table-container { left: 0.5% !important; }
+                /* =========================================================
+                   NUEVO: CORRECCIONES PARA LAS COLUMNAS DE LA TABLA
+                   ========================================================= */
+                
+                /* FILAS NORMALES (+3% AL LEFT ORIGINAL) */
+                .awb-row .col-kglb { left: 3% !important; }        /* Original: 0.6% */
+                .awb-row .col-commodity { left: 6.9% !important; }   /* Original: 3.8% */
+                .awb-row .col-chargeable { left:10.6% !important; }  /* Original: 5.8% */
+                .awb-row .col-rate { left: 13.4% !important; }       /* Original: 7.5% */
+                .awb-row .col-total { left: 18.5% !important; }      /* Original: 9.5% */
+                .awb-row .col-nature { left: 23.5% !important; }     /* Original: 11.5% */
+
+                /* FILA DE TOTALES (+2% AL LEFT ORIGINAL) */
+                .awb-totals-row .col-grossweight { left: 2.4% !important; } /* Original: 0.4% */
+                .awb-totals-row .col-kglb { left: 3.1% !important; }        /* Original: 0.6% */
+                .awb-totals-row .col-rateclass { left: 2% !important; }     /* Original: 0 (no tenía) */
+                .awb-totals-row .col-commodity { left: 5.8% !important; }   /* Original: 3.8% */
+                .awb-totals-row .col-chargeable { left: 7.8% !important; }  /* Original: 5.8% */
+                .awb-totals-row .col-rate { left: 9.5% !important; }        /* Original: 7.5% */
+                .awb-totals-row .col-total { left: 49.5% !important; }      /* Original: 9.5% */
+                .awb-totals-row .col-nature { left: 13.5% !important; }     /* Original: 11.5% */
             `;
             docPrin.head.appendChild(tempStyle);
             docPrin.defaultView?.scrollTo(0, 0);
@@ -185,23 +289,60 @@ export function Airwilbil() {
             await new Promise(resolve => setTimeout(resolve, 200));
 
             // =========================================================
-            // 3. CAPTURA Y GENERACIÓN DEL PDF
+            // 3. CAPTURA Y GENERACIÓN DEL PDF (MULTICOPIA)
             // =========================================================
             const page = docPrin.querySelector('.air-wil-bil-vacio') as HTMLElement;
+            const input8 = page.querySelector('.input-8') as HTMLElement;
 
-            const canvas = await html2canvas(page, {
-                scale: 2.5,
-                useCORS: true,
-                scrollY: 0,
-                windowY: 0,
-                backgroundColor: '#ffffff'
-            });
+            // Guardamos el texto original que el usuario haya escrito para restaurarlo al final
+            const textoOriginalInput8 = input8 ? input8.innerText : "";
 
-            const imgData = canvas.toDataURL('image/jpeg', 1.0);
-            const imgProps = pdf.getImageProperties(imgData);
-            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            // Textos específicos para cada una de las 6 copias
+            const leyendasCopias = [
+                "ORIGINAL 3 (FOR SHIPPER)",
+                "COPY 6 (FOR AGENT)",
+                "ORIGINAL 1 (FOR ISSUING CARRIER)",
+                "ORIGINAL 2 (FOR CONSIGNEE)",
+                "COPY 4 (FOR AGENT)",
+                "COPY 5 (FOR AIRPORT OF DESTINATION)"
+            ];
 
-            pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+            for (let i = 0; i < leyendasCopias.length; i++) {
+                // 1. Cambiamos el texto de la leyenda
+                if (input8) {
+                    input8.innerText = leyendasCopias[i];
+                }
+
+                // Pequeña pausa para asegurar que el DOM se actualizó visualmente antes de la foto
+                await new Promise(resolve => setTimeout(resolve, 50));
+
+                // 2. Tomamos la foto
+                const canvas = await html2canvas(page, {
+                    scale: 3,
+                    useCORS: true,
+                    scrollY: 0,
+                    windowY: 0,
+                    backgroundColor: '#ffffff'
+                });
+
+                const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+                // 3. Añadimos la página al PDF (excepto en la primera vuelta que ya tiene una hoja en blanco)
+                if (i > 0) {
+                    pdf.addPage();
+                }
+
+                // 4. Pegamos la imagen
+                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+            }
+
+            // Restauramos el input-8 a su estado original para que la pantalla del usuario quede igual
+            if (input8) {
+                input8.innerText = textoOriginalInput8;
+            }
+            // =========================================================
 
             // =========================================================
             // 4. RESTAURAR PANTALLA Y ENVIAR AL BACKEND
