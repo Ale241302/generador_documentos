@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { AppHeader } from "@/components/layout/AppHeader";
-import { Plus, X } from "lucide-react";
+import { Plus, X, Search } from "lucide-react";
 import { useDocumentStore } from "@/stores/documentStore";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -14,6 +14,7 @@ const ESTADOS_MAP: Record<number, string> = {
 
 export function Dashboard() {
   const [records, setRecords] = useState<any[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { setActiveDocumentType, activeDocumentType } = useDocumentStore();
@@ -162,9 +163,6 @@ export function Dashboard() {
     );
   };
 
-  // ==========================================
-  // REDIRECCIÓN A LA VISTA DE BITÁCORA
-  // ==========================================
   const renderBitacoraIcon = (id: any) => {
     if (!id) return <span className="text-muted-foreground">-</span>;
     return (
@@ -177,11 +175,45 @@ export function Dashboard() {
     );
   };
 
+  // ==========================================
+  // LÓGICA DE FILTRADO UNIFICADO
+  // ==========================================
+  const filteredRecords = records.filter((row) => {
+    if (!searchTerm) return true;
+
+    const term = searchTerm.toLowerCase();
+
+    const folderMatch = (row.nombre_carpeta || "").toLowerCase().includes(term);
+    const valueMatch = (String(row.valor_pagado) || "").toLowerCase().includes(term);
+    const estadoString = ESTADOS_MAP[Number(row.estado)] || "";
+    const statusMatch = estadoString.toLowerCase().includes(term);
+
+    return folderMatch || valueMatch || statusMatch;
+  });
+
   return (
     <div className="min-h-screen bg-background flex flex-col relative">
       <AppHeader />
       <main className="flex-1 p-4 md:p-8 w-full flex flex-col">
-        <h1 className="text-2xl font-bold mb-6 shrink-0">Documentos Generados</h1>
+
+        {/* ENCABEZADO Y BUSCADOR UNIFICADO */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+          <h1 className="text-2xl font-bold shrink-0">Documentos Generados</h1>
+
+          <div className="relative w-full sm:w-80 shrink-0">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Search className="h-5 w-5 text-gray-400" />
+            </div>
+            <input
+              type="text"
+              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#f06e00] focus:border-transparent sm:text-sm transition-all"
+              placeholder="Buscar carpeta, valor o estado..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </div>
+
         <div className="rounded-md border bg-card shadow-sm w-full overflow-x-auto pb-4">
           <table className="w-full text-sm text-left min-w-max">
             <thead className="text-xs uppercase bg-muted text-muted-foreground border-b">
@@ -203,8 +235,8 @@ export function Dashboard() {
               </tr>
             </thead>
             <tbody>
-              {records.length > 0 ? (
-                records.map((row) => (
+              {filteredRecords.length > 0 ? (
+                filteredRecords.map((row) => (
                   <tr key={row.id} className="border-b last:border-0 hover:bg-muted/50 transition-colors">
                     <td className="px-6 py-4 font-medium">{row.id}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{row.fecha_creacion}</td>
@@ -247,7 +279,7 @@ export function Dashboard() {
               ) : (
                 <tr>
                   <td colSpan={14} className="px-6 py-12 text-center text-muted-foreground">
-                    No hay documentos generados.
+                    No se encontraron documentos.
                   </td>
                 </tr>
               )}
@@ -255,9 +287,8 @@ export function Dashboard() {
           </table>
         </div>
       </main>
-      {/* ==============================================
-          MENÚ INFERIOR DE ACCIÓN (Restaurado y Completo)
-      ============================================== */}
+
+      {/* MENÚ INFERIOR DE ACCIÓN */}
       <div className="fixed bottom-8 right-8 z-40" ref={menuRef}>
         {isMenuOpen && (
           <div className="absolute bottom-16 right-0 mb-2 w-56 rounded-md shadow-lg bg-card border border-border/50 py-1 z-50">
@@ -278,6 +309,7 @@ export function Dashboard() {
           {isMenuOpen ? <X className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
         </button>
       </div>
+
       {/* Modales de Confirmación */}
       {isEstadoModalOpen && pendingEstado && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">

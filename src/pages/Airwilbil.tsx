@@ -26,7 +26,7 @@ function generateIframeContent(html: string, globalCss: string, styleCss: string
         margin: 0 auto 48px auto !important; 
       }
       .form-overlay-container {
-        height: 92% !important; 
+        height: 92.14% !important; 
         top: 10px !important; 
       }
     </style>
@@ -148,8 +148,7 @@ export function Airwilbil() {
             // =========================================================
             // 2. PREPARACIÓN ESTÉTICA DEL PDF
             // =========================================================
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const pdfWidth = pdf.internal.pageSize.getWidth();
+
 
             // Ocultar botoneras y marcas de agua UI
             const actionButtons = docPrin.querySelectorAll('.delete-awb-row, .add-awb-btn-container, .watermark-controls');
@@ -167,6 +166,10 @@ export function Airwilbil() {
                     margin: 0 !important; 
                     border: none !important; 
                     box-shadow: none !important;
+                }
+                .air-wil-bil {
+                    position: relative !important;
+                    top: 10px !important; /* <- AJUSTA AQUÍ: Aumenta este valor si necesitas que la plantilla baje más, o redúcelo si bajó demasiado */
                 }
                 .pdf-textarea:empty::before, .pdf-textarea:empty { 
                     color: transparent !important; 
@@ -215,8 +218,8 @@ export function Airwilbil() {
                 .input-issueby { left: 64% !important; }
                 .input-acountinginfo { left: 48.5% !important; }
                 .input-refnumber { left: 48.5% !important; }
-                .input-refnumber2 { left: 62% !important; }
-                .input-refnumber3 { left: 76% !important; }
+                .input-refnumber2 { left: 68% !important; }
+                .input-refnumber3 { left: 84% !important; }
                 .input-currency { left: 48.5% !important; }
                 .input-chgs { left: 54% !important; }
                 .input-ppdwt { left: 57% !important; }
@@ -252,7 +255,7 @@ export function Airwilbil() {
                 .input-6 { left: 69% !important; }
                 .input-7 { left: 77% !important; }
                 .input-8 { 
-                    left: 65% !important;  /* <- Lo movemos un poco a la izquierda para hacerle espacio */
+                    left: 60% !important;  /* <- Lo movemos un poco a la izquierda para hacerle espacio */
                     width: 38% !important; /* <- Aumentamos el ancho al doble para evitar saltos de línea */
                     text-align: center !important; /* <- Lo centramos en ese nuevo espacio ancho */
                     white-space: nowrap !important; /* <- FUERZA a que el texto NO haga salto de línea bajo ninguna circunstancia */
@@ -293,11 +296,8 @@ export function Airwilbil() {
             // =========================================================
             const page = docPrin.querySelector('.air-wil-bil-vacio') as HTMLElement;
             const input8 = page.querySelector('.input-8') as HTMLElement;
-
-            // Guardamos el texto original que el usuario haya escrito para restaurarlo al final
             const textoOriginalInput8 = input8 ? input8.innerText : "";
 
-            // Textos específicos para cada una de las 6 copias
             const leyendasCopias = [
                 "ORIGINAL 3 (FOR SHIPPER)",
                 "COPY 6 (FOR AGENT)",
@@ -307,16 +307,18 @@ export function Airwilbil() {
                 "COPY 5 (FOR AIRPORT OF DESTINATION)"
             ];
 
+            // ✅ NUEVO: Declaramos las variables del PDF fuera del bucle
+            let pdf: jsPDF | null = null;
+            const pdfWidth = 210; // Ancho estándar A4 en milímetros
+            let pdfHeight = 0;
+
             for (let i = 0; i < leyendasCopias.length; i++) {
-                // 1. Cambiamos el texto de la leyenda
                 if (input8) {
                     input8.innerText = leyendasCopias[i];
                 }
 
-                // Pequeña pausa para asegurar que el DOM se actualizó visualmente antes de la foto
                 await new Promise(resolve => setTimeout(resolve, 50));
 
-                // 2. Tomamos la foto
                 const canvas = await html2canvas(page, {
                     scale: 3,
                     useCORS: true,
@@ -326,19 +328,28 @@ export function Airwilbil() {
                 });
 
                 const imgData = canvas.toDataURL('image/jpeg', 1.0);
-                const imgProps = pdf.getImageProperties(imgData);
-                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-                // 3. Añadimos la página al PDF (excepto en la primera vuelta que ya tiene una hoja en blanco)
-                if (i > 0) {
-                    pdf.addPage();
+                if (i === 0) {
+                    // En la primera vuelta, calculamos el alto exacto de tu HTML
+                    const tempPdf = new jsPDF('p', 'mm', 'a4');
+                    const imgProps = tempPdf.getImageProperties(imgData);
+                    pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+                    // Creamos el PDF final con el formato dinámico [Ancho, Alto]
+                    pdf = new jsPDF({
+                        orientation: 'p',
+                        unit: 'mm',
+                        format: [pdfWidth, pdfHeight]
+                    });
+
+                    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                } else {
+                    // Para las siguientes copias, agregamos una página con el mismo formato dinámico
+                    pdf!.addPage([pdfWidth, pdfHeight], 'p');
+                    pdf!.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
                 }
-
-                // 4. Pegamos la imagen
-                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
             }
 
-            // Restauramos el input-8 a su estado original para que la pantalla del usuario quede igual
             if (input8) {
                 input8.innerText = textoOriginalInput8;
             }
