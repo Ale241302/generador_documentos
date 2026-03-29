@@ -294,7 +294,12 @@ export function Dashboard() {
           <div className="absolute bottom-16 right-0 mb-2 w-56 rounded-md shadow-lg bg-card border border-border/50 py-1 z-50">
             <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors" onClick={() => navigate('/cotizacion')}>Cotización</button>
             <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors" onClick={() => { /* navigate('/manifiesto') */ }}>Manifiesto</button>
-            <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors" onClick={() => { /* navigate('/invoices') */ }}>Invoices</button>
+            <button
+              className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors"
+              onClick={() => navigate('/invoices')}
+            >
+              Invoices
+            </button>
             <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors" onClick={() => { /* navigate('/bl-import') */ }}>BL Import</button>
             <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors" onClick={() => navigate('/bl-export')}>BL Export</button>
             <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors" onClick={() => navigate('/awb')}>AWB</button>

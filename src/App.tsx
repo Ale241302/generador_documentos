@@ -8,6 +8,7 @@ import { Editor } from "./pages/Editor";
 import { BlExport } from '@/pages/BlExport';
 import { Bitacora } from "@/pages/Bitacora";
 import { Airwilbil } from "@/pages/Airwilbil";
+import { Invoices } from "@/pages/Invoices";
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="sclcargo-theme">
@@ -22,6 +23,7 @@ function App() {
           <Route path="/bl-export" element={<BlExport />} />
           <Route path="/bitacora/:id" element={<Bitacora />} />
           <Route path="/awb" element={<Airwilbil />} />
+          <Route path="/invoices" element={<Invoices />} />
         </Routes>
       </BrowserRouter>
       <Toaster />
