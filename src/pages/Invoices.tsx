@@ -148,11 +148,13 @@ export function Invoices() {
                 .icon, 
                 .icon-2, 
                 .icon-3, 
-                .icon-5,
                 img.img[src*="container.svg"],
                 img.img[src*="icon-2.svg"] {
                     /* Aumenta a 12px o 14px si siguen quedando muy arriba */
                     margin-top: 10px !important; 
+                }
+                .icon-5 {
+                    margin-top: 20px !important;
                 }
             `;
             doc.head.appendChild(tempStyle);
