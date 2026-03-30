@@ -1,1612 +1,459 @@
+/* RESET BÁSICO Y CONTENEDOR PRINCIPAL LANDSCAPE */
 .cargomanifest {
-  background-color: #ffffff;
-  width: 100%;
-  min-width: 1400px;
-  min-height: 1000px;
   display: flex;
   flex-direction: column;
+  width: 1400px;
+  /* ANCHO HORIZONTAL (Landscape) */
+  height: 990px;
+  /* ALTO HORIZONTAL (Proporción A4) */
+  margin: 0 auto 30px auto;
+  background-color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  font-family: "Public Sans-SemiBold", Helvetica, sans-serif;
+}
+
+.cargomanifest p,
+.cargomanifest div {
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .cargomanifest .header {
-  margin-left: 1px;
-  width: 1399px;
-  height: 103px;
-  margin-top: 1px;
-  align-items: center;
-  padding: 10px 32px;
+  padding: 15px 40px;
   background-color: #ffffff;
-  border-bottom-width: 1px;
-  border-color: #eaeaea;
+  border-bottom: 1px solid #eaeaea;
   display: flex;
-  position: relative;
-  border-bottom-style: solid;
 }
 
 .cargomanifest .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
-  flex: 1;
-  flex-grow: 1;
-}
-
-.cargomanifest .img {
-  position: relative;
-  flex: 0 0 auto;
+  width: 100%;
 }
 
 .cargomanifest .container-wrapper {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
   gap: 10px;
-  position: relative;
-  flex: 0 0 auto;
 }
 
 .cargomanifest .div {
   display: flex;
   flex-direction: column;
-  width: 141px;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 4px;
-  position: relative;
 }
 
-.cargomanifest .container-2 {
-  display: flex;
-  flex-direction: column;
-  width: 135px;
-  align-items: flex-start;
-  position: relative;
-  flex: 0 0 auto;
-}
-
-.cargomanifest .div-wrapper {
+.cargomanifest .container-2,
+.cargomanifest .container-3 {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 auto;
 }
 
 .cargomanifest .text-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 135px;
-  height: 15px;
-  margin-top: -1.00px;
   font-family: "Public Sans-Black", Helvetica;
   font-weight: 900;
   color: #f06e00;
   font-size: 10px;
   text-align: right;
   letter-spacing: -0.50px;
-  line-height: 15px;
-  white-space: nowrap;
 }
 
 .cargomanifest .text-wrapper-2 {
-  justify-content: flex-end;
-  width: 186px;
-  height: 32px;
-  margin-left: -51.00px;
   font-family: "Public Sans-Black", Helvetica;
   font-weight: 900;
+  color: #2f2f2f;
   font-size: 24px;
   text-align: right;
   letter-spacing: -0.81px;
-  line-height: 36.2px;
-  white-space: nowrap;
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-top: -1.00px;
-  color: #2f2f2f;
-}
-
-.cargomanifest .container-3 {
-  display: flex;
-  flex-direction: column;
-  width: 137px;
-  align-items: flex-start;
-  position: relative;
-  flex: 0 0 auto;
 }
 
 .cargomanifest .text-wrapper-3 {
-  justify-content: flex-end;
-  width: 186px;
-  height: 15px;
-  margin-left: -49.00px;
+  font-family: "Public Sans-Bold", Helvetica;
+  font-weight: 700;
   color: #707070;
   font-size: 10px;
   text-align: right;
-  line-height: 15px;
-  white-space: nowrap;
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-top: -1.00px;
-  font-family: "Public Sans-Bold", Helvetica;
-  font-weight: 700;
-  letter-spacing: 0;
 }
 
 .cargomanifest .text-wrapper-4 {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  align-self: stretch;
-  height: 16px;
-  margin-top: -1.00px;
   font-family: "Public Sans-SemiBold", Helvetica;
   font-weight: 600;
   color: #2f2f2f;
   font-size: 12px;
   text-align: right;
-  letter-spacing: 0;
-  line-height: 16px;
-  white-space: nowrap;
 }
 
+/* CUERPO PRINCIPAL */
 .cargomanifest .main {
   display: flex;
-  margin-left: 1px;
-  width: 1399px;
-  height: 784px;
-  position: relative;
-  margin-top: 4px;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 15px 32px 20px;
+  padding: 30px 40px;
+  flex: 1;
 }
 
 .cargomanifest .container-4 {
   display: flex;
   flex-direction: column;
-  height: 346px;
-  align-items: flex-start;
-  gap: 10px;
-  position: relative;
-  align-self: stretch;
+  gap: 25px;
+  width: 100%;
+  flex: 1;
+}
+
+/* BLOQUES FLEXIBLES */
+.cargomanifest .top-row {
+  display: flex;
+  gap: 40px;
   width: 100%;
 }
 
-.cargomanifest .top-row-requested-by {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: 253px;
-  height: 198px;
-  gap: 32px;
-}
-
-.cargomanifest .requested-by-section {
-  position: relative;
-  grid-row: 1 / 2;
-  grid-column: 1 / 2;
-  justify-self: start;
-  align-self: start;
-  width: 100%;
-  height: 180px;
+.cargomanifest .requested-by-section,
+.cargomanifest .quote-details {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
+  flex: 1;
 }
 
+.cargomanifest .bottom-row {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+}
+
+.cargomanifest .section-30 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cargomanifest .section-40 {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TÍTULOS CON ICONOS Y BORDES */
 .cargomanifest .horizontal-border {
   display: flex;
-  height: 28px;
   align-items: center;
-  gap: 8px;
-  padding: 0px 0px 8px;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-color: #2f2f2f;
-}
-
-.cargomanifest .icon-wrapper {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  flex: 0 0 auto;
-}
-
-.cargomanifest .icon {
-  position: relative;
-  width: 16px;
-  height: 16px;
-}
-
-.cargomanifest .heading {
-  display: flex;
-  width: 221px;
-  position: relative;
-  margin-top: -5.00px;
-  margin-bottom: -3.00px;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.cargomanifest .destination-agent {
-  width: 208px;
-  height: 28px;
-  font-family: "Inter-ExtraBold", Helvetica;
-  font-weight: 800;
-  color: #1a1a1a;
-  font-size: 13.6px;
-  letter-spacing: 0.68px;
-  line-height: 20.4px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-top: -1.00px;
-}
-
-.cargomanifest .background-border {
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  height: 160px;
-  margin-bottom: -18.00px;
-  background-color: #fffcf9;
-  border-radius: 8px;
-  border: 1px solid;
-}
-
-.cargomanifest .container-5 {
-  display: flex;
-  flex-direction: column;
-  width: calc(100% - 190px);
-  height: 45px;
-  align-items: flex-start;
-  padding: 0px 0px 10px;
-  position: absolute;
-  top: 11px;
-  left: 21px;
-}
-
-.cargomanifest .container-6 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 auto;
-}
-
-.cargomanifest .text-wrapper-5 {
-  position: relative;
-  align-self: stretch;
-  margin-top: -1.00px;
-  font-family: "Public Sans-Bold", Helvetica;
-  font-weight: 700;
-  color: #707070;
-  font-size: 10px;
-  line-height: 15px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0;
-}
-
-.cargomanifest .text-wrapper-6 {
-  position: relative;
-  display: flex;
-  align-items: center;
-  align-self: stretch;
-  margin-top: -1.00px;
-  font-family: "Public Sans-Bold", Helvetica;
-  font-weight: 700;
-  color: #2f2f2f;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 20px;
-}
-
-.cargomanifest .container-7 {
-  display: flex;
-  flex-direction: column;
-  width: calc(100% - 246px);
-  height: 53px;
-  align-items: flex-start;
-  padding: 0px 0px 18px;
-  position: absolute;
-  top: 61px;
-  left: 21px;
-}
-
-.cargomanifest .element-floor-wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 597px;
-  align-items: flex-start;
-  position: relative;
-  flex: 0 0 auto;
-  margin-bottom: -20.00px;
-  margin-right: -191.50px;
-}
-
-.cargomanifest .div-2 {
-  grid-column: 2 / 3;
-  height: fit-content;
-  position: relative;
-  grid-row: 1 / 2;
-  justify-self: start;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   gap: 10px;
-}
-
-.cargomanifest .horizontal-border-2 {
-  position: relative;
-  align-self: stretch;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #2f2f2f;
   width: 100%;
-  height: 28px;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-color: #2f2f2f;
+  margin-bottom: 12px;
 }
 
-.cargomanifest .img-wrapper {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: absolute;
-  top: calc(50.00% - 16px);
-  left: 0;
-}
-
-.cargomanifest .icon-2 {
-  position: relative;
-  width: 20px;
-  height: 20px;
-}
-
-.cargomanifest .carrier-voyage-wrapper {
-  display: inline-flex;
-  position: absolute;
-  top: calc(50.00% - 20px);
-  left: 28px;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.cargomanifest .carrier-voyage {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 228px;
-  height: 28px;
-  margin-top: -1.00px;
-  font-family: "Inter-ExtraBold", Helvetica;
-  font-weight: 800;
-  color: #1a1a1a;
-  font-size: 13.6px;
-  letter-spacing: 0.68px;
-  line-height: 20.4px;
-}
-
-.cargomanifest .container-8 {
-  position: absolute;
-  top: -12px;
-  left: 570px;
-  width: 82px;
-  height: 31px;
-  display: flex;
-  flex-direction: column;
-}
-
-.cargomanifest .container-9 {
-  width: 82px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.cargomanifest .created-by {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 82px;
-  height: 15px;
-  font-family: "Public Sans-Bold", Helvetica;
-  font-weight: 700;
-  color: #707070;
-  font-size: 10px;
-  text-align: right;
-  letter-spacing: 0;
-  line-height: 15px;
-  white-space: nowrap;
-}
-
-.cargomanifest .text-wrapper-7 {
-  justify-content: flex-end;
-  width: 82px;
-  height: 16px;
-  font-family: "Public Sans-Bold", Helvetica;
-  font-weight: 700;
-  color: #2f2f2f;
-  font-size: 12px;
-  text-align: right;
-  line-height: 16px;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0;
-}
-
-.cargomanifest .background-border-2 {
-  height: 160px;
-  padding: 10px 20px 110px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  background-color: #fffcf9;
-  border-radius: 8px;
-  border: 1px solid;
-}
-
-.cargomanifest .container-10 {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: 35px 35px 35px;
-  height: fit-content;
-  gap: 8px 16px;
-}
-
-.cargomanifest .container-11 {
-  position: relative;
-  grid-row: 1 / 2;
-  grid-column: 1 / 2;
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.cargomanifest .container-12 {
-  position: relative;
-  grid-row: 1 / 2;
-  grid-column: 2 / 3;
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.cargomanifest .container-13 {
-  position: relative;
-  grid-row: 2 / 3;
-  grid-column: 1 / 2;
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.cargomanifest .container-14 {
-  position: relative;
-  grid-row: 2 / 3;
-  grid-column: 2 / 3;
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.cargomanifest .flight-number-voyage {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 208px;
-  margin-top: -1.00px;
-  font-family: "Public Sans-Bold", Helvetica;
-  font-weight: 700;
-  color: #707070;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: 15px;
-}
-
-.cargomanifest .container-15 {
-  position: relative;
-  grid-row: 3 / 4;
-  grid-column: 1 / 2;
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.cargomanifest .container-16 {
-  position: relative;
-  grid-row: 3 / 4;
-  grid-column: 2 / 3;
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.cargomanifest .bottom-row-origin {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: 233px;
-  height: 154px;
-  gap: 32px;
-}
-
-.cargomanifest .section {
-  grid-column: 1 / 2;
-  align-self: start;
-  height: 138px;
-  position: relative;
-  grid-row: 1 / 2;
-  justify-self: start;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.cargomanifest .container-17 {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  flex: 0 0 auto;
-  margin-top: -1.00px;
-}
-
-.cargomanifest .icon-3 {
-  position: relative;
-  width: 16px;
-  height: 20px;
-}
-
-.cargomanifest .heading-2 {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  flex: 0 0 auto;
-  margin-top: -5.00px;
-  margin-bottom: -3.00px;
-}
-
-.cargomanifest .origin {
-  width: 63.55px;
-  height: 28px;
-  color: #2f2f2f;
-  font-size: 16px;
-  letter-spacing: -0.45px;
-  line-height: 28px;
-  white-space: nowrap;
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-top: -1.00px;
-  font-family: "Public Sans-Bold", Helvetica;
-  font-weight: 700;
-}
-
-.cargomanifest .background-border-3 {
-  height: 100px;
-  gap: 16px;
-  padding: 10px 20px 74px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  background-color: #fffcf9;
-  border-radius: 8px;
-  border: 1px solid;
-}
-
-.cargomanifest .container-18 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 auto;
-  margin-bottom: -20.00px;
-}
-
+.cargomanifest .icon,
+.cargomanifest .icon-2,
+.cargomanifest .icon-3,
 .cargomanifest .icon-4 {
-  position: relative;
   width: 18px;
   height: 18px;
 }
 
-.cargomanifest .destination {
-  width: 120.84px;
-  height: 28px;
-  font-family: "Public Sans-Bold", Helvetica;
-  font-weight: 700;
-  color: #2f2f2f;
-  font-size: 16px;
-  letter-spacing: -0.45px;
-  line-height: 28px;
-  white-space: nowrap;
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-top: -1.00px;
+.cargomanifest .destination-agent,
+.cargomanifest .heading-title {
+  font-family: "Inter-ExtraBold", Helvetica;
+  font-weight: 800;
+  color: #1a1a1a;
+  font-size: 14px;
+  letter-spacing: 0.7px;
 }
 
-.cargomanifest .background-border-4 {
-  height: 100px;
-  gap: 16px;
-  padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  background-color: #fffcf9;
-  border-radius: 8px;
-  border: 1px solid;
+.cargomanifest .created-container {
+  margin-left: auto;
+  text-align: right;
 }
 
-.cargomanifest .container-19 {
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  height: 20px;
-}
-
-.cargomanifest .new-section {
-  position: relative;
-  grid-row: 1 / 2;
-  grid-column: 3 / 4;
-  justify-self: start;
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.cargomanifest .text-wrapper-8 {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 217.3px;
-  height: 28px;
-  margin-top: -1.00px;
-  font-family: "Public Sans-Bold", Helvetica;
-  font-weight: 700;
-  color: #2f2f2f;
-  font-size: 16px;
-  letter-spacing: -0.45px;
-  line-height: 28px;
-  white-space: nowrap;
-}
-
-.cargomanifest .background-border-5 {
-  height: 100px;
-  padding: 10px 20px 133px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  background-color: #fffcf9;
-  border-radius: 8px;
-  border: 1px solid;
-}
-
-.cargomanifest .container-20 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px 0px 0.75px;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 auto;
-  margin-bottom: -83.75px;
-}
-
-.cargomanifest .p {
-  position: relative;
-  display: flex;
-  align-items: center;
-  align-self: stretch;
-  margin-top: -1.00px;
-  font-family: "Public Sans-Regular", Helvetica;
-  font-weight: 400;
+.cargomanifest .created-by {
+  font-size: 10px;
   color: #707070;
+  font-family: "Public Sans-Bold", Helvetica;
+}
+
+.cargomanifest .created-name {
   font-size: 12px;
-  letter-spacing: 0;
-  line-height: 19.5px;
-}
-
-.cargomanifest .section-goods-table {
-  display: flex;
-  flex-direction: column;
-  height: 270px;
-  align-items: flex-start;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-}
-
-.cargomanifest .row-wrapper {
-  flex-direction: column;
-  align-items: flex-start;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 auto;
-  background-color: #f9fafb;
-  border-bottom-width: 0.9px;
-  border-color: #f8f8f8;
-  display: flex;
-  position: relative;
-  border-bottom-style: solid;
-}
-
-.cargomanifest .row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex: 0 0 auto;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-}
-
-.cargomanifest .cell {
-  width: 164px;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10.86px 7.24px;
-  position: relative;
-}
-
-.cargomanifest .house-no {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 62.62px;
-  height: 13.57px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
   color: #2f2f2f;
-  font-size: 10px;
-  letter-spacing: 0.24px;
-  line-height: 13.0px;
-  white-space: nowrap;
+  font-family: "Public Sans-Bold", Helvetica;
 }
 
-.cargomanifest .shipper-name-wrapper {
-  width: 157px;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10.86px 7.24px;
-  position: relative;
-}
-
-.cargomanifest .shipper-name {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 87px;
-  height: 13px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  letter-spacing: 0.24px;
-  line-height: 13.0px;
-  white-space: nowrap;
-}
-
-.cargomanifest .consignee-name-wrapper {
-  width: 238px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10.86px 7.24px;
-  position: relative;
-}
-
-.cargomanifest .consignee-name {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 103.43px;
-  height: 13.57px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  letter-spacing: 0.24px;
-  line-height: 13.0px;
-  white-space: nowrap;
-}
-
-.cargomanifest .pcs-wrapper {
-  width: 105px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10.86px 7.24px;
-  position: relative;
-}
-
-.cargomanifest .pcs {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22.89px;
-  height: 13.57px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  text-align: center;
-  letter-spacing: 0.24px;
-  line-height: 13.0px;
-  white-space: nowrap;
-}
-
-.cargomanifest .weight-wrapper {
-  width: 168px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10.86px 7.24px;
-  position: relative;
-}
-
-.cargomanifest .weight {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 45.84px;
-  height: 13.57px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  text-align: center;
-  letter-spacing: 0.24px;
-  line-height: 13.0px;
-  white-space: nowrap;
-}
-
-.cargomanifest .volume-wrapper {
-  width: 142px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10.86px 7.24px;
-  position: relative;
-}
-
-.cargomanifest .volume {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 48.26px;
-  height: 13.57px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  text-align: right;
-  letter-spacing: 0.24px;
-  line-height: 13.0px;
-  white-space: nowrap;
-}
-
-.cargomanifest .nature-AND-QUANTITY-wrapper {
-  width: 227px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10.86px 7.24px;
-  position: relative;
-}
-
-.cargomanifest .nature-AND-QUANTITY {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 179px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  letter-spacing: 0.24px;
-  line-height: 13.0px;
-}
-
-.cargomanifest .u-s-customs-wrapper {
-  width: 115px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10.86px 7.24px;
-  position: relative;
-}
-
-.cargomanifest .u-s-customs {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 75px;
-  height: 13px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  letter-spacing: 0.24px;
-  line-height: 13.0px;
-  white-space: nowrap;
-}
-
-.cargomanifest .body {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 auto;
-  margin-top: -0.9px;
-}
-
-.cargomanifest .row-2 {
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  height: 59.07px;
-}
-
-.cargomanifest .data {
-  width: calc(100% - 1206px);
-  padding: 22.12px 7.24px 23.38px;
-  top: -1px;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-}
-
-.cargomanifest .text-wrapper-9 {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 66px;
-  height: 14px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #f06e00;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: 13.0px;
-  white-space: nowrap;
-}
-
-.cargomanifest .data-2 {
-  width: calc(100% - 1156px);
-  height: 60px;
-  gap: 3.62px;
-  padding: 15.1px 7.24px 16.02px;
-  top: -1px;
-  left: 151px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-}
-
-.cargomanifest .container-21 {
-  display: flex;
-  flex-direction: column;
-  width: 82px;
-  align-items: flex-start;
-  position: relative;
-  flex: 0 0 auto;
-}
-
-.cargomanifest .text-wrapper-10 {
-  position: relative;
-  display: flex;
-  align-items: center;
-  align-self: stretch;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: 13.0px;
-}
-
-.cargomanifest .data-3 {
-  width: calc(100% - 1136px);
-  height: 60px;
-  gap: 3.62px;
-  padding: 15.1px 7.24px 16.02px;
-  top: 1px;
-  left: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-}
-
-.cargomanifest .LABORATORIOS-RENE {
-  position: relative;
-  align-self: stretch;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: 13.0px;
-}
-
-.cargomanifest .data-4 {
-  width: calc(100% - 1232px);
-  padding: 22.12px 7.24px 23.38px;
-  top: 1px;
-  left: 567px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-}
-
-.cargomanifest .text-wrapper-11 {
-  justify-content: center;
-  width: 32px;
-  height: 14px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  text-align: center;
-  line-height: 13.0px;
-  white-space: nowrap;
-  position: relative;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0;
-}
-
-.cargomanifest .data-5 {
-  width: calc(100% - 1205px);
-  padding: 22.12px 7.24px 23.38px;
-  top: 1px;
-  left: 694px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-}
-
-.cargomanifest .text-wrapper-12 {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 53.49px;
-  height: 13.57px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  text-align: right;
-  letter-spacing: 0;
-  line-height: 13.0px;
-  white-space: nowrap;
-}
-
-.cargomanifest .data-6 {
-  width: calc(100% - 1195px);
-  padding: 22.12px 7.24px 23.38px;
-  top: 1px;
-  left: 843px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-}
-
-.cargomanifest .text-wrapper-13 {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 42.57px;
-  height: 13.57px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  text-align: right;
-  letter-spacing: 0;
-  line-height: 13.0px;
-  white-space: nowrap;
-}
-
-.cargomanifest .data-7 {
-  width: calc(100% - 1116px);
-  height: 60px;
-  padding: 10.86px 7.24px;
-  top: 1px;
-  left: 983px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-}
-
-.cargomanifest .container-22 {
-  display: flex;
-  flex-direction: column;
-  width: 131px;
-  align-items: center;
-  justify-content: center;
-  padding: 0px 0px 0.53px;
-  position: relative;
-  flex: 0 0 auto;
-}
-
-.cargomanifest .text-wrapper-14 {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 130px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: 13.0px;
-}
-
-.cargomanifest .data-8 {
-  width: calc(100% - 1227px);
-  top: 23px;
-  left: 1219px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-}
-
-.cargomanifest .EEI-NO-REQUIRED {
-  position: relative;
-  display: flex;
-  align-items: center;
-  align-self: stretch;
-  height: 12px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: 11.3px;
-  white-space: nowrap;
-}
-
-.cargomanifest .row-3 {
-  height: 59.07px;
-  margin-top: -0.9px;
-  background-color: #fffdfc;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-}
-
-.cargomanifest .data-9 {
-  width: calc(100% - 1163px);
-  height: 60px;
-  gap: 3.62px;
-  padding: 15.1px 7.24px 16.02px;
-  top: -1px;
-  left: 151px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-}
-
-.cargomanifest .container-23 {
-  display: flex;
-  flex-direction: column;
-  width: 170px;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  flex: 0 0 auto;
-  margin-top: -5.56px;
-  margin-bottom: -5.56px;
-  margin-left: -6.24px;
-  margin-right: -6.24px;
-}
-
-.cargomanifest .text-wrapper-15 {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 116px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: 13.0px;
-}
-
-.cargomanifest .data-10 {
-  width: calc(100% - 1125px);
-  height: 60px;
-  gap: 3.62px;
-  padding: 15.1px 7.24px 16.02px;
-  top: 1px;
-  left: 339px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-}
-
-.cargomanifest .text-wrapper-16 {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 93px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: 13.0px;
-}
-
-.cargomanifest .SEC-a-FTSR {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 108px;
-  height: 12px;
-  margin-top: -0.90px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 10px;
-  letter-spacing: 0;
-  line-height: 11.3px;
-  white-space: nowrap;
-}
-
-.cargomanifest .row-4 {
-  height: 59.07px;
-  margin-top: -0.9px;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-}
-
-.cargomanifest .section-manifest {
-  position: absolute;
-  top: 671px;
-  left: 685px;
-  width: 674px;
-  height: 89px;
-  background-color: #f06e00;
-  border-radius: 7.24px;
-}
-
-.cargomanifest .total-pcs {
-  top: 18px;
-  left: 187px;
-  height: 15px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #ffedd5;
-  font-size: 9.4px;
-  letter-spacing: 0.47px;
-  line-height: 14.1px;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.cargomanifest .text-wrapper-17 {
-  position: absolute;
-  top: 35px;
-  left: 203px;
-  height: 37px;
-  display: flex;
-  align-items: center;
-  font-family: "Public Sans-Black", Helvetica;
-  font-weight: 900;
-  color: #ffffff;
-  font-size: 32.6px;
-  letter-spacing: 0;
-  line-height: 36.2px;
-  white-space: nowrap;
-}
-
-.cargomanifest .total-weight {
-  top: 18px;
-  left: 358px;
-  height: 15px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #ffedd5;
-  font-size: 9.4px;
-  letter-spacing: 0.47px;
-  line-height: 14.1px;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.cargomanifest .text-wrapper-18 {
-  position: absolute;
-  top: 35px;
-  left: 319px;
-  height: 37px;
-  display: flex;
-  align-items: center;
-  font-family: "Public Sans-Black", Helvetica;
-  font-weight: 900;
-  color: #ffffff;
-  font-size: 32.6px;
-  letter-spacing: 0;
-  line-height: 36.2px;
-  white-space: nowrap;
-}
-
-.cargomanifest .total-volume {
-  top: 17px;
-  left: 547px;
-  height: 15px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #ffedd5;
-  font-size: 9.4px;
-  letter-spacing: 0.47px;
-  line-height: 14.1px;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.cargomanifest .text-wrapper-19 {
-  position: absolute;
-  top: 35px;
-  left: 549px;
-  height: 37px;
-  font-family: "Public Sans-Black", Helvetica;
-  font-weight: 900;
-  color: #ffffff;
-  font-size: 32.6px;
-  line-height: 36.2px;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0;
-}
-
-.cargomanifest .total {
-  top: 32px;
-  left: 41px;
-  height: 26px;
-  font-family: "Public Sans-Black", Helvetica;
-  font-weight: 900;
-  color: #ffffff;
-  font-size: 18.1px;
-  letter-spacing: 3.62px;
-  line-height: 25.3px;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.cargomanifest .footer {
-  display: flex;
-  margin-left: 1px;
-  width: 1399px;
-  height: 47px;
-  position: relative;
-  margin-top: 61px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 30px 32px 32px;
+/* FONDOS CREMA DE LOS DATOS */
+.cargomanifest .background-border {
   background-color: #fffcf9;
-  border-top-width: 1px;
-  border-top-style: solid;
-  border-right-style: none;
-  border-bottom-style: none;
-  border-left-style: none;
-}
-
-.cargomanifest .container-24 {
+  border-radius: 8px;
+  padding: 15px 20px;
   display: flex;
-  width: 409px;
-  align-items: flex-start;
-  gap: 32px;
-  position: relative;
-  margin-top: -22.50px;
-  margin-bottom: -23.50px;
-}
-
-.cargomanifest .container-25 {
-  display: inline-flex;
   flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  align-self: stretch;
-  flex: 0 0 auto;
+  gap: 15px;
+  height: 100%;
 }
 
-.cargomanifest .ocean-operations {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 167px;
-  height: 15px;
-  margin-top: -1.00px;
+.cargomanifest .grid-2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* TEXTOS Y ETIQUETAS */
+.cargomanifest .label {
   font-family: "Public Sans-Bold", Helvetica;
   font-weight: 700;
   color: #707070;
   font-size: 10px;
-  letter-spacing: 0;
-  line-height: 15px;
-  white-space: nowrap;
+  margin-bottom: 3px;
 }
 
-.cargomanifest .container-26 {
-  display: flex;
-  flex-direction: column;
-  width: 409px;
-  align-items: flex-start;
-  position: relative;
-  flex: 0 0 auto;
-}
-
-.cargomanifest .text-wrapper-20 {
-  align-self: stretch;
-  height: 16px;
-  margin-top: -1.00px;
-  font-family: "Public Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #2f2f2f;
-  font-size: 12px;
-  line-height: 16px;
-  white-space: nowrap;
-  position: relative;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0;
-}
-
-.cargomanifest .container-27 {
-  position: relative;
-  width: 148px;
-  height: 40px;
-  margin-top: -27.00px;
-  margin-bottom: -28.00px;
-}
-
-.cargomanifest .background {
-  display: flex;
-  width: 28px;
-  height: 40px;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: calc(50.00% - 20px);
-  left: 0;
-  background-color: #fffcf9;
-  border-radius: 9999px;
-}
-
-.cargomanifest .icon-5 {
-  position: relative;
-  width: 16.67px;
-  height: 16.67px;
-}
-
-.cargomanifest .container-28 {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: absolute;
-  top: calc(50.00% - 10px);
-  left: 33px;
-}
-
-.cargomanifest .text-wrapper-21 {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 115px;
-  height: 20px;
-  margin-top: -1.00px;
+.cargomanifest .value {
   font-family: "Public Sans-Bold", Helvetica;
   font-weight: 700;
   color: #2f2f2f;
   font-size: 14px;
-  letter-spacing: 0;
-  line-height: 20px;
-  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.cargomanifest .text-dark {
+  color: #1a1a1a;
+}
+
+.cargomanifest .font-light {
+  font-family: "Public Sans-Regular", Helvetica;
+  font-weight: 400;
+  font-size: 12px;
+  color: #707070;
+}
+
+/* TABLA DE MANIFIESTO */
+.cargomanifest .section-goods-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.cargomanifest .row-header {
+  display: flex;
+  width: 100%;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #eaeaea;
+  padding: 12px 10px;
+}
+
+.cargomanifest .row-header div {
+  font-family: "Public Sans-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #2f2f2f;
+  font-size: 10px;
+  letter-spacing: 0.3px;
+}
+
+.cargomanifest .row-item {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #f8f8f8;
+  padding: 12px 10px;
+  align-items: center;
+  position: relative;
+}
+
+/* ANCHOS DE COLUMNAS (MANIFIESTO) */
+.cargomanifest .col-house {
+  width: 10%;
+  text-align: left;
+}
+
+.cargomanifest .col-shipper {
+  width: 18%;
+  text-align: left;
+  padding-right: 10px;
+}
+
+.cargomanifest .col-consignee {
+  width: 22%;
+  text-align: left;
+  padding-right: 10px;
+}
+
+.cargomanifest .col-pcs {
+  width: 6%;
+  text-align: center;
+}
+
+.cargomanifest .col-weight {
+  width: 12%;
+  text-align: center;
+}
+
+.cargomanifest .col-volume {
+  width: 10%;
+  text-align: center;
+}
+
+.cargomanifest .col-nature {
+  width: 14%;
+  text-align: center;
+}
+
+.cargomanifest .col-customs {
+  width: 8%;
+  text-align: right;
+}
+
+.cargomanifest .row-item div {
+  font-family: "Public Sans-SemiBold", Helvetica;
+  font-size: 10px;
+  color: #2f2f2f;
+}
+
+.cargomanifest .color-orange {
+  color: #f06e00 !important;
+}
+
+/* TOTALES NARANJA */
+.cargomanifest .section-manifest {
+  background-color: #f06e00;
+  border-radius: 8px;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+.cargomanifest .tot-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffffff;
+}
+
+.cargomanifest .tot-label {
+  font-family: "Public Sans-SemiBold", Helvetica;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+
+.cargomanifest .tot-value {
+  font-family: "Public Sans-Black", Helvetica;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+/* FOOTER */
+.cargomanifest .footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background-color: #fffcf9;
+  border-top: 1px solid #eaeaea;
+  margin-top: auto;
+}
+
+.cargomanifest .ocean-operations {
+  font-family: "Public Sans-Bold", Helvetica;
+  font-weight: 700;
+  color: #707070;
+  font-size: 10px;
+  margin-bottom: 4px;
+}
+
+.cargomanifest .text-wrapper-37 {
+  font-family: "Public Sans-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #2f2f2f;
+  font-size: 12px;
+}
+
+.cargomanifest .container-47 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cargomanifest .icon-5 {
+  width: 16px;
+  height: 16px;
+}
+
+.cargomanifest .text-wrapper-38 {
+  font-family: "Public Sans-Bold", Helvetica;
+  font-weight: 700;
+  color: #2f2f2f;
+  font-size: 14px;
+}
+
+/* ACCIONES TABLA */
+.cargomanifest .delete-action {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.2s;
+  z-index: 20;
+}
+
+.cargomanifest .delete-action:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.cargomanifest .delete-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.cargomanifest .add-row-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 15px;
+  z-index: 20;
+}
+
+.cargomanifest .add-button {
+  background-color: #f06e00;
+  color: #fff;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 8px;
+  font-family: "Public Sans-Bold", Helvetica;
+  cursor: pointer;
+  font-size: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.cargomanifest .add-button:hover {
+  background-color: #d15f00;
+  transform: scale(1.05);
+}
+
+.editable {
+  transition: background-color 0.2s ease;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+.editable:hover {
+
+  border: 1px dashed #cccccc;
+  cursor: text;
+}
+
+.editable:focus {
+
+  border: 1px solid #f06e00;
+  cursor: text;
 }
