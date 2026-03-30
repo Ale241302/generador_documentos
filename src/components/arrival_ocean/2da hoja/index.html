@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="globals.css" />
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+  <div class="arrival-notice-air">
+
+    <header class="header">
+      <div class="container">
+        <img class="img" src="https://storage.googleapis.com/sclcargo/web/Home/logo-largo.png" alt="SCL Cargo Logo" />
+
+        <div class="header-right">
+          <div class="header-title">ARRIVAL NOTICE - OCEAN - UNRATED</div>
+          <div class="header-value editable sync-doc" contenteditable="true">(H)0</div>
+          <div class="header-label">DATE</div>
+          <div class="header-date editable date-auto sync-date" contenteditable="true"></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="main">
+      <div class="notes-container">
+
+        <div class="notes-section">
+          <div class="notes-header">
+            <img class="notes-icon" src="https://storage.googleapis.com/sclcargo/SCLCargo_gendoc/assets/icon-7.svg" />
+            <div class="notes-title">DESCRIPTION OF GOODS</div>
+          </div>
+          <div class="notes-content editable" contenteditable="true">
+
+          </div>
+        </div>
+
+        <div class="notes-section">
+          <div class="notes-header">
+            <img class="notes-icon" src="https://storage.googleapis.com/sclcargo/SCLCargo_gendoc/assets/icon-7.svg" />
+            <div class="notes-title">CARGO LOCATION</div>
+          </div>
+          <div class="notes-content editable" contenteditable="true">
+
+          </div>
+        </div>
+
+        <div class="notes-section">
+          <div class="notes-header">
+            <img class="notes-icon" src="https://storage.googleapis.com/sclcargo/SCLCargo_gendoc/assets/icon-7.svg" />
+            <div class="notes-title">NOTES</div>
+          </div>
+          <div class="notes-content editable" contenteditable="true">
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-left">
+        <div class="ocean-operations">OCEAN OPERATIONS</div>
+        <div class="footer-address">Av Ventisquero 1111, Bodega 58, Renca, Santiago, RM 7550000. CHILE</div>
+      </div>
+      <div class="footer-right">
+        <div class="icon-circle"><img class="icon-web"
+            src="https://storage.googleapis.com/sclcargo/SCLCargo_gendoc/assets/icon-5.svg" /></div>
+        <div class="web-address">www.sclcargo.cl</div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function setearFechaHoraActual() {
+      const dateElement = document.querySelector('.date-auto');
+      if (dateElement && !dateElement.innerText.trim()) {
+        const now = new Date();
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        el.innerText = `${monthNames[now.getMonth()]}/${String(now.getDate()).padStart(2, '0')}/${now.getFullYear()} ${now.getHours() % 12 || 12}:${String(now.getMinutes()).padStart(2, '0')} ${now.getHours() >= 12 ? 'pm' : 'am'}`;
+      }
+    }
+
+    // 🔴 COMUNICACIÓN HACIA EL OTRO IFRAME MEDIANTE REACT
+    document.addEventListener('input', function (e) {
+      if (e.target.classList.contains('sync-doc')) {
+        window.parent.postMessage({ type: 'SYNC_HEADER', field: 'doc', value: e.target.innerText }, '*');
+      }
+      if (e.target.classList.contains('sync-date')) {
+        window.parent.postMessage({ type: 'SYNC_HEADER', field: 'date', value: e.target.innerText }, '*');
+      }
+    });
+
+    // 🔴 RECIBIR COMUNICACIÓN DEL OTRO IFRAME
+    window.addEventListener('message', function (event) {
+      if (event.data?.type === 'SYNC_HEADER') {
+        if (event.data.field === 'doc') document.querySelector('.sync-doc').innerText = event.data.value;
+        if (event.data.field === 'date') document.querySelector('.sync-date').innerText = event.data.value;
+      }
+    });
+
+    function notificarAlturaAReact() {
+      const contenedor = document.querySelector('.arrival-notice-air');
+      if (contenedor) window.parent.postMessage({ type: 'RESIZE_ARRIVAL_2', height: contenedor.offsetHeight + 40 }, '*');
+    }
+
+    window.addEventListener('load', () => {
+      setearFechaHoraActual();
+      setTimeout(notificarAlturaAReact, 100);
+    });
+
+    const observer = new MutationObserver(notificarAlturaAReact);
+    observer.observe(document.body, { childList: true, subtree: true });
+  </script>
+</body>
+
+</html>

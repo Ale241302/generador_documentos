@@ -224,7 +224,7 @@ export function Dashboard() {
                 <th className="px-6 py-4 whitespace-nowrap text-center">Cotización</th>
                 <th className="px-6 py-4 whitespace-nowrap text-center">Manifiesto</th>
                 <th className="px-6 py-4 whitespace-nowrap text-center">Invoices</th>
-                <th className="px-6 py-4 whitespace-nowrap text-center">BL Import</th>
+                {/*<th className="px-6 py-4 whitespace-nowrap text-center">BL Import</th>*/}
                 <th className="px-6 py-4 whitespace-nowrap text-center">BL Export</th>
                 <th className="px-6 py-4 whitespace-nowrap text-center">AWB</th>
                 <th className="px-6 py-4 whitespace-nowrap text-center">Arribo Air</th>
@@ -244,7 +244,7 @@ export function Dashboard() {
                     <td className="px-6 py-4 text-center">{renderDocumentLink(row.url_documento_cotizacion)}</td>
                     <td className="px-6 py-4 text-center">{renderDocumentLink(row.url_documento_manifiesto)}</td>
                     <td className="px-6 py-4 text-center">{renderDocumentLink(row.url_documento_invoices)}</td>
-                    <td className="px-6 py-4 text-center">{renderDocumentLink(row.url_documento_bl_import)}</td>
+                    {/*<td className="px-6 py-4 text-center">{renderDocumentLink(row.url_documento_bl_import)}</td>*/}
                     <td className="px-6 py-4 text-center">{renderDocumentLink(row.url_documento_bl_export)}</td>
                     <td className="px-6 py-4 text-center">{renderDocumentLink(row.url_documento_awb)}</td>
                     <td className="px-6 py-4 text-center">{renderDocumentLink(row.url_documento_arribo_air)}</td>
@@ -300,11 +300,11 @@ export function Dashboard() {
             >
               Invoices
             </button>
-            <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors" onClick={() => { /* navigate('/bl-import') */ }}>BL Import</button>
+            {/*<button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors" onClick={() => {  navigate('/bl-import') }}>BL Import</button>*/}
             <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors" onClick={() => navigate('/bl-export')}>BL Export</button>
             <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors" onClick={() => navigate('/awb')}>AWB</button>
-            <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors" onClick={() => { /* navigate('/arribo-air') */ }}>Arribo Air</button>
-            <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted transition-colors" onClick={() => { /* navigate('/arribo-sea') */ }}>Arribo Sea</button>
+            <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted border-b border-border/50 transition-colors" onClick={() => { navigate('/arribo-air') }}>Arribo Air</button>
+            <button className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-muted transition-colors" onClick={() => { navigate('/arribo-sea') }}>Arribo Sea</button>
           </div>
         )}
         <button

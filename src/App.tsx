@@ -10,6 +10,8 @@ import { Bitacora } from "@/pages/Bitacora";
 import { Airwilbil } from "@/pages/Airwilbil";
 import { Invoices } from "@/pages/Invoices";
 import { Manifiestos } from "@/pages/Manifiestos";
+import { ArriboAir } from "@/pages/ArriboAir";
+import { ArriboSea } from "@/pages/ArriboSea";
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="sclcargo-theme">
@@ -26,6 +28,8 @@ function App() {
           <Route path="/awb" element={<Airwilbil />} />
           <Route path="/invoices" element={<Invoices />} />
           <Route path="/manifiestos" element={<Manifiestos />} />
+          <Route path="/arribo-air" element={<ArriboAir />} />
+          <Route path="/arribo-sea" element={<ArriboSea />} />
         </Routes>
       </BrowserRouter>
       <Toaster />

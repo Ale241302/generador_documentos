@@ -1,0 +1,219 @@
+/* =========================================
+   RESET Y CONTENEDOR PRINCIPAL
+   ========================================= */
+body {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+.arrival-notice-air {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  height: 1529px;
+  /* PORTRAIT: Altura estricta A4 para la foto PDF */
+  background-color: #ffffff;
+  font-family: "Public Sans-SemiBold", Helvetica, sans-serif;
+  color: #2f2f2f;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.arrival-notice-air p,
+.arrival-notice-air div {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   HEADER (Igual a la hoja 1)
+   ========================================= */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 40px;
+  border-bottom: 2px solid #eaeaea;
+  background-color: #ffffff;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.img {
+  height: 50px;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0px;
+}
+
+.header-title {
+  font-family: "Public Sans-Black", Helvetica, sans-serif;
+  font-weight: 900;
+  color: #f06e00;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.header-value {
+  font-family: "Public Sans-Black", Helvetica, sans-serif;
+  font-weight: 900;
+  color: #2f2f2f;
+  font-size: 38px;
+  margin-top: -2px;
+  margin-bottom: 5px;
+}
+
+.header-label {
+  font-family: "Public Sans-Bold", Helvetica, sans-serif;
+  font-weight: 700;
+  color: #707070;
+  font-size: 12px;
+}
+
+.header-date {
+  font-family: "Public Sans-SemiBold", Helvetica, sans-serif;
+  font-weight: 600;
+  color: #2f2f2f;
+  font-size: 14px;
+}
+
+/* =========================================
+   CUERPO PRINCIPAL Y NOTAS
+   ========================================= */
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  flex: 1;
+  /* Esto asegura que empuje el Footer hacia abajo */
+}
+
+.notes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+}
+
+.notes-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.notes-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding-bottom: 10px;
+}
+
+.notes-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.notes-title {
+  font-family: "Inter-ExtraBold", Helvetica;
+  font-weight: 800;
+  color: #1a1a1a;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.notes-content {
+  font-family: "Public Sans-Regular", Helvetica, sans-serif;
+  font-weight: 400;
+  color: #707070;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* =========================================
+   FOOTER (Igual a la hoja 1)
+   ========================================= */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px;
+  background-color: #fffcf9;
+  border-top: 1px solid #eaeaea;
+  width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.ocean-operations {
+  font-size: 10px;
+  color: #707070;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.footer-address {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-circle {
+  display: flex;
+}
+
+.icon-web {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+}
+
+.web-address {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Efecto Visual Editable */
+.editable {
+  transition: all 0.2s ease-in-out;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+  outline: none;
+  border: 1px solid transparent;
+  cursor: pointer !important;
+}
+
+.editable:hover {
+  cursor: pointer !important;
+  border: 1px dashed #cccccc;
+  cursor: text;
+}
+
+.editable:focus {
+
+  border: 1px solid #f06e00;
+  cursor: text;
+}

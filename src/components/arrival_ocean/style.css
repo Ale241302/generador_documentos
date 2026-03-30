@@ -1,0 +1,440 @@
+/* =========================================
+   RESET Y CONTENEDOR PRINCIPAL
+   ========================================= */
+body {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+#document-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 30px;
+  padding-bottom: 50px;
+}
+
+.arrival-notice-ocean {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  height: 1529px;
+  /* PORTRAIT A4 */
+  background-color: #ffffff;
+  font-family: "Public Sans-SemiBold", Helvetica, sans-serif;
+  color: #2f2f2f;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.arrival-notice-ocean p,
+.arrival-notice-ocean div {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   HEADER
+   ========================================= */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 40px;
+  border-bottom: 2px solid #eaeaea;
+  background-color: #ffffff;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.img {
+  height: 50px;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0px;
+}
+
+.header-title {
+  font-family: "Public Sans-Black", Helvetica, sans-serif;
+  font-weight: 900;
+  color: #f06e00;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.header-value {
+  font-family: "Public Sans-Black", Helvetica, sans-serif;
+  font-weight: 900;
+  color: #2f2f2f;
+  font-size: 38px;
+  margin-top: -2px;
+  margin-bottom: 5px;
+}
+
+.header-label {
+  font-family: "Public Sans-Bold", Helvetica, sans-serif;
+  font-weight: 700;
+  color: #707070;
+  font-size: 12px;
+}
+
+.header-date {
+  font-family: "Public Sans-SemiBold", Helvetica, sans-serif;
+  font-weight: 600;
+  color: #2f2f2f;
+  font-size: 14px;
+}
+
+/* =========================================
+   CUERPO PRINCIPAL
+   ========================================= */
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 40px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.container-4 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* =========================================
+   CAJAS Y BORDES
+   ========================================= */
+.horizontal-border {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid #2f2f2f;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.icon,
+.icon-2 {
+  width: 18px;
+  height: 18px;
+}
+
+.heading {
+  font-family: "Inter-ExtraBold", Helvetica;
+  font-weight: 800;
+  color: #1a1a1a;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.background-border {
+  background-color: #fffcf9;
+  border-radius: 8px;
+
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+}
+
+.data-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  color: #707070;
+  font-size: 9px;
+  font-family: "Public Sans-Bold", Helvetica;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.value {
+  font-size: 12px;
+  font-family: "Public Sans-Bold", Helvetica;
+  line-height: 1.3;
+}
+
+.font-small {
+  font-size: 11px;
+}
+
+/* =========================================
+   GRILLAS OCEAN (5 columnas para Details)
+   ========================================= */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px 15px;
+}
+
+.arrival-section {
+  width: 100%;
+  margin-top: 25px !important;
+  margin-bottom: 25px !important;
+}
+
+.bill-to-section {
+  width: 100%;
+  margin-bottom: 25px !important;
+}
+
+.grid-4-wide {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr;
+  /* Address toma más espacio */
+  gap: 15px;
+}
+
+/* =========================================
+   TABLA DE PRODUCTOS
+   ========================================= */
+.section-goods-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.arrival-notice-ocean:not(:first-child) .section-goods-table {
+  margin-top: 0px;
+}
+
+.row-header {
+  display: flex;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #eaeaea;
+  padding: 12px 10px;
+}
+
+.row-header div {
+  font-size: 10px;
+  font-weight: 700;
+  color: #2f2f2f;
+  text-transform: uppercase;
+}
+
+.row-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f8f8f8;
+  padding: 12px 10px;
+  position: relative;
+}
+
+.row-item div {
+  font-size: 12px;
+}
+
+/* Anchos de columnas Ocean */
+.col-marks {
+  width: 25%;
+  text-align: left;
+  padding-right: 10px;
+}
+
+.col-packs {
+  width: 15%;
+  text-align: center;
+}
+
+.col-desc {
+  width: 30%;
+  text-align: center;
+}
+
+.col-gw {
+  width: 15%;
+  text-align: center;
+}
+
+.col-cw {
+  width: 15%;
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Acciones Tabla */
+.delete-action {
+  position: absolute;
+  right: -25px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.2s;
+  z-index: 20;
+}
+
+.delete-action:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.delete-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.add-row-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.add-button {
+  background-color: #f06e00;
+  color: white;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #d15f00;
+}
+
+/* =========================================
+   BARRA NARANJA DE TOTALES (Fondo de hoja)
+   ========================================= */
+.totals-bar-wrapper {
+  padding: 0 40px 20px 40px;
+  background-color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.totals-bar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f06e00;
+  border-radius: 8px;
+  padding: 15px 40px;
+  color: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tot-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tot-label {
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.9;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.tot-value {
+  font-size: 20px;
+  font-family: "Public Sans-Black", Helvetica, sans-serif;
+  font-weight: 900;
+  margin-top: 4px;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px;
+  background-color: #fffcf9;
+  border-top: 1px solid #eaeaea;
+  width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.ocean-operations {
+  font-size: 10px;
+  color: #707070;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.footer-address {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-circle {
+  display: flex;
+}
+
+.icon-web {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+}
+
+.web-address {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Efecto Visual Editable */
+.editable {
+  transition: all 0.2s ease-in-out;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+.editable:hover {
+  cursor: pointer !important;
+  border: 1px dashed #cccccc;
+  cursor: text;
+}
+
+.editable:focus {
+  box-shadow: 0 0 0 1px #f06e00;
+  border: 1px solid #f06e00;
+  cursor: text;
+}
