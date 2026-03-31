@@ -11,6 +11,7 @@
 
 <body>
   <div class="arrival-notice-air">
+    <div class="watermark-display"></div>
 
     <header class="header">
       <div class="container">
@@ -115,6 +116,24 @@
 
     const observer = new MutationObserver(notificarAlturaAReact);
     observer.observe(document.body, { childList: true, subtree: true });
+
+    // 🔴 RECIBIR MARCA DE AGUA DEL PADRE
+    window.addEventListener('message', function (event) {
+      if (event.data?.type === 'SET_WATERMARK') {
+        const texto = event.data.text;
+        const displays = document.querySelectorAll('.watermark-display');
+
+        displays.forEach(display => {
+          if (texto === '') {
+            display.textContent = '';
+            display.classList.remove('active');
+          } else {
+            display.textContent = texto;
+            display.classList.add('active');
+          }
+        });
+      }
+    });
   </script>
 </body>
 

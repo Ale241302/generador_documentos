@@ -10,7 +10,14 @@
 </head>
 
 <body>
+  <div class="watermark-controls" data-html2canvas-ignore="true">
+    <span class="watermark-tag" data-text="DRAFT">DRAFT</span>
+    <span class="watermark-tag" data-text="CONFIDENCIAL">CONFIDENCIAL</span>
+    <span class="watermark-tag" data-text="COPY">COPY</span>
+    <span class="watermark-tag" data-text="ORIGINAL">ORIGINAL</span>
+  </div>
   <div class="quotation">
+    <div class="watermark-display"></div>
     <header class="header">
       <div class="container">
         <img class="img" src="https://storage.googleapis.com/sclcargo/web/Home/logo-largo.png" />
@@ -721,11 +728,14 @@
     // COMUNICACIÓN CON REACT PARA EFECTO MULTI-HOJA
     // =========================================================
     function notificarAlturaAReact() {
-      // 1. Buscamos cuántas hojas existen actualmente
+      const controls = document.querySelector('.watermark-controls');
       const hojas = document.querySelectorAll('.quotation');
       let alturaRealExacta = 0;
 
-      // 2. Sumamos la altura de cada hoja + sus márgenes
+      if (controls) {
+        alturaRealExacta += controls.offsetHeight;
+      }
+
       hojas.forEach(hoja => {
         const estilos = window.getComputedStyle(hoja);
         const margenSuperior = parseFloat(estilos.marginTop) || 0;
@@ -734,7 +744,6 @@
         alturaRealExacta += hoja.offsetHeight + margenSuperior + margenInferior;
       });
 
-      // 3. Enviamos la altura exacta a React (forzando a que se encoja si borraste hojas)
       window.parent.postMessage({ type: 'RESIZE_PRINCIPAL', height: alturaRealExacta }, '*');
     }
 
@@ -746,6 +755,86 @@
 
     const observer = new MutationObserver(notificarAlturaAReact);
     observer.observe(document.body, { childList: true, subtree: true });
+
+    // =========================================================
+    // LÓGICA DE MARCAS DE AGUA (SINCRONIZACIÓN)
+    // =========================================================
+    let activeWatermark = null;
+
+    document.querySelector('.watermark-controls').addEventListener('click', function (e) {
+      if (e.target.classList.contains('watermark-tag')) {
+        const clickedText = e.target.getAttribute('data-text');
+        const allTags = document.querySelectorAll('.watermark-tag');
+
+        if (activeWatermark === clickedText) {
+          activeWatermark = null;
+          allTags.forEach(tag => tag.classList.remove('active'));
+          aplicarMarcaDeAgua('');
+        } else {
+          activeWatermark = clickedText;
+          allTags.forEach(tag => tag.classList.remove('active'));
+          e.target.classList.add('active');
+          aplicarMarcaDeAgua(clickedText);
+        }
+      }
+    });
+
+    function aplicarMarcaDeAgua(texto) {
+      const displays = document.querySelectorAll('.watermark-display');
+      const allTags = document.querySelectorAll('.watermark-tag');
+
+      // Actualizar visual localmente
+      displays.forEach(display => {
+        if (texto === '') {
+          display.textContent = '';
+          display.classList.remove('active');
+        } else {
+          display.textContent = texto;
+          display.classList.add('active');
+        }
+      });
+
+      // Actualizar tags locales por si llega el mensaje desde fuera
+      allTags.forEach(tag => {
+        if (tag.getAttribute('data-text') === texto) {
+          tag.classList.add('active');
+          activeWatermark = texto;
+        } else {
+          tag.classList.remove('active');
+        }
+      });
+
+      // NOTIFICAR AL PADRE (Para que el otro iframe se entere)
+      window.parent.postMessage({ type: 'SET_WATERMARK', text: texto }, '*');
+    }
+
+    // Escuchar mensajes por si el padre reenvía algo
+    window.addEventListener('message', function (event) {
+      if (event.data?.type === 'SET_WATERMARK') {
+        const texto = event.data.text;
+        const displays = document.querySelectorAll('.watermark-display');
+        const allTags = document.querySelectorAll('.watermark-tag');
+
+        displays.forEach(display => {
+          if (texto === '') {
+            display.textContent = '';
+            display.classList.remove('active');
+          } else {
+            display.textContent = texto;
+            display.classList.add('active');
+          }
+        });
+
+        allTags.forEach(tag => {
+          if (tag.getAttribute('data-text') === texto) {
+            tag.classList.add('active');
+            activeWatermark = texto;
+          } else {
+            tag.classList.remove('active');
+          }
+        });
+      }
+    });
   </script>
 </body>
 

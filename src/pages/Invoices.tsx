@@ -99,6 +99,16 @@ export function Invoices() {
     useEffect(() => {
         const handleMessage = (event: MessageEvent) => {
             if (event.data?.type === "RESIZE_INVOICE") setIframeHeight(event.data.height);
+
+            // 🔴 Puente para sincronizar marcas de agua entre múltiples iframes si existieran
+            if (event.data?.type === 'SET_WATERMARK') {
+                const iframes = document.querySelectorAll('iframe');
+                iframes.forEach(iframe => {
+                    if (iframe.contentWindow) {
+                        iframe.contentWindow.postMessage(event.data, '*');
+                    }
+                });
+            }
         };
         window.addEventListener("message", handleMessage);
         return () => window.removeEventListener("message", handleMessage);
@@ -137,7 +147,7 @@ export function Invoices() {
             let isFirstPage = true;
 
             // Ocultar botones antes de capturar el PDF
-            const actionButtons = doc.querySelectorAll('.delete-action, .add-row-container');
+            const actionButtons = doc.querySelectorAll('.delete-action, .add-row-container, .watermark-controls');
             actionButtons.forEach(btn => ((btn as HTMLElement).style.display = 'none'));
 
             // 🔴 SOLUCIÓN: INYECTAR ESTILO TEMPORAL SOLO PARA LOS ÍCONOS AL EXPORTAR A PDF 🔴

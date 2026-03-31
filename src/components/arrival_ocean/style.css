@@ -438,3 +438,90 @@ body {
   border: 1px solid #f06e00;
   cursor: text;
 }
+
+/* =========================================================
+   MARCAS DE AGUA (CONTROLES Y VISUALIZACIÓN)
+   ========================================================= */
+
+/* Barra superior de botones */
+.watermark-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 0px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+/* Diseño de cada tag/botón */
+.watermark-tag {
+  padding: 8px 16px;
+  background-color: #ffffff;
+  border: 2px solid #ced4da;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: "Public Sans-Bold", Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #495057;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.watermark-tag:hover {
+  background-color: #e9ecef;
+}
+
+/* Estado activo del tag */
+.watermark-tag.active {
+  background-color: #f06e00;
+  /* Naranja corporativo */
+  color: white;
+  border-color: #f06e00;
+}
+
+/* =========================================================
+   MARCAS DE AGUA (VISUALIZACIÓN GIGANTE)
+   ========================================================= */
+
+.watermark-display {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+  /* Capa 5: Por encima del SVG (fondo) pero debajo de botones(20) y textos(10) */
+  z-index: 5;
+
+  display: none;
+
+  /* Centramos el texto gigante perfectamente en medio de la hoja */
+  justify-content: center;
+  align-items: center;
+
+  /* LETRA GIGANTE Y ESTILOS */
+  font-size: 175px;
+  /* Tamaño masivo */
+  font-family: "Public Sans-Bold", Helvetica, sans-serif;
+  font-weight: 700;
+
+  /* Color Naranja corporativo (#f06e00) pero con 25% de opacidad para que no tape nada */
+  color: rgba(240, 110, 0, 0.25);
+
+  /* Rotación diagonal */
+  transform: rotate(-45deg);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.watermark-display.active {
+  display: flex;
+  /* Usamos flex para que actúe el centrado */
+}

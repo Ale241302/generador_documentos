@@ -165,6 +165,12 @@ export function Cotizacion() {
     const handleMessage = (event: MessageEvent) => {
       if (event.data?.type === "RESIZE_PRINCIPAL") setPrincipalHeight(event.data.height);
       if (event.data?.type === "HEADER_UPDATED") setSyncedHeaderHtml(event.data.headerHtml);
+
+      // NUEVO: Sincronización de marcas de agua entre iframes
+      if (event.data?.type === "SET_WATERMARK") {
+        iframeSecundarioRef.current?.contentWindow?.postMessage(event.data, "*");
+        iframePrincipalRef.current?.contentWindow?.postMessage(event.data, "*");
+      }
     };
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);

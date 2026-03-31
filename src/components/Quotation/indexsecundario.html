@@ -4,13 +4,14 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="globals.css" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="globalsecundario.css" />
+  <link rel="stylesheet" href="stylesecundario.css" />
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
 
 <body>
   <div class="quotation">
+    <div class="watermark-display"></div>
     <header class="header">
       <div class="container">
         <img class="img" src="https://storage.googleapis.com/sclcargo/web/Home/logo-largo.png" />
@@ -130,6 +131,26 @@
     }
 
     window.addEventListener('load', actualizarCodigoBarras);
+
+    // =========================================================
+    // LÓGICA DE MARCAS DE AGUA (SINCRONIZACIÓN)
+    // =========================================================
+    window.addEventListener('message', function (event) {
+      if (event.data?.type === 'SET_WATERMARK') {
+        const texto = event.data.text;
+        const displays = document.querySelectorAll('.watermark-display');
+
+        displays.forEach(display => {
+          if (texto === '') {
+            display.textContent = '';
+            display.classList.remove('active');
+          } else {
+            display.textContent = texto;
+            display.classList.add('active');
+          }
+        });
+      }
+    });
   </script>
 </body>
 

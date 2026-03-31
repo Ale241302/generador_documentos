@@ -90,8 +90,8 @@ export function ArriboAir() {
             if (event.data?.type === "RESIZE_ARRIVAL_1") setIframe1Height(event.data.height);
             if (event.data?.type === "RESIZE_ARRIVAL_2") setIframe2Height(event.data.height);
 
-            // PUENTE DE COMUNICACIÓN
-            if (event.data?.type === "SYNC_HEADER") {
+            // PUENTE DE COMUNICACIÓN (HEADERS Y MARCAS DE AGUA)
+            if (event.data?.type === "SYNC_HEADER" || event.data?.type === "SET_WATERMARK") {
                 if (iframe1Ref.current && event.source === iframe1Ref.current.contentWindow) {
                     iframe2Ref.current?.contentWindow?.postMessage(event.data, '*');
                 } else if (iframe2Ref.current && event.source === iframe2Ref.current.contentWindow) {
@@ -129,8 +129,8 @@ export function ArriboAir() {
             const pdfHeight = pdf.internal.pageSize.getHeight();
             let isFirstPage = true;
 
-            const actionButtons1 = doc1.querySelectorAll('.delete-action, .add-row-container');
-            const actionButtons2 = doc2.querySelectorAll('.delete-action, .add-row-container');
+            const actionButtons1 = doc1.querySelectorAll('.delete-action, .add-row-container, .watermark-controls');
+            const actionButtons2 = doc2.querySelectorAll('.delete-action, .add-row-container, .watermark-controls');
             actionButtons1.forEach(btn => ((btn as HTMLElement).style.display = 'none'));
             actionButtons2.forEach(btn => ((btn as HTMLElement).style.display = 'none'));
 
